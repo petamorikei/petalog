@@ -11,7 +11,9 @@ import {
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
+// biome-ignore lint/suspicious/noEmptyInterface: Required for Astro client:only directive compatibility
 interface Props {}
+// biome-ignore lint/correctness/noEmptyPattern: Required for Astro client:only directive compatibility
 let {}: Props = $props();
 
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
