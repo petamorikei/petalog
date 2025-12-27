@@ -13,7 +13,9 @@ let { sortedPosts = [] }: Props = $props();
 
 const params = new URLSearchParams(window.location.search);
 const tags: string[] = params.has("tag") ? params.getAll("tag") : [];
-const categories: string[] = params.has("category") ? params.getAll("category") : [];
+const categories: string[] = params.has("category")
+	? params.getAll("category")
+	: [];
 const uncategorized = params.get("uncategorized");
 
 interface Post {
