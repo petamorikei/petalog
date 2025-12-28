@@ -13,6 +13,7 @@ import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
+import remarkLinkCardPlus from "remark-link-card-plus";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
@@ -106,6 +107,11 @@ export default defineConfig({
 			remarkMath,
 			remarkReadingTime,
 			remarkExcerpt,
+			[remarkLinkCardPlus, {
+				cache: true,
+				shortenUrl: true,
+				thumbnailPosition: "right",
+			}],
 			remarkGithubAdmonitionsToDirectives,
 			remarkDirective,
 			remarkSectionize,

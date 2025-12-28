@@ -9,8 +9,13 @@ category: 'Examples'
 draft: false 
 ---
 
+## Link Cards
+You can add link cards by placing a URL on its own line. The card will display the page title, description, and thumbnail.
+
+https://astro.build/
+
 ## GitHub Repository Cards
-You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API. 
+You can add dynamic cards that link to GitHub repositories, on page load, the repository information is pulled from the GitHub API.
 
 ::github{repo="Fabrizz/MMM-OnSpotify"}
 
