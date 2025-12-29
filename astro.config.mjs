@@ -11,6 +11,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
+import remarkBreaks from "remark-breaks";
 import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkLinkCardPlus from "remark-link-card-plus";
@@ -104,6 +105,7 @@ export default defineConfig({
 	],
 	markdown: {
 		remarkPlugins: [
+			remarkBreaks,
 			remarkMath,
 			remarkReadingTime,
 			remarkExcerpt,
