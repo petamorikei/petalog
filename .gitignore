@@ -22,6 +22,11 @@ pnpm-debug.log*
 
 .vercel
 
+# Playwright transient output (migration Golden snapshots are committed)
+test-results/
+playwright-report/
+blob-report/
+
 package-lock.json
 bun.lockb
 yarn.lock

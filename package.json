@@ -8,6 +8,10 @@
     "check": "astro check",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
+    "test:e2e": "playwright test",
+    "test:e2e:behavior": "playwright test tests/e2e",
+    "test:e2e:visual": "playwright test tests/visual-migration",
+    "test:e2e:update": "playwright test tests/visual-migration --update-snapshots",
     "astro": "astro",
     "type-check": "tsc --noEmit --isolatedDeclarations",
     "new-post": "node scripts/new-post.js",
@@ -64,6 +68,7 @@
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.6",
     "@biomejs/biome": "2.2.5",
+    "@playwright/test": "1.61.1",
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/hast": "^3.0.4",
     "@types/markdown-it": "^14.1.2",

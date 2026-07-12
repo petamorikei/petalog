@@ -1,0 +1,315 @@
+import { expect, type Page, test } from "@playwright/test";
+
+const DESKTOP_VIEWPORT = { width: 1440, height: 900 };
+const MOBILE_VIEWPORT = { width: 390, height: 844 };
+
+type StoredSettings = {
+	theme?: "light" | "dark" | "auto";
+	hue?: string;
+};
+
+async function seedStoredSettings(page: Page, settings: StoredSettings) {
+	await page.addInitScript((initialSettings) => {
+		if (
+			initialSettings.theme !== undefined &&
+			localStorage.getItem("theme") === null
+		) {
+			localStorage.setItem("theme", initialSettings.theme);
+		}
+		if (
+			initialSettings.hue !== undefined &&
+			localStorage.getItem("hue") === null
+		) {
+			localStorage.setItem("hue", initialSettings.hue);
+		}
+	}, settings);
+}
+
+async function waitForHydratedIsland(page: Page, componentName: string) {
+	await page.waitForFunction((name) => {
+		const island = [...document.querySelectorAll("astro-island")].find(
+			(element) => element.getAttribute("component-url")?.includes(name),
+		);
+		return island !== undefined && !island.hasAttribute("ssr");
+	}, componentName);
+}
+
+async function expectDarkMode(page: Page, enabled: boolean) {
+	const root = page.locator("html");
+	if (enabled) {
+		await expect(root).toHaveClass(/\bdark\b/);
+	} else {
+		await expect(root).not.toHaveClass(/\bdark\b/);
+	}
+}
+
+test.describe("visitor settings", () => {
+	test("theme control persists light, dark, and system modes", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.emulateMedia({ colorScheme: "light", reducedMotion: "reduce" });
+		await seedStoredSettings(page, { theme: "light" });
+
+		await page.goto("/");
+		await waitForHydratedIsland(page, "LightDarkSwitch");
+
+		const themeSwitch = page.locator("#scheme-switch");
+		await expectDarkMode(page, false);
+		await expect
+			.poll(() => page.evaluate(() => localStorage.getItem("theme")))
+			.toBe("light");
+
+		await themeSwitch.click();
+		await expect
+			.poll(() => page.evaluate(() => localStorage.getItem("theme")))
+			.toBe("dark");
+		await expectDarkMode(page, true);
+
+		await themeSwitch.click();
+		await expect
+			.poll(() => page.evaluate(() => localStorage.getItem("theme")))
+			.toBe("auto");
+		await expectDarkMode(page, false);
+
+		await page.emulateMedia({ colorScheme: "dark" });
+		await expectDarkMode(page, true);
+
+		await page.emulateMedia({ colorScheme: "light" });
+		await expectDarkMode(page, false);
+	});
+
+	test("hue persists and the display settings panel closes on outside click", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await seedStoredSettings(page, { theme: "light", hue: "250" });
+
+		await page.goto("/");
+		await waitForHydratedIsland(page, "DisplaySettings");
+
+		const panel = page.locator("#display-setting");
+		await page.getByRole("button", { name: "Display Settings" }).click();
+		await expect(panel).not.toHaveClass(/\bfloat-panel-closed\b/);
+
+		await page.locator("#colorSlider").fill("125");
+		await expect(page.locator("#hueValue")).toHaveText("125");
+		await expect
+			.poll(() => page.evaluate(() => localStorage.getItem("hue")))
+			.toBe("125");
+		await expect
+			.poll(() =>
+				page.evaluate(() =>
+					getComputedStyle(document.documentElement)
+						.getPropertyValue("--hue")
+						.trim(),
+				),
+			)
+			.toBe("125");
+
+		await page.locator("#content-wrapper").click({ position: { x: 5, y: 5 } });
+		await expect(panel).toHaveClass(/\bfloat-panel-closed\b/);
+
+		await page.reload();
+		await waitForHydratedIsland(page, "DisplaySettings");
+		await expect(page.locator("#hueValue")).toHaveText("125");
+		await expect
+			.poll(() =>
+				page.evaluate(() =>
+					document.documentElement.style.getPropertyValue("--hue").trim(),
+				),
+			)
+			.toBe("125");
+	});
+});
+
+test.describe("floating navigation", () => {
+	test("mobile menu closes when the visitor clicks outside it", async ({
+		page,
+	}) => {
+		await page.setViewportSize(MOBILE_VIEWPORT);
+		await page.goto("/");
+
+		const panel = page.locator("#nav-menu-panel");
+		await page.getByRole("button", { name: "Menu" }).click();
+		await expect(panel).not.toHaveClass(/\bfloat-panel-closed\b/);
+
+		await page.locator("#content-wrapper").click({ position: { x: 5, y: 5 } });
+		await expect(panel).toHaveClass(/\bfloat-panel-closed\b/);
+	});
+});
+
+test.describe("content discovery", () => {
+	test("Pagefind returns a real production result and closes on outside click", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.goto("/");
+		await waitForHydratedIsland(page, "Search");
+		await page.waitForFunction(
+			() =>
+				typeof (
+					window as typeof window & {
+						pagefind?: { search?: unknown };
+					}
+				).pagefind?.search === "function",
+		);
+
+		await page.locator("#search-bar input").fill("Expressive Code");
+
+		const searchPanel = page.locator("#search-panel");
+		const result = searchPanel.locator('a[href="/posts/expressive-code/"]');
+		await expect(result).toBeVisible({ timeout: 10_000 });
+		await expect(result).toContainText("Expressive Code Example");
+		await expect(searchPanel).not.toHaveClass(/\bfloat-panel-closed\b/);
+
+		await page.locator("#content-wrapper").click({ position: { x: 5, y: 5 } });
+		await expect(searchPanel).toHaveClass(/\bfloat-panel-closed\b/);
+	});
+
+	test("archive query parameters filter posts by tag and category", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		const archivePosts = page.locator(
+			'#swup-container a[aria-label][href^="/posts/"]',
+		);
+
+		await page.goto("/archive/");
+		await waitForHydratedIsland(page, "ArchivePanel");
+		await expect(archivePosts).toHaveCount(5);
+
+		await page.goto("/archive/?tag=Fuwari");
+		await waitForHydratedIsland(page, "ArchivePanel");
+		await expect(archivePosts).toHaveCount(2);
+		await expect(archivePosts).toHaveText([
+			/Markdown Extended Features/,
+			/Simple Guides for Fuwari/,
+		]);
+
+		await page.goto("/archive/?category=Guides");
+		await waitForHydratedIsland(page, "ArchivePanel");
+		await expect(archivePosts).toHaveCount(1);
+		await expect(archivePosts).toHaveText([/Simple Guides for Fuwari/]);
+	});
+});
+
+test.describe("navigation and scrolling", () => {
+	test("Swup replaces content and updates the document head without a reload", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.goto("/");
+		await page.waitForFunction(() =>
+			Boolean(
+				(
+					window as typeof window & {
+						swup?: { hooks?: unknown };
+					}
+				).swup?.hooks,
+			),
+		);
+		await page.evaluate(() => {
+			(
+				window as typeof window & {
+					__behaviorNavigationMarker?: string;
+				}
+			).__behaviorNavigationMarker = "preserved";
+		});
+
+		await Promise.all([
+			page.waitForURL(/\/about\/$/),
+			page.locator('#navbar a[aria-label="About"]').click(),
+		]);
+
+		await expect(page).toHaveTitle("About - Fuwari");
+		await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+			"content",
+			"About",
+		);
+		await expect(page.locator("#swup-container h1#about")).toHaveText("About");
+		await expect
+			.poll(() =>
+				page.evaluate(
+					() =>
+						(
+							window as typeof window & {
+								__behaviorNavigationMarker?: string;
+							}
+						).__behaviorNavigationMarker,
+				),
+			)
+			.toBe("preserved");
+	});
+
+	test("Back to Top becomes available after scrolling and returns to the top", async ({
+		page,
+	}) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.emulateMedia({ reducedMotion: "reduce" });
+		await page.goto("/posts/expressive-code/");
+
+		await page.evaluate(() =>
+			window.scrollTo(0, document.documentElement.scrollHeight),
+		);
+		await expect
+			.poll(() => page.evaluate(() => window.scrollY))
+			.toBeGreaterThan(400);
+
+		const backToTop = page.locator("#back-to-top-btn");
+		await expect(backToTop).not.toHaveClass(/\bhide\b/);
+		await page.getByRole("button", { name: "Back to Top" }).click();
+
+		await expect
+			.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 })
+			.toBeLessThanOrEqual(1);
+		await expect(backToTop).toHaveClass(/\bhide\b/);
+	});
+});
+
+test("representative pages do not overflow the viewport horizontally", async ({
+	page,
+}) => {
+	const routes = [
+		"/",
+		"/archive/",
+		"/about/",
+		"/posts/guide/",
+		"/posts/markdown/",
+		"/posts/markdown-extended/",
+		"/posts/expressive-code/",
+		"/posts/video/",
+	];
+	const viewports = [MOBILE_VIEWPORT, DESKTOP_VIEWPORT];
+
+	await page.route(
+		(url) => url.hostname !== "127.0.0.1",
+		(route) => route.abort(),
+	);
+
+	for (const viewport of viewports) {
+		await page.setViewportSize(viewport);
+		for (const route of routes) {
+			await page.goto(route, { waitUntil: "domcontentloaded" });
+			await expect(page.locator("#content-wrapper")).toBeVisible();
+			if (route === "/archive/") {
+				await waitForHydratedIsland(page, "ArchivePanel");
+			}
+			await page.evaluate(() => document.fonts.ready);
+
+			const horizontalOverflow = await page.evaluate(() => {
+				const pageWidth = Math.max(
+					document.documentElement.scrollWidth,
+					document.body.scrollWidth,
+				);
+				return pageWidth - document.documentElement.clientWidth;
+			});
+			expect
+				.soft(
+					horizontalOverflow,
+					`${route} at ${viewport.width}x${viewport.height}`,
+				)
+				.toBeLessThanOrEqual(1);
+		}
+	}
+});
