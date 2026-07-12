@@ -1,0 +1,1794 @@
+@layer petalog_base {
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
+.prose {
+  color: var(--panda-compat-prose-body);
+  max-width: 65ch;
+}
+
+.prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose :where([class~="lead"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-lead);
+  font-size: 1.25em;
+  line-height: 1.6;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.prose :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-links);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.prose :where(strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-bold);
+  font-weight: 600;
+}
+
+.prose :where(a strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(blockquote strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(thead th strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(ol):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-inline-start: 1.625em;
+}
+
+.prose :where(ol[type="A"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: upper-alpha;
+}
+
+.prose :where(ol[type="a"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: lower-alpha;
+}
+
+.prose :where(ol[type="A" s]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: upper-alpha;
+}
+
+.prose :where(ol[type="a" s]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: lower-alpha;
+}
+
+.prose :where(ol[type="I"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: upper-roman;
+}
+
+.prose :where(ol[type="i"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: lower-roman;
+}
+
+.prose :where(ol[type="I" s]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: upper-roman;
+}
+
+.prose :where(ol[type="i" s]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: lower-roman;
+}
+
+.prose :where(ol[type="1"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: decimal;
+}
+
+.prose :where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  list-style-type: disc;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-inline-start: 1.625em;
+}
+
+.prose :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
+  font-weight: 400;
+  color: var(--panda-compat-prose-counters);
+}
+
+.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *))::marker {
+  color: var(--panda-compat-prose-bullets);
+}
+
+.prose :where(dt):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 600;
+  margin-top: 1.25em;
+}
+
+.prose :where(hr):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border-color: var(--panda-compat-prose-hr);
+  border-top-width: 1px;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--panda-compat-prose-quotes);
+  border-inline-start-width: 0.25rem;
+  border-inline-start-color: var(--panda-compat-prose-quote-borders);
+  quotes: "\201C""\201D""\2018""\2019";
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-inline-start: 1em;
+}
+
+.prose :where(blockquote p:first-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::before {
+  content: open-quote;
+}
+
+.prose :where(blockquote p:last-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: close-quote;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 800;
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: 0.8888889em;
+  line-height: 1.1111111;
+}
+
+.prose :where(h1 strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 900;
+  color: inherit;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 700;
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.prose :where(h2 strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 800;
+  color: inherit;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 600;
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose :where(h3 strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 700;
+  color: inherit;
+}
+
+.prose :where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+.prose :where(h4 strong):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 700;
+  color: inherit;
+}
+
+.prose :where(img):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(picture):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  display: block;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(video):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(kbd):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-weight: 500;
+  font-family: inherit;
+  color: var(--panda-compat-prose-kbd);
+  box-shadow: 0 0 0 1px var(--panda-compat-prose-kbd-shadows), 0 3px 0 var(--panda-compat-prose-kbd-shadows);
+  font-size: 0.875em;
+  border-radius: 0.3125rem;
+  padding-top: 0.1875em;
+  padding-inline-end: 0.375em;
+  padding-bottom: 0.1875em;
+  padding-inline-start: 0.375em;
+}
+
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-code);
+  font-weight: 600;
+  font-size: 0.875em;
+}
+
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before {
+  content: "`";
+}
+
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: "`";
+}
+
+.prose :where(a code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(h1 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(h2 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+  font-size: 0.875em;
+}
+
+.prose :where(h3 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+  font-size: 0.9em;
+}
+
+.prose :where(h4 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(blockquote code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(thead th code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: inherit;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-pre-code);
+  background-color: var(--panda-compat-prose-pre-bg);
+  overflow-x: auto;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+  margin-top: 1.7142857em;
+  margin-bottom: 1.7142857em;
+  border-radius: 0.375rem;
+  padding-top: 0.8571429em;
+  padding-inline-end: 1.1428571em;
+  padding-bottom: 0.8571429em;
+  padding-inline-start: 1.1428571em;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background-color: transparent;
+  border-width: 0;
+  border-radius: 0;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before {
+  content: none;
+}
+
+.prose :where(pre code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: none;
+}
+
+.prose :where(table):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  width: 100%;
+  table-layout: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  font-size: 0.875em;
+  line-height: 1.7142857;
+}
+
+.prose :where(thead):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--panda-compat-prose-th-borders);
+}
+
+.prose :where(thead th):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-headings);
+  font-weight: 600;
+  vertical-align: bottom;
+  padding-inline-end: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-inline-start: 0.5714286em;
+}
+
+.prose :where(tbody tr):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border-bottom-width: 1px;
+  border-bottom-color: var(--panda-compat-prose-td-borders);
+}
+
+.prose :where(tbody tr:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border-bottom-width: 0;
+}
+
+.prose :where(tbody td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  vertical-align: baseline;
+}
+
+.prose :where(tfoot):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border-top-width: 1px;
+  border-top-color: var(--panda-compat-prose-th-borders);
+}
+
+.prose :where(tfoot td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  vertical-align: top;
+}
+
+.prose :where(th, td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  text-align: start;
+}
+
+.prose :where(figure > *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose :where(figcaption):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--panda-compat-prose-captions);
+  font-size: 0.875em;
+  line-height: 1.4285714;
+  margin-top: 0.8571429em;
+}
+
+.prose {
+  --panda-compat-prose-body: #374151;
+  --panda-compat-prose-headings: #111827;
+  --panda-compat-prose-lead: #4b5563;
+  --panda-compat-prose-links: #111827;
+  --panda-compat-prose-bold: #111827;
+  --panda-compat-prose-counters: #6b7280;
+  --panda-compat-prose-bullets: #d1d5db;
+  --panda-compat-prose-hr: #e5e7eb;
+  --panda-compat-prose-quotes: #111827;
+  --panda-compat-prose-quote-borders: #e5e7eb;
+  --panda-compat-prose-captions: #6b7280;
+  --panda-compat-prose-kbd: #111827;
+  --panda-compat-prose-kbd-shadows: rgb(17 24 39 / 10%);
+  --panda-compat-prose-code: #111827;
+  --panda-compat-prose-pre-code: #e5e7eb;
+  --panda-compat-prose-pre-bg: #1f2937;
+  --panda-compat-prose-th-borders: #d1d5db;
+  --panda-compat-prose-td-borders: #e5e7eb;
+  --panda-compat-prose-invert-body: #d1d5db;
+  --panda-compat-prose-invert-headings: #fff;
+  --panda-compat-prose-invert-lead: #9ca3af;
+  --panda-compat-prose-invert-links: #fff;
+  --panda-compat-prose-invert-bold: #fff;
+  --panda-compat-prose-invert-counters: #9ca3af;
+  --panda-compat-prose-invert-bullets: #4b5563;
+  --panda-compat-prose-invert-hr: #374151;
+  --panda-compat-prose-invert-quotes: #f3f4f6;
+  --panda-compat-prose-invert-quote-borders: #374151;
+  --panda-compat-prose-invert-captions: #9ca3af;
+  --panda-compat-prose-invert-kbd: #fff;
+  --panda-compat-prose-invert-kbd-shadows: rgb(255 255 255 / 10%);
+  --panda-compat-prose-invert-code: #fff;
+  --panda-compat-prose-invert-pre-code: #d1d5db;
+  --panda-compat-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --panda-compat-prose-invert-th-borders: #4b5563;
+  --panda-compat-prose-invert-td-borders: #374151;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose :where(picture > img):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0.375em;
+}
+
+.prose :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0.375em;
+}
+
+.prose :where(.prose > ul > li p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose :where(.prose > ul > li > p:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose :where(.prose > ul > li > p:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose :where(.prose > ol > li > p:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose :where(.prose > ol > li > p:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose :where(dl):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose :where(dd):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  padding-inline-start: 1.625em;
+}
+
+.prose :where(hr + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h2 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h3 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(h4 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(thead th:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0;
+}
+
+.prose :where(thead th:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-end: 0;
+}
+
+.prose :where(tbody td, tfoot td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-top: 0.5714286em;
+  padding-inline-end: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-inline-start: 0.5714286em;
+}
+
+.prose :where(tbody td:first-child, tfoot td:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0;
+}
+
+.prose :where(tbody td:last-child, tfoot td:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-end: 0;
+}
+
+.prose :where(figure):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose :where(.prose > :first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose :where(.prose > :last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 0;
+}
+
+.prose-base {
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.prose-base :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose-base :where([class~="lead"]):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.25em;
+  line-height: 1.6;
+  margin-top: 1.2em;
+  margin-bottom: 1.2em;
+}
+
+.prose-base :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+  padding-inline-start: 1em;
+}
+
+.prose-base :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 2.25em;
+  margin-top: 0;
+  margin-bottom: 0.8888889em;
+  line-height: 1.1111111;
+}
+
+.prose-base :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.5em;
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3333333;
+}
+
+.prose-base :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 1.25em;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+  line-height: 1.6;
+}
+
+.prose-base :where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+.prose-base :where(img):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose-base :where(picture):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose-base :where(picture > img):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose-base :where(video):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose-base :where(kbd):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+  border-radius: 0.3125rem;
+  padding-top: 0.1875em;
+  padding-inline-end: 0.375em;
+  padding-bottom: 0.1875em;
+  padding-inline-start: 0.375em;
+}
+
+.prose-base :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+}
+
+.prose-base :where(h2 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+}
+
+.prose-base :where(h3 code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.9em;
+}
+
+.prose-base :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+  line-height: 1.7142857;
+  margin-top: 1.7142857em;
+  margin-bottom: 1.7142857em;
+  border-radius: 0.375rem;
+  padding-top: 0.8571429em;
+  padding-inline-end: 1.1428571em;
+  padding-bottom: 0.8571429em;
+  padding-inline-start: 1.1428571em;
+}
+
+.prose-base :where(ol):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-inline-start: 1.625em;
+}
+
+.prose-base :where(ul):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-inline-start: 1.625em;
+}
+
+.prose-base :where(li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose-base :where(ol > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0.375em;
+}
+
+.prose-base :where(ul > li):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0.375em;
+}
+
+.prose-base :where(.prose-base > ul > li p):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose-base :where(.prose-base > ul > li > p:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose-base :where(.prose-base > ul > li > p:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose-base :where(.prose-base > ol > li > p:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose-base :where(.prose-base > ol > li > p:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 1.25em;
+}
+
+.prose-base :where(ul ul, ul ol, ol ul, ol ol):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.prose-base :where(dl):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose-base :where(dt):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.25em;
+}
+
+.prose-base :where(dd):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  padding-inline-start: 1.625em;
+}
+
+.prose-base :where(hr):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.prose-base :where(hr + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose-base :where(h2 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose-base :where(h3 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose-base :where(h4 + *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose-base :where(table):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+  line-height: 1.7142857;
+}
+
+.prose-base :where(thead th):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-end: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-inline-start: 0.5714286em;
+}
+
+.prose-base :where(thead th:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0;
+}
+
+.prose-base :where(thead th:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-end: 0;
+}
+
+.prose-base :where(tbody td, tfoot td):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-top: 0.5714286em;
+  padding-inline-end: 0.5714286em;
+  padding-bottom: 0.5714286em;
+  padding-inline-start: 0.5714286em;
+}
+
+.prose-base :where(tbody td:first-child, tfoot td:first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-start: 0;
+}
+
+.prose-base :where(tbody td:last-child, tfoot td:last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-inline-end: 0;
+}
+
+.prose-base :where(figure):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.prose-base :where(figure > *):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prose-base :where(figcaption):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875em;
+  line-height: 1.4285714;
+  margin-top: 0.8571429em;
+}
+
+.prose-base :where(.prose-base > :first-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 0;
+}
+
+.prose-base :where(.prose-base > :last-child):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-bottom: 0;
+}
+
+.card-base {
+  overflow: hidden;
+  border-radius: var(--radius-large);
+  background-color: var(--card-bg);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.\!link {
+  position: relative;
+  z-index: 0;
+}
+
+.\!link::before {
+  position: absolute;
+  inset: 0px;
+  z-index: -10;
+  --panda-compat-scale-x: 0.85;
+  --panda-compat-scale-y: 0.85;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  border-radius: inherit;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  content: var(--panda-compat-content);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.\!link:hover::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.\!link:active {
+  background-image: none;
+}
+
+.\!link:active::before {
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-active);
+}
+
+.\!link {
+  margin: -0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.link {
+  position: relative;
+  z-index: 0;
+}
+
+.link::before {
+  position: absolute;
+  inset: 0px;
+  z-index: -10;
+  --panda-compat-scale-x: 0.85;
+  --panda-compat-scale-y: 0.85;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  border-radius: inherit;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  content: var(--panda-compat-content);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.link:hover::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.link:active {
+  background-image: none;
+}
+
+.link:active::before {
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-active);
+}
+
+.link {
+  margin: -0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.link-lg {
+  position: relative;
+  z-index: 0;
+}
+
+.link-lg::before {
+  position: absolute;
+  inset: 0px;
+  z-index: -10;
+  --panda-compat-scale-x: 0.85;
+  --panda-compat-scale-y: 0.85;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  border-radius: inherit;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  content: var(--panda-compat-content);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.link-lg:hover::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.link-lg:active {
+  background-image: none;
+}
+
+.link-lg:active::before {
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-active);
+}
+
+.link-lg {
+  margin: -0.375rem;
+  border-radius: 0.375rem;
+  padding: 0.375rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.float-panel {
+  top: 5.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-large);
+  background-color: var(--float-panel-bg);
+  --panda-compat-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --panda-compat-shadow-colored: 0 20px 25px -5px var(--panda-compat-shadow-color), 0 8px 10px -6px var(--panda-compat-shadow-color);
+  box-shadow: var(--panda-compat-ring-offset-shadow, 0 0 #0000), var(--panda-compat-ring-shadow, 0 0 #0000), var(--panda-compat-shadow);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.float-panel:is(.dark *) {
+  --panda-compat-shadow: 0 0 #0000;
+  --panda-compat-shadow-colored: 0 0 #0000;
+  box-shadow: var(--panda-compat-ring-offset-shadow, 0 0 #0000), var(--panda-compat-ring-shadow, 0 0 #0000), var(--panda-compat-shadow);
+}
+
+.float-panel-closed {
+  pointer-events: none;
+  --panda-compat-translate-y: -0.25rem;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  opacity: 0;
+}
+
+.search-panel mark {
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.btn-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-card:hover {
+  background-color: var(--btn-card-bg-hover);
+}
+
+.btn-card:active {
+  background-color: var(--btn-card-bg-active);
+}
+
+.btn-card.disabled {
+  pointer-events: none;
+  color: rgb(0 0 0 / 0.1);
+}
+
+.btn-card.disabled:is(.dark *) {
+  color: rgb(255 255 255 / 0.1);
+}
+
+.btn-plain {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: none;
+  color: rgb(0 0 0 / 0.75);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-plain:hover {
+  color: var(--primary);
+}
+
+.btn-plain:is(.dark *) {
+  color: rgb(255 255 255 / 0.75);
+}
+
+.btn-plain:hover:is(.dark *) {
+  color: var(--primary);
+}
+
+.btn-plain:not(.scale-animation):hover {
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.btn-plain:not(.scale-animation):active {
+  background-color: var(--btn-plain-bg-active);
+}
+
+.btn-plain.scale-animation {
+  position: relative;
+  z-index: 0;
+}
+
+.btn-plain.scale-animation::before {
+  position: absolute;
+  inset: 0px;
+  z-index: -10;
+  --panda-compat-scale-x: 0.85;
+  --panda-compat-scale-y: 0.85;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  border-radius: inherit;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  content: var(--panda-compat-content);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.btn-plain.scale-animation:hover::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.btn-plain.scale-animation:active {
+  background-image: none;
+}
+
+.btn-plain.scale-animation:active::before {
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-active);
+}
+
+.btn-plain.scale-animation.current-theme-btn {
+  color: var(--primary);
+}
+
+.btn-plain.scale-animation.current-theme-btn::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  background-color: var(--btn-plain-bg-hover);
+  content: var(--panda-compat-content);
+  opacity: 1;
+}
+
+.btn-regular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn-regular-bg);
+  color: var(--btn-content);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-regular:hover {
+  background-color: var(--btn-regular-bg-hover);
+}
+
+.btn-regular:active {
+  background-color: var(--btn-regular-bg-active);
+}
+
+.btn-regular:is(.dark *) {
+  color: rgb(255 255 255 / 0.75);
+}
+
+.toc-hide,
+    .toc-not-ready {
+  pointer-events: none;
+  opacity: 0;
+}
+
+#toc-inner-wrapper {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0%, black 2rem, black calc(100% - 2rem), transparent 100%);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.text-90 {
+  color: rgb(0 0 0 / 0.9);
+}
+
+.text-90:is(.dark *) {
+  color: rgb(255 255 255 / 0.9);
+}
+
+.text-75 {
+  color: rgb(0 0 0 / 0.75);
+}
+
+.text-75:is(.dark *) {
+  color: rgb(255 255 255 / 0.75);
+}
+
+.text-50 {
+  color: rgb(0 0 0 / 0.5);
+}
+
+.text-50:is(.dark *) {
+  color: rgb(255 255 255 / 0.5);
+}
+
+.text-30 {
+  color: rgb(0 0 0 / 0.3);
+}
+
+.text-30:is(.dark *) {
+  color: rgb(255 255 255 / 0.3);
+}
+
+.meta-icon {
+  margin-right: 0.5rem;
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  background-color: var(--btn-regular-bg);
+  color: var(--btn-content);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.btn-regular-dark.success {
+  background-color: oklch(0.75 0.14 var(--hue));
+}
+
+.btn-regular-dark.success:is(.dark *) {
+  background-color: oklch(0.75 0.14 var(--hue));
+}
+
+.custom-md img, #post-cover img {
+  cursor: zoom-in;
+}
+
+::-moz-selection {
+  background-color: var(--selection-bg)
+}
+
+::selection {
+  background-color: var(--selection-bg)
+}
+
+.dash-line {
+  position: relative;
+}
+
+.dash-line::before {
+  content: "";
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  left: calc(50% - 1px);
+  border-left: 2px dashed var(--line-color);
+  pointer-events: none;
+  transition: all 0.3s;
+  transform: translateY(-50%);
+}
+
+.collapsed {
+  height: var(--collapsedHeight);
+}
+
+.custom-md spoiler {
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background-color: var(--codeblock-bg);
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.custom-md spoiler:hover {
+  background-color: transparent;
+}
+
+.custom-md spoiler:not(:hover) {
+  color: var(--codeblock-bg);
+}
+
+.custom-md spoiler:not(:hover) * {
+  color: var(--codeblock-bg);
+}
+
+.custom-md h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.custom-md h1 .anchor, .custom-md h2 .anchor, .custom-md h3 .anchor, .custom-md h4 .anchor, .custom-md h5 .anchor, .custom-md h6 .anchor {
+  margin: -0.125rem !important;
+  margin-left: 0.2ch !important;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
+  padding: 0.125rem !important;
+  text-decoration-line: none !important;
+  opacity: 0 !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+
+.custom-md h1 .anchor .anchor-icon, .custom-md h2 .anchor .anchor-icon, .custom-md h3 .anchor .anchor-icon, .custom-md h4 .anchor .anchor-icon, .custom-md h5 .anchor .anchor-icon, .custom-md h6 .anchor .anchor-icon {
+  margin-left: 0.45ch !important;
+  margin-right: 0.45ch !important;
+}
+
+.custom-md h1:hover .anchor, .custom-md h2:hover .anchor, .custom-md h3:hover .anchor, .custom-md h4:hover .anchor, .custom-md h5:hover .anchor, .custom-md h6:hover .anchor {
+  opacity: 1 !important;
+}
+
+.custom-md a:not(.no-styling) {
+  position: relative;
+  z-index: 0;
+}
+
+.custom-md a:not(.no-styling)::before {
+  position: absolute;
+  inset: 0px;
+  z-index: -10;
+  --panda-compat-scale-x: 0.85;
+  --panda-compat-scale-y: 0.85;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  border-radius: inherit;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  content: var(--panda-compat-content);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.custom-md a:not(.no-styling):hover::before {
+  --panda-compat-scale-x: 1;
+  --panda-compat-scale-y: 1;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-hover);
+}
+
+.custom-md a:not(.no-styling):active {
+  background-image: none;
+}
+
+.custom-md a:not(.no-styling):active::before {
+  content: var(--panda-compat-content);
+  background-color: var(--btn-plain-bg-active);
+}
+
+.custom-md a:not(.no-styling) {
+  margin: -0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  position: relative;
+  background-image: none;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-style: dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  display: inline-block;
+}
+
+.custom-md a:not(.no-styling):hover, .custom-md a:not(.no-styling):active {
+  text-decoration-color: transparent;
+  background: var(--btn-plain-bg-hover);
+  border-bottom: 1px dashed var(--link-hover);
+  text-decoration: none;
+}
+
+.custom-md code {
+  overflow: hidden;
+  border-radius: 0.375rem;
+  background-color: var(--inline-code-bg);
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  color: var(--inline-code-color);
+  font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+
+.custom-md code:before {
+  content:none;
+}
+
+.custom-md code:after {
+  content:none;
+}
+
+.custom-md code {
+  counter-reset: line;
+}
+
+.custom-md code span.line:before {
+  margin-right: 1rem;
+  display: inline-block;
+  width: 1rem;
+  color: rgb(255 255 255 / 0.25);
+  content: counter(line);
+  counter-increment: line;
+  direction: rtl;
+}
+
+.custom-md code span.line:last-child:empty, .custom-md code span.line:last-child:has(> span:empty:only-child) {
+  display: none;
+}
+
+.custom-md .copy-btn {
+  all: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: oklch(0.45 0.01 var(--hue));
+}
+
+.custom-md .copy-btn:hover {
+  background-color: oklch(0.50 0.01 var(--hue));
+}
+
+.custom-md .copy-btn:active {
+  background-color: oklch(0.55 0.01 var(--hue));
+}
+
+.custom-md .copy-btn:is(.dark *) {
+  background-color: oklch(0.30 0.02 var(--hue));
+}
+
+.custom-md .copy-btn:hover:is(.dark *) {
+  background-color: oklch(0.35 0.03 var(--hue));
+}
+
+.custom-md .copy-btn:active:is(.dark *) {
+  background-color: oklch(0.40 0.03 var(--hue));
+}
+
+.custom-md .copy-btn.success {
+  background-color: oklch(0.75 0.14 var(--hue));
+}
+
+.custom-md .copy-btn.success:is(.dark *) {
+  background-color: oklch(0.75 0.14 var(--hue));
+}
+
+.custom-md .copy-btn {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 20;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  opacity: 0;
+  --panda-compat-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --panda-compat-shadow-colored: 0 10px 15px -3px var(--panda-compat-shadow-color), 0 4px 6px -4px var(--panda-compat-shadow-color);
+  box-shadow: var(--panda-compat-ring-offset-shadow, 0 0 #0000), var(--panda-compat-ring-shadow, 0 0 #0000), var(--panda-compat-shadow);
+  --panda-compat-shadow-color: rgb(0 0 0 / 0.5);
+  --panda-compat-shadow: var(--panda-compat-shadow-colored);
+  transition-property: all;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-md .copy-btn:active {
+  --panda-compat-scale-x: .9;
+  --panda-compat-scale-y: .9;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+}
+
+.custom-md .frame:hover .copy-btn {
+  opacity: 1;
+}
+
+.custom-md .copy-btn-icon {
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 1rem;
+  width: 1rem;
+  --panda-compat-translate-x: -50%;
+  --panda-compat-translate-y: -50%;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  fill: #fff;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.custom-md .copy-btn .copy-icon {
+  fill: #fff;
+  opacity: 1;
+}
+
+.custom-md .copy-btn .copy-icon:is(.dark *) {
+  fill: rgb(255 255 255 / 0.75);
+}
+
+.custom-md .copy-btn.success .copy-icon {
+  fill: var(--deep-text);
+  opacity: 0;
+}
+
+.custom-md .copy-btn .success-icon {
+  fill: #fff;
+  opacity: 0;
+}
+
+.custom-md .copy-btn.success .success-icon {
+  opacity: 1;
+}
+
+.custom-md .expressive-code {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.custom-md .expressive-code ::-moz-selection {
+  background-color: var(--codeblock-selection);
+}
+
+.custom-md .expressive-code ::selection {
+  background-color: var(--codeblock-selection);
+}
+
+.custom-md ul li::marker, .custom-md ol li::marker {
+  color: var(--primary);
+}
+
+.custom-md blockquote {
+  position: relative;
+  border-color: transparent;
+  font-style: normal;
+  font-weight: inherit;
+}
+
+.custom-md blockquote:before {
+  position: absolute;
+  left: -0.25rem;
+  display: block;
+  height: 100%;
+  width: 0.25rem;
+  border-radius: 9999px;
+  background-color: var(--btn-regular-bg);
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  --panda-compat-content: '';
+  content: var(--panda-compat-content);
+}
+
+/* Remove the double quotes from default styles */
+
+.custom-md blockquote p:before, .custom-md blockquote p:after {
+  --panda-compat-content: none;
+  content: var(--panda-compat-content);
+}
+
+.custom-md .katex-display-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.scrollbar-base.os-scrollbar {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  pointer-events: unset;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal {
+  height: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal .os-scrollbar-track .os-scrollbar-handle {
+  height: 0.25rem;
+  border-radius: 9999px;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal:hover .os-scrollbar-track .os-scrollbar-handle {
+  height: 0.5rem;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical {
+  width: 1rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical .os-scrollbar-track .os-scrollbar-handle {
+  width: 0.25rem;
+  border-radius: 9999px;
+}
+
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical:hover .os-scrollbar-track .os-scrollbar-handle {
+  width: 0.5rem;
+}
+
+.os-scrollbar.scrollbar-auto {
+  --os-handle-bg: var(--scrollbar-bg);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover);
+  --os-handle-bg-active: var(--scrollbar-bg-active);
+}
+
+.os-scrollbar.scrollbar-dark {
+  --os-handle-bg: var(--scrollbar-bg-dark);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover-dark);
+  --os-handle-bg-active: var(--scrollbar-bg-active-dark);
+}
+
+.os-scrollbar.scrollbar-light {
+  --os-handle-bg: var(--scrollbar-bg-light);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover-light);
+  --os-handle-bg-active: var(--scrollbar-bg-active-light);
+}
+
+/* Page transition animations with Swup */
+
+html.is-changing .transition-swup-fade {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+html.is-animating .transition-swup-fade {
+  --panda-compat-translate-y: 1rem;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y));
+  opacity: 0;
+}
+
+/* Fade-in animations for components */
+
+@keyframes fade-in-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Main components */
+
+.onload-animation {
+  opacity: 0;
+  animation: 300ms fade-in-up;
+  animation-fill-mode: forwards;
+}
+
+#navbar {
+  animation-delay: 0ms
+}
+
+#sidebar {
+  animation-delay: 100ms
+}
+
+#swup-container {
+  outline: none;
+}
+
+#content-wrapper {
+  animation-delay: var(--content-delay);
+}
+
+.footer {
+  animation-delay: 250ms;
+}
+
+#banner-credit {
+  animation-delay: 400ms;
+}
+
+/* Post content */
+
+#post-container :nth-child(1) {
+  animation-delay: calc(var(--content-delay) + 0ms)
+}
+
+#post-container :nth-child(2) {
+  animation-delay: calc(var(--content-delay) + 50ms)
+}
+
+#post-container :nth-child(3) {
+  animation-delay: calc(var(--content-delay) + 100ms)
+}
+
+#post-container :nth-child(4) {
+  animation-delay: calc(var(--content-delay) + 175ms)
+}
+
+#post-container :nth-child(5) {
+  animation-delay: calc(var(--content-delay) + 250ms)
+}
+
+#post-container :nth-child(6) {
+  animation-delay: calc(var(--content-delay) + 325ms)
+}
+
+.pswp__button {
+  margin-right: 0px !important;
+  display: flex !important;
+  height: 3rem !important;
+  width: 3rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background-color: rgb(0 0 0 / 0.4) !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+
+.pswp__button:hover {
+  background-color: rgb(0 0 0 / 0.5) !important;
+}
+
+.pswp__button:active {
+  background-color: rgb(0 0 0 / 0.6) !important;
+}
+
+.pswp__button--zoom, .pswp__button--close {
+  margin-top: 1rem !important;
+  border-radius: 0.75rem !important;
+}
+
+.pswp__button--zoom:active, .pswp__button--close:active {
+  --panda-compat-scale-x: .9 !important;
+  --panda-compat-scale-y: .9 !important;
+  transform: translate(var(--panda-compat-translate-x), var(--panda-compat-translate-y)) rotate(var(--panda-compat-rotate)) skewX(var(--panda-compat-skew-x)) skewY(var(--panda-compat-skew-y)) scaleX(var(--panda-compat-scale-x)) scaleY(var(--panda-compat-scale-y)) !important;
+}
+
+.pswp__button--zoom {
+  margin-right: 0.625rem !important;
+}
+
+.pswp__button--close {
+  margin-right: 1rem !important;
+}
+
+.expressive-code .frame {
+  --panda-compat-shadow: 0 0 #0000 !important;
+  --panda-compat-shadow-colored: 0 0 #0000 !important;
+  box-shadow: var(--panda-compat-ring-offset-shadow, 0 0 #0000), var(--panda-compat-ring-shadow, 0 0 #0000), var(--panda-compat-shadow) !important;
+}
+
+.expressive-code .title {
+  font-family: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.prose-invert:is(.dark *) {
+  --panda-compat-prose-body: var(--panda-compat-prose-invert-body);
+  --panda-compat-prose-headings: var(--panda-compat-prose-invert-headings);
+  --panda-compat-prose-lead: var(--panda-compat-prose-invert-lead);
+  --panda-compat-prose-links: var(--panda-compat-prose-invert-links);
+  --panda-compat-prose-bold: var(--panda-compat-prose-invert-bold);
+  --panda-compat-prose-counters: var(--panda-compat-prose-invert-counters);
+  --panda-compat-prose-bullets: var(--panda-compat-prose-invert-bullets);
+  --panda-compat-prose-hr: var(--panda-compat-prose-invert-hr);
+  --panda-compat-prose-quotes: var(--panda-compat-prose-invert-quotes);
+  --panda-compat-prose-quote-borders: var(--panda-compat-prose-invert-quote-borders);
+  --panda-compat-prose-captions: var(--panda-compat-prose-invert-captions);
+  --panda-compat-prose-kbd: var(--panda-compat-prose-invert-kbd);
+  --panda-compat-prose-kbd-shadows: var(--panda-compat-prose-invert-kbd-shadows);
+  --panda-compat-prose-code: var(--panda-compat-prose-invert-code);
+  --panda-compat-prose-pre-code: var(--panda-compat-prose-invert-pre-code);
+  --panda-compat-prose-pre-bg: var(--panda-compat-prose-invert-pre-bg);
+  --panda-compat-prose-th-borders: var(--panda-compat-prose-invert-th-borders);
+  --panda-compat-prose-td-borders: var(--panda-compat-prose-invert-td-borders);
+}
+
+.panda-box-vertical {
+  -webkit-box-orient: vertical;
+}
+
+/* Stable state hooks toggled directly by runtime scripts. */
+.hidden {
+  display: none !important;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+}

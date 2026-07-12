@@ -17,7 +17,7 @@ Template blog statis yang dibangun dengan [Astro](https://astro.build).
 
 ## ✨ Fitur
 
-- [x] Dibangun dengan [Astro](https://astro.build) dan [Tailwind CSS](https://tailwindcss.com)
+- [x] Dibangun dengan [Astro](https://astro.build) dan [Panda CSS](https://panda-css.com)
 - [x] Animasi dan transisi halaman yang halus
 - [x] Mode terang / gelap
 - [x] Warna tema & banner yang bisa dikustomisasi

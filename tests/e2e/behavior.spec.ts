@@ -257,13 +257,13 @@ test.describe("navigation and scrolling", () => {
 			.toBeGreaterThan(400);
 
 		const backToTop = page.locator("#back-to-top-btn");
-		await expect(backToTop).not.toHaveClass(/\bhide\b/);
+		await expect(backToTop).not.toHaveClass(/(?:^|\s)hide(?:\s|$)/);
 		await page.getByRole("button", { name: "Back to Top" }).click();
 
 		await expect
 			.poll(() => page.evaluate(() => window.scrollY), { timeout: 10_000 })
 			.toBeLessThanOrEqual(1);
-		await expect(backToTop).toHaveClass(/\bhide\b/);
+		await expect(backToTop).toHaveClass(/(?:^|\s)hide(?:\s|$)/);
 	});
 });
 

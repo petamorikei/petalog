@@ -1,46 +1,71 @@
 ---
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
+
+const wrapperClass = css({
+	pointerEvents: "none",
+	position: "absolute",
+	top: "0",
+	right: "0",
+	display: "none",
+	height: "3.75rem",
+	width: "3.75rem",
+	lg: {
+		display: "block",
+	},
+});
+
+const backToTopClass = css({
+	pointerEvents: "auto",
+	position: "fixed",
+	bottom: "10rem",
+	display: "flex",
+	alignItems: "center",
+	overflow: "hidden",
+	cursor: "pointer",
+	border: "none",
+	borderRadius: "1rem",
+	color: "var(--primary)",
+	fontSize: "2.25rem",
+	fontWeight: "700",
+	opacity: "1",
+	transform: "translateX(5rem)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	"& i": {
+		fontSize: "1.75rem",
+	},
+	"&.hide": {
+		pointerEvents: "none",
+		opacity: "0",
+		transform: "translateX(5rem) scale(0.9)",
+	},
+	_active: {
+		transform: "translateX(5rem) scale(0.9)",
+	},
+});
+
+const buttonClass = css({
+	height: "3.75rem",
+	width: "3.75rem",
+});
+
+const iconClass = css({
+	marginRight: "auto",
+	marginLeft: "auto",
+});
 ---
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
-<div class="back-to-top-wrapper hidden lg:block">
-    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
-        <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]">
-            <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
+<div class:list={["back-to-top-wrapper", wrapperClass]}>
+    <div id="back-to-top-btn" class:list={["back-to-top-btn", "hide", backToTopClass]} onclick="backToTop()">
+        <button aria-label="Back to Top" class:list={["btn-card", buttonClass]}>
+            <Icon name="material-symbols:keyboard-arrow-up-rounded" class={iconClass}></Icon>
         </button>
     </div>
 </div>
-
-<style lang="stylus">
-.back-to-top-wrapper
-    width: 3.75rem
-    height: 3.75rem
-    position: absolute
-    right: 0
-    top: 0
-    pointer-events: none
-
-.back-to-top-btn
-    color: var(--primary)
-    font-size: 2.25rem
-    font-weight: bold
-    border: none
-    position: fixed
-    bottom: 10rem
-    opacity: 1
-    cursor: pointer
-    transform: translateX(5rem)
-    pointer-events: auto
-    i
-        font-size: 1.75rem
-    &.hide
-        transform: translateX(5rem) scale(0.9)
-        opacity: 0
-        pointer-events: none
-    &:active
-      transform: translateX(5rem) scale(0.9)
-
-</style>
 
 <script is:raw is:inline>
 function backToTop() {

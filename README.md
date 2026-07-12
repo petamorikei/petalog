@@ -21,7 +21,7 @@ A static blog template built with [Astro](https://astro.build).
 
 ## ✨ Features
 
-- [x] Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)
+- [x] Built with [Astro](https://astro.build) and [Panda CSS](https://panda-css.com)
 - [x] Smooth animations and page transitions
 - [x] Light / dark mode
 - [x] Customizable theme colors & banner

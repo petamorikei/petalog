@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
 import { licenseConfig, profileConfig } from "../../config";
 import I18nKey from "../../i18n/i18nKey";
 import { i18n } from "../../i18n/translation";
@@ -17,27 +18,114 @@ const className = Astro.props.class;
 const profileConf = profileConfig;
 const licenseConf = licenseConfig;
 const postUrl = decodeURIComponent(Astro.url.toString());
+
+const licenseClass = css({
+	position: "relative",
+	overflow: "hidden",
+	backgroundColor: "var(--license-block-bg)",
+	paddingTop: "1.25rem",
+	paddingRight: "1.5rem",
+	paddingBottom: "1.25rem",
+	paddingLeft: "1.5rem",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+
+const titleClass = css({
+	fontWeight: "700",
+	color: "rgb(0 0 0 / 0.75)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		color: "rgb(255 255 255 / 0.75)",
+	},
+});
+
+const linkClass = css({
+	color: "var(--primary)",
+});
+
+const metadataClass = css({
+	marginTop: "0.5rem",
+	display: "flex",
+	gap: "1.5rem",
+});
+
+const metadataLabelClass = css({
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	color: "rgb(0 0 0 / 0.3)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		color: "rgb(255 255 255 / 0.3)",
+	},
+});
+
+const metadataValueClass = css({
+	display: "-webkit-box",
+	overflow: "hidden",
+	WebkitLineClamp: "2",
+	color: "rgb(0 0 0 / 0.75)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		color: "rgb(255 255 255 / 0.75)",
+	},
+});
+
+const metadataLinkClass = css({
+	display: "-webkit-box",
+	overflow: "hidden",
+	WebkitLineClamp: "2",
+	color: "var(--primary)",
+});
+
+const watermarkClass = css({
+	pointerEvents: "none",
+	position: "absolute",
+	top: "50%",
+	right: "1.5rem",
+	fontSize: "15rem",
+	color: "rgb(0 0 0 / 0.05)",
+	transform: "translateY(-50%)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		color: "rgb(255 255 255 / 0.05)",
+	},
+});
 ---
-<div class={`relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 ${className}`}>
-    <div class="transition font-bold text-black/75 dark:text-white/75">
+<div class:list={[licenseClass, className]}>
+    <div class={titleClass}>
         {title}
     </div>
-    <a href={postUrl} class="link text-[var(--primary)]">
+    <a href={postUrl} class:list={["link", linkClass]}>
         {postUrl}
     </a>
-    <div class="flex gap-6 mt-2">
+    <div class={metadataClass}>
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.author)}</div>
-            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{profileConf.name}</div>
+            <div class={metadataLabelClass}>{i18n(I18nKey.author)}</div>
+            <div class:list={["panda-box-vertical", metadataValueClass]}>{profileConf.name}</div>
         </div>
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.publishedAt)}</div>
-            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{formatDateToYYYYMMDD(pubDate)}</div>
+            <div class={metadataLabelClass}>{i18n(I18nKey.publishedAt)}</div>
+            <div class:list={["panda-box-vertical", metadataValueClass]}>{formatDateToYYYYMMDD(pubDate)}</div>
         </div>
         <div>
-            <div class="transition text-black/30 dark:text-white/30 text-sm">{i18n(I18nKey.license)}</div>
-            <a href={licenseConf.url} target="_blank" class="link text-[var(--primary)] line-clamp-2">{licenseConf.name}</a>
+            <div class={metadataLabelClass}>{i18n(I18nKey.license)}</div>
+            <a href={licenseConf.url} target="_blank" class:list={["link", "panda-box-vertical", metadataLinkClass]}>{licenseConf.name}</a>
         </div>
     </div>
-    <Icon name="fa6-brands:creative-commons" class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"></Icon>
+    <Icon name="fa6-brands:creative-commons" class={watermarkClass}></Icon>
 </div>

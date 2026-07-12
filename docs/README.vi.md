@@ -8,7 +8,7 @@ Một mẫu blog tĩnh được xây bằng [Astro](https://astro.build).
 
 ## ✨ Tính năng
 
-- [x] Được xây dựng bằng [Astro](https://astro.build) và [Tailwind CSS](https://tailwindcss.com)
+- [x] Được xây dựng bằng [Astro](https://astro.build) và [Panda CSS](https://panda-css.com)
 - [x] Có hoạt ảnh đổi chuyển trang mượt mà
 - [x] Chế độ sáng / tối
 - [x] Màu sắc và biểu ngữ có thể tùy chỉnh được

@@ -1,6 +1,7 @@
 ---
 import type { Page } from "astro";
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
 import { url } from "../../utils/url-utils";
 
 interface Props {
@@ -49,36 +50,96 @@ const getPageUrl = (p: number) => {
 	if (p === 1) return "/";
 	return `/${p}/`;
 };
+
+const paginationClass = css({
+	display: "flex",
+	flexDirection: "row",
+	justifyContent: "center",
+	gap: "0.75rem",
+});
+
+const navigationButtonClass = css({
+	height: "2.75rem",
+	width: "2.75rem",
+	overflow: "hidden",
+	borderRadius: "0.5rem",
+	color: "var(--primary)",
+});
+
+const navigationIconClass = css({
+	fontSize: "1.75rem",
+});
+
+const pageListClass = css({
+	display: "flex",
+	flexDirection: "row",
+	alignItems: "center",
+	borderRadius: "0.5rem",
+	backgroundColor: "var(--card-bg)",
+	fontWeight: "700",
+	color: "#404040",
+	_dark: {
+		color: "#d4d4d4",
+	},
+});
+
+const ellipsisClass = css({
+	marginLeft: "0.25rem",
+	marginRight: "0.25rem",
+});
+
+const currentPageClass = css({
+	display: "flex",
+	height: "2.75rem",
+	width: "2.75rem",
+	alignItems: "center",
+	justifyContent: "center",
+	borderRadius: "0.5rem",
+	backgroundColor: "var(--primary)",
+	fontWeight: "700",
+	color: "#ffffff",
+	_dark: {
+		color: "rgb(0 0 0 / 0.7)",
+	},
+});
+
+const pageLinkClass = css({
+	height: "2.75rem",
+	width: "2.75rem",
+	overflow: "hidden",
+	borderRadius: "0.5rem",
+	_active: {
+		transform: "scale(0.85)",
+	},
+});
 ---
 
-<div class:list={[className, "flex flex-row gap-3 justify-center"]} style={style}>
+<div class:list={[className, paginationClass]} style={style}>
     <a href={page.url.prev || ""} aria-label={page.url.prev ? "Previous Page" : null}
-       class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
+       class:list={["btn-card", navigationButtonClass,
            {"disabled": page.url.prev == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-left-rounded" class="text-[1.75rem]"></Icon>
+        <Icon name="material-symbols:chevron-left-rounded" class={navigationIconClass}></Icon>
     </a>
-    <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
+    <div class={pageListClass}>
         {pages.map((p) => {
             if (p == HIDDEN)
-                return <Icon name="material-symbols:more-horiz" class="mx-1"/>;
+                return <Icon name="material-symbols:more-horiz" class={ellipsisClass}/>;
             if (p == page.currentPage)
-                return <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
-                    font-bold text-white dark:text-black/70"
-                >
+                return <div class={currentPageClass}>
                     {p}
                 </div>
             return <a href={url(getPageUrl(p))} aria-label={`Page ${p}`}
-                class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
+                class:list={["btn-card", pageLinkClass]}
             >{p}</a>
         })}
     </div>
     <a href={page.url.next || ""} aria-label={page.url.next ? "Next Page" : null}
-       class:list={["btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
+       class:list={["btn-card", navigationButtonClass,
            {"disabled": page.url.next == undefined}
        ]}
     >
-        <Icon name="material-symbols:chevron-right-rounded" class="text-[1.75rem]"></Icon>
+        <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass}></Icon>
     </a>
 </div>

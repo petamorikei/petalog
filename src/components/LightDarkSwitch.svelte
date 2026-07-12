@@ -8,11 +8,74 @@ import {
 	getStoredTheme,
 	setTheme,
 } from "@utils/setting-utils.ts";
+import { css } from "styled-system/css";
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 
 const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
+
+const switchWrapperClass = css({
+	position: "relative",
+	zIndex: 50,
+});
+const switchButtonClass = css({
+	position: "relative",
+	borderRadius: "0.5rem",
+	height: "2.75rem",
+	width: "2.75rem",
+	_active: {
+		transform: "scale(0.9)",
+	},
+});
+const modeIconWrapperClass = css({
+	position: "absolute",
+});
+const hiddenModeIconClass = css({
+	opacity: 0,
+});
+const modeIconClass = css({
+	fontSize: "1.25rem",
+});
+const panelClass = css({
+	display: { base: "none", lg: "block" },
+	position: "absolute",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	top: "2.75rem",
+	right: "-0.5rem",
+	paddingTop: "1.25rem",
+});
+const panelContentClass = css({
+	padding: "0.5rem",
+});
+const optionButtonClass = css({
+	display: "flex",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	whiteSpace: "nowrap",
+	alignItems: "center",
+	justifyContent: "flex-start!",
+	width: "100%",
+	borderRadius: "0.5rem",
+	height: "2.25rem",
+	paddingInline: "0.75rem",
+	fontWeight: 500,
+	_active: {
+		transform: "scale(0.95)",
+	},
+});
+const optionGapClass = css({
+	marginBottom: "0.125rem",
+});
+const optionIconClass = css({
+	fontSize: "1.25rem",
+	marginRight: "0.75rem",
+});
 
 onMount(() => {
 	mode = getStoredTheme();
@@ -57,41 +120,41 @@ function hidePanel() {
 }
 </script>
 
-<!-- z-50 make the panel higher than other float panels -->
-<div class="relative z-50" role="menu" tabindex="-1" onmouseleave={hidePanel}>
-    <button aria-label="Light/Dark Mode" role="menuitem" class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="scheme-switch" onclick={toggleScheme} onmouseenter={showPanel}>
-        <div class="absolute" class:opacity-0={mode !== LIGHT_MODE}>
-            <Icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem]"></Icon>
+<!-- Keep this panel above the other floating panels. -->
+<div class={switchWrapperClass} role="menu" tabindex="-1" onmouseleave={hidePanel}>
+    <button aria-label="Light/Dark Mode" role="menuitem" class={`btn-plain scale-animation ${switchButtonClass}`} id="scheme-switch" onclick={toggleScheme} onmouseenter={showPanel}>
+        <div class={`${modeIconWrapperClass} ${mode !== LIGHT_MODE ? hiddenModeIconClass : ""}`}>
+            <Icon icon="material-symbols:wb-sunny-outline-rounded" class={modeIconClass}></Icon>
         </div>
-        <div class="absolute" class:opacity-0={mode !== DARK_MODE}>
-            <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem]"></Icon>
+        <div class={`${modeIconWrapperClass} ${mode !== DARK_MODE ? hiddenModeIconClass : ""}`}>
+            <Icon icon="material-symbols:dark-mode-outline-rounded" class={modeIconClass}></Icon>
         </div>
-        <div class="absolute" class:opacity-0={mode !== AUTO_MODE}>
-            <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem]"></Icon>
+        <div class={`${modeIconWrapperClass} ${mode !== AUTO_MODE ? hiddenModeIconClass : ""}`}>
+            <Icon icon="material-symbols:radio-button-partial-outline" class={modeIconClass}></Icon>
         </div>
     </button>
 
-    <div id="light-dark-panel" class="hidden lg:block absolute transition float-panel-closed top-11 -right-2 pt-5" >
-        <div class="card-base float-panel p-2">
-            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
+    <div id="light-dark-panel" class={`float-panel-closed ${panelClass}`} >
+        <div class={`card-base float-panel ${panelContentClass}`}>
+            <button class={`btn-plain scale-animation ${optionButtonClass} ${optionGapClass}`}
                     class:current-theme-btn={mode === LIGHT_MODE}
                     onclick={() => switchScheme(LIGHT_MODE)}
             >
-                <Icon icon="material-symbols:wb-sunny-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
+                <Icon icon="material-symbols:wb-sunny-outline-rounded" class={optionIconClass}></Icon>
                 {i18n(I18nKey.lightMode)}
             </button>
-            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
+            <button class={`btn-plain scale-animation ${optionButtonClass} ${optionGapClass}`}
                     class:current-theme-btn={mode === DARK_MODE}
                     onclick={() => switchScheme(DARK_MODE)}
             >
-                <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem] mr-3"></Icon>
+                <Icon icon="material-symbols:dark-mode-outline-rounded" class={optionIconClass}></Icon>
                 {i18n(I18nKey.darkMode)}
             </button>
-            <button class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95"
+            <button class={`btn-plain scale-animation ${optionButtonClass}`}
                     class:current-theme-btn={mode === AUTO_MODE}
                     onclick={() => switchScheme(AUTO_MODE)}
             >
-                <Icon icon="material-symbols:radio-button-partial-outline" class="text-[1.25rem] mr-3"></Icon>
+                <Icon icon="material-symbols:radio-button-partial-outline" class={optionIconClass}></Icon>
                 {i18n(I18nKey.systemMode)}
             </button>
         </div>

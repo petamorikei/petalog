@@ -8,7 +8,7 @@
 
 ## ✨ คุณสมบัติ
 
-- [x] สร้างด้วย [Astro](https://astro.build) และ [Tailwind CSS](https://tailwindcss.com)
+- [x] สร้างด้วย [Astro](https://astro.build) และ [Panda CSS](https://panda-css.com)
 - [x] มีอนิเมชั่นและการเปลี่ยนหน้าอย่างลื่นไหล
 - [x] โหมดสว่าง / โหมดมืด
 - [x] ปรับแต่งสีธีมและแบนเนอร์ได้

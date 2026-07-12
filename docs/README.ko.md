@@ -8,7 +8,7 @@
 
 ## ✨ 특징
 
-- [x] [Astro](https://astro.build) 및 [Tailwind CSS](https://tailwindcss.com)로 구축됨
+- [x] [Astro](https://astro.build) 및 [Panda CSS](https://panda-css.com)로 구축됨
 - [x] 부드러운 애니메이션 및 페이지 전환
 - [x] 라이트 모드 / 다크 모드
 - [x] 사용자 정의 가능한 테마 색상 및 배너

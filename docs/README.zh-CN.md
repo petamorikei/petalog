@@ -8,7 +8,7 @@
 
 ## ✨ 功能特性
 
-- [x] 基于 Astro 和 Tailwind CSS 开发
+- [x] 基于 Astro 和 Panda CSS 开发
 - [x] 流畅的动画和页面过渡
 - [x] 亮色 / 暗色模式
 - [x] 自定义主题色和横幅图片

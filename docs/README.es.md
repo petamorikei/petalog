@@ -8,7 +8,7 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 
 ## ✨ Características
 
-- [x] Construido con [Astro](https://astro.build) y [Tailwind CSS](https://tailwindcss.com)
+- [x] Construido con [Astro](https://astro.build) y [Panda CSS](https://panda-css.com)
 - [x] Animaciones suaves y transiciones de página
 - [x] Modo claro / oscuro
 - [x] Colores del tema y banner personalizables

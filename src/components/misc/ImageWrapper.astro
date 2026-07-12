@@ -11,6 +11,7 @@ interface Props {
 }
 
 import { Image } from "astro:assets";
+import { css } from "styled-system/css";
 import { url } from "../../utils/url-utils";
 
 const { id, src, alt, position = "center", basePath = "/" } = Astro.props;
@@ -44,11 +45,31 @@ if (isLocal) {
 	img = await file();
 }
 
-const imageClass = "w-full h-full object-cover";
+const wrapperClass = css({
+	position: "relative",
+	overflow: "hidden",
+});
+const overlayClass = css({
+	pointerEvents: "none",
+	position: "absolute",
+	inset: "0",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		backgroundColor: "rgb(0 0 0 / 0.1)",
+	},
+});
+const imageClass = css({
+	height: "100%",
+	width: "100%",
+	objectFit: "cover",
+});
 const imageStyle = `object-position: ${position}`;
 ---
-<div id={id} class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+<div id={id} class:list={[className, wrapperClass]}>
+    <div class={overlayClass}></div>
     {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
     {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
 </div>

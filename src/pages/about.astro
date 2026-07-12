@@ -2,6 +2,7 @@
 
 import { getEntry, render } from "astro:content";
 import Markdown from "@components/misc/Markdown.astro";
+import { css } from "styled-system/css";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
@@ -13,11 +14,28 @@ if (!aboutPost) {
 }
 
 const { Content } = await render(aboutPost);
+
+const outerClass = css({
+	display: "flex",
+	width: "100%",
+	borderRadius: "var(--radius-large)",
+	overflow: "hidden",
+	position: "relative",
+	minHeight: "8rem",
+});
+const cardClass = css({
+	zIndex: "10",
+	paddingInline: "2.25rem",
+	paddingBlock: "1.5rem",
+	position: "relative",
+	width: "100%",
+});
+const markdownClass = css({ marginTop: "0.5rem" });
 ---
 <MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
-        <div class="card-base z-10 px-9 py-6 relative w-full ">
-            <Markdown class="mt-2">
+    <div class={outerClass}>
+        <div class:list={["card-base", cardClass]}>
+            <Markdown class={markdownClass}>
                 <Content />
             </Markdown>
         </div>

@@ -5,6 +5,7 @@ import Navbar from "@components/Navbar.astro";
 import SideBar from "@components/widget/SideBar.astro";
 import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
 import ImageWrapper from "../components/misc/ImageWrapper.astro";
 import TOC from "../components/widget/TOC.astro";
 import { siteConfig } from "../config";
@@ -39,61 +40,230 @@ const hasBannerLink = !!siteConfig.banner.credit.url;
 const mainPanelTop = siteConfig.banner.enable
 	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 	: "5.5rem";
+
+const topRowClass = css({
+	zIndex: 50,
+	pointerEvents: "none",
+	position: "relative",
+	transitionProperty: "all",
+	transitionDuration: "700ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	maxWidth: "var(--page-width)",
+	paddingInline: "0",
+	marginInline: "auto",
+	md: { paddingInline: "1rem" },
+});
+const navbarWrapperClass = css({
+	pointerEvents: "auto",
+	position: "sticky",
+	top: "0",
+	transitionProperty: "all",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+const bannerWrapperClass = css({
+	position: "absolute",
+	zIndex: 10,
+	width: "100%",
+	overflow: "hidden",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "700ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+const bannerClass = css({
+	objectFit: "cover",
+	height: "100%",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "700ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+const mainPanelClass = css({
+	position: "absolute",
+	width: "100%",
+	zIndex: 30,
+	pointerEvents: "none",
+});
+const pageWidthClass = css({
+	position: "relative",
+	maxWidth: "var(--page-width)",
+	marginInline: "auto",
+	pointerEvents: "auto",
+});
+const mainGridClass = css({
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "700ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	width: "100%",
+	left: "0",
+	right: "0",
+	display: "grid",
+	gridTemplateColumns: "17.5rem auto",
+	gridTemplateRows: "auto 1fr auto",
+	marginInline: "auto",
+	gap: "1rem",
+	paddingInline: "0",
+	md: { paddingInline: "1rem" },
+	lg: { gridTemplateRows: "auto" },
+});
+const bannerCreditClass = css({
+	position: "absolute",
+	display: "flex",
+	justifyContent: "center",
+	alignItems: "center",
+	borderRadius: "9999px",
+	paddingInline: "0.75rem",
+	right: "1rem",
+	top: "-3.25rem",
+	backgroundColor: "rgba(0, 0, 0, 0.6)",
+	height: "2.25rem",
+	transitionProperty: "all",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_hover: { backgroundColor: "rgba(0, 0, 0, 0.7)" },
+});
+const linkedBannerCreditClass = css({
+	_hover: { paddingRight: "2.25rem" },
+	_active: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
+});
+const bannerCreditIconClass = css({
+	color: "rgba(255, 255, 255, 0.75)",
+	fontSize: "1.25rem",
+	marginRight: "0.25rem",
+});
+const bannerCreditTextClass = css({
+	color: "rgba(255, 255, 255, 0.75)",
+	fontSize: "0.75rem",
+	lineHeight: "1rem",
+});
+const bannerCreditLinkIconClass = css({
+	position: "absolute",
+	color: "oklch(0.75 0.14 var(--hue))",
+	right: "1rem",
+	fontSize: "0.75rem",
+	opacity: 0,
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+const visibleBannerCreditLinkIconClass = css({ _groupHover: { opacity: 1 } });
+const sidebarClass = css({
+	marginBottom: "1rem",
+	gridRowStart: 2,
+	gridRowEnd: 3,
+	gridColumn: "span 2 / span 2",
+	lg: {
+		gridRowStart: 1,
+		gridRowEnd: 2,
+		gridColumn: "span 1 / span 1",
+		maxWidth: "17.5rem",
+	},
+});
+const mainClass = css({
+	gridColumn: "span 2 / span 2",
+	overflow: "hidden",
+	lg: { gridColumn: "span 1 / span 1" },
+});
+const desktopFooterClass = css({
+	gridColumn: "span 2 / span 2",
+	display: "none",
+	lg: { display: "block" },
+});
+const mobileFooterClass = css({
+	gridColumn: "span 2 / span 2",
+	display: "block",
+	lg: { display: "none" },
+});
+const tocLayerClass = css({
+	position: "absolute",
+	width: "100%",
+	zIndex: 0,
+	display: "none",
+	"2xl": { display: "block" },
+});
+const tocWidthClass = css({
+	position: "relative",
+	maxWidth: "var(--page-width)",
+	marginInline: "auto",
+});
+const tocWrapperClass = css({
+	display: "none",
+	position: "absolute",
+	top: "0",
+	right: "calc(var(--toc-width) * -1)",
+	width: "var(--toc-width)",
+	alignItems: "center",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	lg: { display: "block" },
+});
+const tocInnerWrapperClass = css({
+	position: "fixed",
+	top: "3.5rem",
+	width: "var(--toc-width)",
+	height: "calc(100vh - 20rem)",
+	overflowY: "scroll",
+	overflowX: "hidden",
+});
+const tocClass = css({ width: "100%", height: "100%" });
+const tocSpacerClass = css({ height: "2rem", width: "100%" });
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
-<div id="top-row" class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto" class:list={[""]}>
-    <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
+<div id="top-row" class={topRowClass}>
+    <div id="navbar-wrapper" class={navbarWrapperClass}>
         <Navbar></Navbar>
     </div>
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden`} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
-    <ImageWrapper id="banner" alt="Banner image of the blog" class:list={["object-cover h-full transition duration-700 opacity-0 scale-105"]}
+{siteConfig.banner.enable && <div id="banner-wrapper" class={bannerWrapperClass} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
+    <ImageWrapper id="banner" alt="Banner image of the blog" class:list={[bannerClass, "opacity-0 scale-105"]}
                   src={siteConfig.banner.src} position={siteConfig.banner.position}
     >
     </ImageWrapper>
 </div>}
 
 <!-- Main content -->
-<div class="absolute w-full z-30 pointer-events-none" style={`top: ${mainPanelTop}`}>
+<div class={mainPanelClass} style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
-    <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
-        <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
-    mx-auto gap-4 px-0 md:px-4"
+    <div class={pageWidthClass}>
+        <div id="main-grid" class={mainGridClass}
         >
             <!-- Banner image credit -->
             {hasBannerCredit && <a href={siteConfig.banner.credit.url} id="banner-credit" target="_blank" rel="noopener" aria-label="Visit image source"
-                                   class:list={["group onload-animation transition-all absolute flex justify-center items-center rounded-full " +
-                                   "px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9", {"hover:pr-9 active:bg-black/80": hasBannerLink}]}
+                                   class:list={["group onload-animation", bannerCreditClass, {[linkedBannerCreditClass]: hasBannerLink}]}
             >
-                <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
-                <div class="text-white/75 text-xs">{siteConfig.banner.credit.text}</div>
-                <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0",
-                    {"group-hover:opacity-100": hasBannerLink}]}
+                <Icon class={bannerCreditIconClass} name="material-symbols:copyright-outline-rounded" ></Icon>
+                <div class={bannerCreditTextClass}>{siteConfig.banner.credit.text}</div>
+                <Icon class:list={[bannerCreditLinkIconClass, {[visibleBannerCreditLinkIconClass]: hasBannerLink}]}
                       name="fa6-solid:arrow-up-right-from-square">
                 </Icon>
             </a>}
 
 
-            <SideBar class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation" headings={headings}></SideBar>
+            <SideBar class={`${sidebarClass} onload-animation`} headings={headings}></SideBar>
 
-            <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden">
+            <main id="swup-container" class:list={["transition-swup-fade", mainClass]}>
                 <div id="content-wrapper" class="onload-animation">
                     <!-- the overflow-hidden here prevent long text break the layout-->
                     <!-- make id different from windows.swup global property -->
                     <slot></slot>
-                    <div class="footer col-span-2 onload-animation hidden lg:block">
+                    <div class:list={["footer onload-animation", desktopFooterClass]}>
                         <Footer></Footer>
                     </div>
                 </div>
             </main>
 
-            <div class="footer col-span-2 onload-animation block lg:hidden">
+            <div class:list={["footer onload-animation", mobileFooterClass]}>
                 <Footer></Footer>
             </div>
         </div>
@@ -103,17 +273,17 @@ const mainPanelTop = siteConfig.banner.enable
 </div>
 
 <!-- The things that should be under the banner, only the TOC for now -->
-<div class="absolute w-full z-0 hidden 2xl:block">
-    <div class="relative max-w-[var(--page-width)] mx-auto">
+<div class={tocLayerClass}>
+    <div class={tocWidthClass}>
         <!-- TOC component -->
-        {siteConfig.toc.enable && <div id="toc-wrapper" class:list={["hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center",
+        {siteConfig.toc.enable && <div id="toc-wrapper" class:list={[tocWrapperClass,
             {"toc-hide": siteConfig.banner.enable}]}
         >
-            <div id="toc-inner-wrapper" class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
-                <div id="toc" class="w-full h-full transition-swup-fade ">
-                    <div class="h-8 w-full"></div>
+            <div id="toc-inner-wrapper" class:list={[tocInnerWrapperClass, "hide-scrollbar"]}>
+                <div id="toc" class:list={[tocClass, "transition-swup-fade"]}>
+                    <div class={tocSpacerClass}></div>
                     <TOC headings={headings}></TOC>
-                    <div class="h-8 w-full"></div>
+                    <div class={tocSpacerClass}></div>
                 </div>
             </div>
         </div>}

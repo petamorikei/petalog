@@ -1,39 +1,186 @@
 ---
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
 import { profileConfig } from "../../config";
 import { url } from "../../utils/url-utils";
 import ImageWrapper from "../misc/ImageWrapper.astro";
 
 const config = profileConfig;
+
+const profileClass = css({
+	padding: "0.75rem",
+});
+
+const avatarLinkClass = css({
+	position: "relative",
+	marginTop: "0.25rem",
+	marginRight: "auto",
+	marginBottom: "0.75rem",
+	marginLeft: "auto",
+	display: "block",
+	maxWidth: "12rem",
+	overflow: "hidden",
+	borderRadius: "0.75rem",
+	_active: {
+		transform: "scale(0.95)",
+	},
+	lg: {
+		marginTop: "0",
+		marginRight: "0",
+		marginLeft: "0",
+		maxWidth: "none",
+	},
+});
+
+const avatarOverlayClass = css({
+	pointerEvents: "none",
+	position: "absolute",
+	zIndex: "50",
+	display: "flex",
+	height: "100%",
+	width: "100%",
+	alignItems: "center",
+	justifyContent: "center",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_groupHover: {
+		backgroundColor: "rgb(0 0 0 / 0.3)",
+	},
+	_groupActive: {
+		backgroundColor: "rgb(0 0 0 / 0.5)",
+	},
+});
+
+const avatarOverlayIconClass = css({
+	fontSize: "3rem",
+	lineHeight: "1",
+	color: "#ffffff",
+	opacity: "0",
+	transform: "scale(0.9)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_groupHover: {
+		opacity: "1",
+		transform: "scale(1)",
+	},
+});
+
+const avatarClass = css({
+	marginRight: "auto",
+	marginLeft: "auto",
+	height: "100%",
+	lg: {
+		marginTop: "0",
+		width: "100%",
+	},
+});
+
+const profileContentClass = css({
+	paddingLeft: "0.5rem",
+	paddingRight: "0.5rem",
+});
+
+const profileNameClass = css({
+	marginBottom: "0.25rem",
+	textAlign: "center",
+	fontSize: "1.25rem",
+	lineHeight: "1.75rem",
+	fontWeight: "700",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		color: "#fafafa",
+	},
+});
+
+const accentClass = css({
+	marginRight: "auto",
+	marginBottom: "0.5rem",
+	marginLeft: "auto",
+	height: "0.25rem",
+	width: "1.25rem",
+	borderRadius: "9999px",
+	backgroundColor: "var(--primary)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+
+const bioClass = css({
+	marginBottom: "0.625rem",
+	textAlign: "center",
+	color: "#a3a3a3",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+
+const socialLinksClass = css({
+	marginBottom: "0.25rem",
+	display: "flex",
+	flexWrap: "wrap",
+	justifyContent: "center",
+	gap: "0.5rem",
+});
+
+const socialIconLinkClass = css({
+	height: "2.5rem",
+	width: "2.5rem",
+	borderRadius: "0.5rem",
+	_active: {
+		transform: "scale(0.9)",
+	},
+});
+
+const socialIconClass = css({
+	fontSize: "1.5rem",
+});
+
+const singleSocialLinkClass = css({
+	height: "2.5rem",
+	gap: "0.5rem",
+	borderRadius: "0.5rem",
+	paddingLeft: "0.75rem",
+	paddingRight: "0.75rem",
+	fontWeight: "700",
+	_active: {
+		transform: "scale(0.95)",
+	},
+});
 ---
-<div class="card-base p-3">
+<div class:list={["card-base", profileClass]}>
     <a aria-label="Go to About Page" href={url('/about/')}
-       class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
-        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center">
+       class:list={["group", avatarLinkClass]}>
+        <div class={avatarOverlayClass}>
             <Icon name="fa6-regular:address-card"
-                  class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl">
+                  class={avatarOverlayIconClass}>
             </Icon>
         </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class="mx-auto lg:w-full h-full lg:mt-0 "></ImageWrapper>
+        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class={avatarClass}></ImageWrapper>
     </a>
-    <div class="px-2">
-        <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{config.name}</div>
-        <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
-        <div class="text-center text-neutral-400 mb-2.5 transition">{config.bio}</div>
-        <div class="flex flex-wrap gap-2 justify-center mb-1">
+    <div class={profileContentClass}>
+        <div class={profileNameClass}>{config.name}</div>
+        <div class={accentClass}></div>
+        <div class={bioClass}>{config.bio}</div>
+        <div class={socialLinksClass}>
             {config.links.length > 1 && config.links.map(item =>
-                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class="btn-regular rounded-lg h-10 w-10 active:scale-90">
-                        <Icon name={item.icon} class="text-[1.5rem]"></Icon>
+                    <a rel="me" aria-label={item.name} href={item.url} target="_blank" class:list={["btn-regular", socialIconLinkClass]}>
+                        <Icon name={item.icon} class={socialIconClass}></Icon>
                     </a>
             )}
             {config.links.length == 1 && <a rel="me" aria-label={config.links[0].name} href={config.links[0].url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                <Icon name={config.links[0].icon} class="text-[1.5rem]"></Icon>
+                                            class:list={["btn-regular", singleSocialLinkClass]}>
+                <Icon name={config.links[0].icon} class={socialIconClass}></Icon>
                 {config.links[0].name}
             </a>}
         </div>
     </div>
 </div>
-

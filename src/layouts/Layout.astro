@@ -2,9 +2,14 @@
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
+import "../styles/preflight.css";
+import "../styles/global.css";
+import "../styles/markdown-extend.css";
+import "../styles/variables.css";
 import "../styles/panda.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
+import { css } from "styled-system/css";
 import { profileConfig, siteConfig } from "@/config";
 import {
 	AUTO_MODE,
@@ -71,10 +76,28 @@ const bannerOffsetByPosition = {
 };
 const bannerOffset =
 	bannerOffsetByPosition[siteConfig.banner.position || "center"];
+
+const documentClass = css({
+	backgroundColor: "var(--page-bg)",
+	fontSize: "14px",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	md: { fontSize: "16px" },
+});
+const bodyClass = css({
+	minHeight: "100vh",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+const pageHeightExtendClass = css({ height: "300vh" });
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+<html lang={siteLang} class={documentClass}
 	  data-overlayscrollbars-initialize
 >
 	<head>
@@ -149,14 +172,14 @@ const bannerOffset =
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
 	</head>
-	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
+	<body class:list={[bodyClass, {"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
 	>
 		<ConfigCarrier></ConfigCarrier>
 		<slot />
 
 		<!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
-		<div id="page-height-extend" class="hidden h-[300vh]"></div>
+		<div id="page-height-extend" class:list={["hidden", pageHeightExtendClass]}></div>
 	</body>
 </html>
 
@@ -165,33 +188,43 @@ const bannerOffset =
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
-@tailwind components;
-@layer components {
-	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
-	}
-	.enable-banner #banner-wrapper {
-		@apply h-[var(--banner-height-home)]
-	}
+.enable-banner.is-home #banner-wrapper {
+	height: var(--banner-height-home);
+	transform: translateY(var(--banner-height-extend));
+}
+.enable-banner #banner-wrapper {
+	height: var(--banner-height-home);
+}
 
-	.enable-banner.is-home #banner {
-		@apply h-[var(--banner-height-home)] translate-y-0
-	}
-	.enable-banner #banner {
-		@apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
-	}
-	.enable-banner.is-home #main-grid {
-		@apply translate-y-[var(--banner-height-extend)];
-	}
-	.enable-banner #top-row {
-		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
-	}
-	.enable-banner.is-home #sidebar-sticky {
-		@apply top-[calc(1rem_-_var(--banner-height-extend))]
-	}
-	.navbar-hidden {
-		@apply opacity-0 -translate-y-16
-	}
+.enable-banner.is-home #banner {
+	height: var(--banner-height-home);
+	transform: translateY(0);
+}
+.enable-banner #banner {
+	height: var(--banner-height-home);
+	transform: translateY(var(--bannerOffset));
+}
+.enable-banner.is-home #banner.scale-105 {
+	transform: translateY(0) scale(1.05);
+}
+.enable-banner #banner.scale-105 {
+	transform: translateY(var(--bannerOffset)) scale(1.05);
+}
+.enable-banner.is-home #main-grid {
+	transform: translateY(var(--banner-height-extend));
+}
+.enable-banner #top-row {
+	height: calc(var(--banner-height-home) - 4.5rem);
+	transition-property: all;
+	transition-duration: 300ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.enable-banner.is-home #sidebar-sticky {
+	top: calc(1rem - var(--banner-height-extend));
+}
+.navbar-hidden {
+	opacity: 0;
+	transform: translateY(-4rem);
 }
 </style>
 
@@ -300,7 +333,7 @@ function initCustomScrollbar() {
 			}
 		}, {
 		scrollbars: {
-			theme: 'scrollbar-base scrollbar-auto py-1',
+			theme: 'scrollbar-base scrollbar-auto',
 			autoHide: 'move',
 			autoHideDelay: 500,
 			autoHideSuspend: false,

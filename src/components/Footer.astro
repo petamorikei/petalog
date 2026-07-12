@@ -1,21 +1,76 @@
 ---
+import { css } from "styled-system/css";
 
 import { profileConfig } from "../config";
 import { url } from "../utils/url-utils";
 
 const currentYear = new Date().getFullYear();
+
+const dividerClass = css({
+	marginTop: "2.5rem",
+	marginRight: "8rem",
+	marginBottom: "2.5rem",
+	marginLeft: "8rem",
+	borderTopWidth: "1px",
+	borderStyle: "dashed",
+	borderColor: "rgb(0 0 0 / 0.1)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		borderColor: "rgb(255 255 255 / 0.15)",
+	},
+});
+
+const footerContainerClass = css({
+	marginBottom: "3rem",
+	display: "flex",
+	flexDirection: "column",
+	alignItems: "center",
+	justifyContent: "center",
+	borderRadius: "1rem",
+	borderStyle: "dashed",
+	borderColor: "oklch(85% 0.01 var(--hue))",
+	paddingLeft: "1.5rem",
+	paddingRight: "1.5rem",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		borderColor: "rgb(255 255 255 / 0.15)",
+	},
+});
+
+const footerTextClass = css({
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	textAlign: "center",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
+
+const footerLinkClass = css({
+	color: "var(--primary)",
+	fontWeight: "500",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+});
 ---
 
-<!--<div class="border-t border-[var(&#45;&#45;primary)] mx-16 border-dashed py-8 max-w-[var(&#45;&#45;page-width)] flex flex-col items-center justify-center px-6">-->
-<div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
-<!--<div class="transition bg-[oklch(92%_0.01_var(&#45;&#45;hue))] dark:bg-black rounded-2xl py-8 mt-4 mb-8 flex flex-col items-center justify-center px-6">-->
-<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
-    <div class="transition text-50 text-sm text-center">
+<div class={dividerClass}></div>
+<div class={footerContainerClass}>
+    <div class:list={["text-50", footerTextClass]}>
         &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('rss.xml')}>RSS</a> /
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
+        <a class:list={["link", footerLinkClass]} target="_blank" href={url('rss.xml')}>RSS</a> /
+        <a class:list={["link", footerLinkClass]} target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
         Powered by
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://astro.build">Astro</a> &
-        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
+        <a class:list={["link", footerLinkClass]} target="_blank" href="https://astro.build">Astro</a> &
+        <a class:list={["link", footerLinkClass]} target="_blank" href="https://github.com/saicaca/fuwari">Fuwari</a>
     </div>
 </div>

@@ -8,7 +8,7 @@
 
 ## ✨ 特徴
 
-- [x] [Astro](https://astro.build) 及び [Tailwind CSS](https://tailwindcss.com) で構築
+- [x] [Astro](https://astro.build) 及び [Panda CSS](https://panda-css.com) で構築
 - [x] スムーズなアニメーションとページ遷移
 - [x] ライト/ダークテーマ対応
 - [x] カスタマイズ可能なテーマカラーとバナー

@@ -1,4 +1,5 @@
 <script lang="ts">
+import { css } from "styled-system/css";
 import { onMount } from "svelte";
 
 import I18nKey from "../i18n/i18nKey";
@@ -28,6 +29,137 @@ interface Group {
 	year: number;
 	posts: Post[];
 }
+
+const archivePanelClass = css({
+	paddingInline: "2rem",
+	paddingBlock: "1.5rem",
+});
+const yearRowClass = css({
+	display: "flex",
+	flexDirection: "row",
+	width: "100%",
+	alignItems: "center",
+	height: "3.75rem",
+});
+const yearClass = css({
+	width: { base: "15%", md: "10%" },
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	fontSize: "1.5rem",
+	lineHeight: "2rem",
+	fontWeight: 700,
+	textAlign: "right",
+});
+const timelineColumnClass = css({
+	width: { base: "15%", md: "10%" },
+});
+const yearDotClass = css({
+	height: "0.75rem",
+	width: "0.75rem",
+	backgroundImage: "none",
+	borderRadius: "9999px",
+	outlineStyle: "solid",
+	outlineColor: "var(--primary)",
+	marginInline: "auto",
+	outlineOffset: "-2px",
+	zIndex: 50,
+});
+const countClass = css({
+	width: { base: "70%", md: "80%" },
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	textAlign: "left",
+});
+const postLinkClass = css({
+	display: "block!",
+	height: "2.5rem",
+	width: "100%",
+	borderRadius: "0.5rem",
+	_hover: {
+		color: "initial",
+	},
+});
+const postRowClass = css({
+	display: "flex",
+	flexDirection: "row",
+	justifyContent: "flex-start",
+	alignItems: "center",
+	height: "100%",
+});
+const postDateClass = css({
+	width: { base: "15%", md: "10%" },
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	textAlign: "right",
+});
+const timelineTrackClass = css({
+	width: { base: "15%", md: "10%" },
+	position: "relative",
+	height: "100%",
+	display: "flex",
+	alignItems: "center",
+});
+const timelineDotClass = css({
+	transitionProperty: "all",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	marginInline: "auto",
+	width: "0.25rem",
+	height: "0.25rem",
+	borderRadius: "0.25rem",
+	backgroundColor: "oklch(0.5 0.05 var(--hue))",
+	outlineStyle: "solid",
+	outlineWidth: "4px",
+	outlineColor: "var(--card-bg)",
+	zIndex: 50,
+	_groupHover: {
+		height: "1.25rem",
+		backgroundColor: "var(--primary)",
+		outlineColor: "var(--btn-plain-bg-hover)",
+	},
+	_groupActive: {
+		outlineColor: "var(--btn-plain-bg-active)",
+	},
+});
+const postTitleClass = css({
+	width: { base: "70%", md: "65%" },
+	maxWidth: { md: "65%" },
+	textAlign: "left",
+	fontWeight: 700,
+	transitionProperty: "all",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	paddingRight: "2rem",
+	whiteSpace: "nowrap",
+	textOverflow: "ellipsis",
+	overflow: "hidden",
+	_groupHover: {
+		transform: "translateX(0.25rem)",
+		color: "var(--primary)",
+	},
+});
+const tagListClass = css({
+	display: { base: "none", md: "block" },
+	width: { md: "15%" },
+	textAlign: "left",
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+	whiteSpace: "nowrap",
+	textOverflow: "ellipsis",
+	overflow: "hidden",
+});
 
 let groups: Group[] = [];
 
@@ -85,20 +217,17 @@ onMount(async () => {
 });
 </script>
 
-<div class="card-base px-8 py-6">
+<div class={`card-base ${archivePanelClass}`}>
     {#each groups as group}
         <div>
-            <div class="flex flex-row w-full items-center h-[3.75rem]">
-                <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
+            <div class={yearRowClass}>
+                <div class={`text-75 ${yearClass}`}>
                     {group.year}
                 </div>
-                <div class="w-[15%] md:w-[10%]">
-                    <div
-                            class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto
-                  -outline-offset-[2px] z-50 outline-3"
-                    ></div>
+                <div class={timelineColumnClass}>
+                    <div class={yearDotClass}></div>
                 </div>
-                <div class="w-[70%] md:w-[80%] transition text-left text-50">
+                <div class={`text-50 ${countClass}`}>
                     {group.posts.length} {i18n(group.posts.length === 1 ? I18nKey.postCount : I18nKey.postsCount)}
                 </div>
             </div>
@@ -107,40 +236,26 @@ onMount(async () => {
                 <a
                         href={getPostUrlBySlug(post.slug)}
                         aria-label={post.data.title}
-                        class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
+                        class={`group btn-plain ${postLinkClass}`}
                 >
-                    <div class="flex flex-row justify-start items-center h-full">
+                    <div class={postRowClass}>
                         <!-- date -->
-                        <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+                        <div class={`text-50 ${postDateClass}`}>
                             {formatDate(post.data.published)}
                         </div>
 
                         <!-- dot and line -->
-                        <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
-                            <div
-                                    class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                       bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
-                       outline outline-4 z-50
-                       outline-[var(--card-bg)]
-                       group-hover:outline-[var(--btn-plain-bg-hover)]
-                       group-active:outline-[var(--btn-plain-bg-active)]"
-                            ></div>
+                        <div class={`dash-line ${timelineTrackClass}`}>
+                            <div class={timelineDotClass}></div>
                         </div>
 
                         <!-- post title -->
-                        <div
-                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                     group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
-                        >
+                        <div class={`text-75 ${postTitleClass}`}>
                             {post.data.title}
                         </div>
 
                         <!-- tag list -->
-                        <div
-                                class="hidden md:block md:w-[15%] text-left text-sm transition
-                     whitespace-nowrap overflow-ellipsis overflow-hidden text-30"
-                        >
+                        <div class={`text-30 ${tagListClass}`}>
                             {formatTag(post.data.tags)}
                         </div>
                     </div>

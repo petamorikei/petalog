@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { css } from "styled-system/css";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { formatDateToYYYYMMDD } from "../utils/date-utils";
@@ -23,60 +24,109 @@ const {
 	hideUpdateDate = false,
 } = Astro.props;
 const className = Astro.props.class;
+
+const transitionClass = css({
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	transitionDuration: "150ms",
+});
+const metadataRootClass = css({
+	display: "flex",
+	flexWrap: "wrap",
+	color: { base: "rgb(115 115 115)", _dark: "rgb(163 163 163)" },
+	alignItems: "center",
+	columnGap: "1rem",
+	rowGap: "0.5rem",
+});
+const itemClass = css({ display: "flex", alignItems: "center" });
+const metaIconContentClass = css({
+	fontSize: "1.25rem",
+	lineHeight: "1.75rem",
+});
+const metaTextClass = css({
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	fontWeight: "500",
+});
+const inlineListClass = css({
+	display: "flex",
+	flexDirection: "row",
+	flexWrap: "nowrap",
+	alignItems: "center",
+});
+const metaLinkClass = css({
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	fontWeight: "500",
+	whiteSpace: "nowrap",
+	_hover: { color: "var(--primary)" },
+	_dark: { _hover: { color: "var(--primary)" } },
+});
+const tagsClass = css({ display: "flex", alignItems: "center" });
+const responsiveTagsClass = css({
+	display: { base: "none", md: "flex" },
+	alignItems: "center",
+});
+const metaDividerClass = css({
+	marginInline: "0.375rem",
+	color: "var(--meta-divider)",
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+});
+const hiddenClass = css({ display: "none" });
 ---
 
-<div class:list={["flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2", className]}>
+<div class:list={[metadataRootClass, className]}>
     <!-- publish date -->
-    <div class="flex items-center">
+    <div class={itemClass}>
         <div class="meta-icon"
         >
-            <Icon name="material-symbols:calendar-today-outline-rounded" class="text-xl"></Icon>
+            <Icon name="material-symbols:calendar-today-outline-rounded" class={metaIconContentClass}></Icon>
         </div>
-        <span class="text-50 text-sm font-medium">{formatDateToYYYYMMDD(published)}</span>
+        <span class:list={["text-50", metaTextClass]}>{formatDateToYYYYMMDD(published)}</span>
     </div>
 
     <!-- update date -->
     {!hideUpdateDate && updated && updated.getTime() !== published.getTime() && (
-        <div class="flex items-center">
+        <div class={itemClass}>
             <div class="meta-icon"
             >
-                <Icon name="material-symbols:edit-calendar-outline-rounded" class="text-xl"></Icon>
+                <Icon name="material-symbols:edit-calendar-outline-rounded" class={metaIconContentClass}></Icon>
             </div>
-            <span class="text-50 text-sm font-medium">{formatDateToYYYYMMDD(updated)}</span>
+            <span class:list={["text-50", metaTextClass]}>{formatDateToYYYYMMDD(updated)}</span>
         </div>
     )}
 
     <!-- categories -->
-    <div class="flex items-center">
+    <div class={itemClass}>
         <div class="meta-icon"
         >
-            <Icon name="material-symbols:book-2-outline-rounded" class="text-xl"></Icon>
+            <Icon name="material-symbols:book-2-outline-rounded" class={metaIconContentClass}></Icon>
         </div>
-        <div class="flex flex-row flex-nowrap items-center">
+        <div class={inlineListClass}>
             <a href={getCategoryUrl(category)} aria-label={`View all posts in the ${category} category`}
-               class="link-lg transition text-50 text-sm font-medium
-                            hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
+               class:list={["link-lg", "text-50", transitionClass, metaLinkClass]}>
                 {category || i18n(I18nKey.uncategorized)}
             </a>
         </div>
     </div>
 
     <!-- tags -->
-    <div class:list={["items-center", {"flex": !hideTagsForMobile, "hidden md:flex": hideTagsForMobile}]}>
+    <div class={hideTagsForMobile ? responsiveTagsClass : tagsClass}>
         <div class="meta-icon"
         >
-            <Icon name="material-symbols:tag-rounded" class="text-xl"></Icon>
+            <Icon name="material-symbols:tag-rounded" class={metaIconContentClass}></Icon>
         </div>
-        <div class="flex flex-row flex-nowrap items-center">
+        <div class={inlineListClass}>
             {(tags && tags.length > 0) && tags.map((tag, i) => (
-                <div class:list={[{"hidden": i == 0}, "mx-1.5 text-[var(--meta-divider)] text-sm"]}>/</div>
+                <div class:list={[metaDividerClass, i == 0 && hiddenClass]}>/</div>
                 <a href={getTagUrl(tag)} aria-label={`View all posts with the ${tag.trim()} tag`}
-                   class="link-lg transition text-50 text-sm font-medium
-                                hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap">
+                   class:list={["link-lg", "text-50", transitionClass, metaLinkClass]}>
                     {tag.trim()}
                 </a>
             ))}
-            {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+            {!(tags && tags.length > 0) && <div class:list={["text-50", transitionClass, metaTextClass]}>{i18n(I18nKey.noTags)}</div>}
         </div>
     </div>
 </div>

@@ -1,40 +1,87 @@
 ---
+import { css } from "styled-system/css";
+
 interface Props {
 	badge?: string;
 	url?: string;
 	label?: string;
 }
 const { badge, url, label } = Astro.props;
+
+const buttonClass = css({
+	height: "2.5rem",
+	width: "100%",
+	borderRadius: "0.5rem",
+	backgroundImage: "none",
+	paddingLeft: "0.5rem",
+	color: "#404040",
+	transitionProperty: "all",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_hover: {
+		backgroundColor: "var(--btn-plain-bg-hover)",
+		paddingLeft: "0.75rem",
+		color: "var(--primary)",
+	},
+	_active: {
+		backgroundColor: "var(--btn-plain-bg-active)",
+	},
+	_dark: {
+		color: "#d4d4d4",
+		_hover: {
+			color: "var(--primary)",
+		},
+	},
+});
+
+const contentClass = css({
+	position: "relative",
+	marginRight: "0.5rem",
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "space-between",
+});
+
+const labelClass = css({
+	overflow: "hidden",
+	textOverflow: "ellipsis",
+	textAlign: "left",
+	whiteSpace: "nowrap",
+});
+
+const badgeClass = css({
+	marginLeft: "1rem",
+	display: "flex",
+	height: "1.75rem",
+	minWidth: "2rem",
+	alignItems: "center",
+	justifyContent: "center",
+	borderRadius: "0.5rem",
+	backgroundColor: "var(--btn-regular-bg)",
+	paddingLeft: "0.5rem",
+	paddingRight: "0.5rem",
+	fontSize: "0.875rem",
+	lineHeight: "1.25rem",
+	fontWeight: "700",
+	color: "var(--btn-content)",
+	transitionProperty:
+		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+	transitionDuration: "150ms",
+	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+	_dark: {
+		backgroundColor: "var(--primary)",
+		color: "var(--deep-text)",
+	},
+});
 ---
 <a href={url} aria-label={label}>
-    <button
-        class:list={`
-            w-full
-            h-10
-            rounded-lg
-            bg-none
-            hover:bg-[var(--btn-plain-bg-hover)]
-            active:bg-[var(--btn-plain-bg-active)]
-            transition-all
-            pl-2
-            hover:pl-3
-            
-            text-neutral-700
-            hover:text-[var(--primary)]
-            dark:text-neutral-300
-            dark:hover:text-[var(--primary)]
-        `
-        }
-    >
-        <div class="flex items-center justify-between relative mr-2">
-            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  ">
+    <button class={buttonClass}>
+        <div class={contentClass}>
+            <div class={labelClass}>
                 <slot></slot>
             </div>
             { badge !== undefined && badge !== null && badge !== '' &&
-                <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
-                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
-                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
-                    flex items-center justify-center">
+                <div class={badgeClass}>
                     { badge }
                 </div>
             }
