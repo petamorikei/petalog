@@ -227,7 +227,7 @@ test.describe("navigation and scrolling", () => {
 			"content",
 			"About",
 		);
-		await expect(page.locator("#swup-container h1#about")).toHaveText("About");
+		await expect(page.locator("#swup-container h1#about")).toHaveText("About#");
 		await expect
 			.poll(() =>
 				page.evaluate(
