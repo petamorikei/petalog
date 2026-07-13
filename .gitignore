@@ -23,7 +23,7 @@ pnpm-debug.log*
 
 .vercel
 
-# Playwright transient output (migration Golden snapshots are committed)
+# Playwright transient output
 test-results/
 playwright-report/
 blob-report/

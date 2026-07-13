@@ -15,8 +15,6 @@
     "panda": "panda",
     "test:e2e": "playwright test",
     "test:e2e:behavior": "playwright test tests/e2e",
-    "test:e2e:visual": "playwright test tests/visual-migration",
-    "test:e2e:update": "playwright test tests/visual-migration --update-snapshots",
     "astro": "astro",
     "type-check": "tsc --noEmit --isolatedDeclarations",
     "new-post": "node scripts/new-post.js",
