@@ -1,6 +1,23 @@
 import { defineCollection } from "astro:content";
+import type { CollectionConfig } from "astro/content/config";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
+
+type PostData = {
+	title: string;
+	published: Date;
+	updated?: Date;
+	draft: boolean;
+	description: string;
+	image: string;
+	tags: string[];
+	category: string | null;
+	lang: string;
+	prevTitle: string;
+	prevSlug: string;
+	nextTitle: string;
+	nextSlug: string;
+};
 
 const postsCollection = defineCollection({
 	loader: glob({
@@ -34,7 +51,13 @@ const specCollection = defineCollection({
 	schema: z.object({}),
 });
 
-export const collections = {
+export const collections: {
+	posts: CollectionConfig<z.ZodType<PostData>, ReturnType<typeof glob>>;
+	spec: CollectionConfig<
+		z.ZodType<Record<string, never>>,
+		ReturnType<typeof glob>
+	>;
+} = {
 	posts: postsCollection,
 	spec: specCollection,
 };
