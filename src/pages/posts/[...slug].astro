@@ -17,167 +17,167 @@ import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
 
 export async function getStaticPaths() {
-	const blogEntries = await getSortedPosts();
-	return blogEntries.map((entry) => ({
-		params: { slug: entry.id },
-		props: { entry },
-	}));
+  const blogEntries = await getSortedPosts();
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 const imageBasePath = entry.filePath
-	? getDir(entry.filePath).replace(/^src\//, "")
-	: path.join("content/posts/", getDir(entry.id));
+  ? getDir(entry.filePath).replace(/^src\//, "")
+  : path.join("content/posts/", getDir(entry.id));
 
 const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": "BlogPosting",
-	headline: entry.data.title,
-	description: entry.data.description || entry.data.title,
-	keywords: entry.data.tags,
-	author: {
-		"@type": "Person",
-		name: profileConfig.name,
-		url: Astro.site,
-	},
-	datePublished: formatDateToYYYYMMDD(entry.data.published),
-	inLanguage: entry.data.lang
-		? entry.data.lang.replace("_", "-")
-		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: entry.data.title,
+  description: entry.data.description || entry.data.title,
+  keywords: entry.data.tags,
+  author: {
+    "@type": "Person",
+    name: profileConfig.name,
+    url: Astro.site,
+  },
+  datePublished: formatDateToYYYYMMDD(entry.data.published),
+  inLanguage: entry.data.lang
+    ? entry.data.lang.replace("_", "-")
+    : siteConfig.lang.replace("_", "-"),
+  // TODO include cover image here
 };
 
 const transitionClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
 });
 const postOuterClass = css({
-	display: "flex",
-	width: "100%",
-	borderRadius: "var(--radius-large)",
-	overflow: "hidden",
-	position: "relative",
-	marginBottom: "1rem",
+  display: "flex",
+  width: "100%",
+  borderRadius: "var(--radius-large)",
+  overflow: "hidden",
+  position: "relative",
+  marginBottom: "1rem",
 });
 const postContainerClass = css({
-	zIndex: "10",
-	paddingLeft: { base: "1.5rem", md: "2.25rem" },
-	paddingRight: { base: "1.5rem", md: "2.25rem" },
-	paddingTop: "1.5rem",
-	paddingBottom: "1rem",
-	position: "relative",
-	width: "100%",
+  zIndex: "10",
+  paddingLeft: { base: "1.5rem", md: "2.25rem" },
+  paddingRight: { base: "1.5rem", md: "2.25rem" },
+  paddingTop: "1.5rem",
+  paddingBottom: "1rem",
+  position: "relative",
+  width: "100%",
 });
 const statsClass = css({
-	display: "flex",
-	flexDirection: "row",
-	color: { base: "rgb(0 0 0 / 0.3)", _dark: "rgb(255 255 255 / 0.3)" },
-	gap: "1.25rem",
-	marginBottom: "0.75rem",
+  display: "flex",
+  flexDirection: "row",
+  color: { base: "rgb(0 0 0 / 0.3)", _dark: "rgb(255 255 255 / 0.3)" },
+  gap: "1.25rem",
+  marginBottom: "0.75rem",
 });
 const statClass = css({
-	display: "flex",
-	flexDirection: "row",
-	alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
 });
 const statIconClass = css({
-	height: "1.5rem",
-	width: "1.5rem",
-	borderRadius: "0.375rem",
-	backgroundColor: {
-		base: "rgb(0 0 0 / 0.05)",
-		_dark: "rgb(255 255 255 / 0.1)",
-	},
-	color: {
-		base: "rgb(0 0 0 / 0.5)",
-		_dark: "rgb(255 255 255 / 0.5)",
-	},
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
-	marginRight: "0.5rem",
+  height: "1.5rem",
+  width: "1.5rem",
+  borderRadius: "0.375rem",
+  backgroundColor: {
+    base: "rgb(0 0 0 / 0.05)",
+    _dark: "rgb(255 255 255 / 0.1)",
+  },
+  color: {
+    base: "rgb(0 0 0 / 0.5)",
+    _dark: "rgb(255 255 255 / 0.5)",
+  },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  marginRight: "0.5rem",
 });
 const smallTextClass = css({
-	fontSize: "0.875rem",
-	lineHeight: "1.25rem",
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
 });
 const relativeClass = css({ position: "relative" });
 const postTitleClass = css({
-	width: "100%",
-	display: "block",
-	fontWeight: "700",
-	marginBottom: "0.75rem",
-	fontSize: { base: "1.875rem", md: "2.25rem" },
-	lineHeight: { base: "2.25rem", md: "2.75rem" },
-	color: { base: "rgb(0 0 0 / 0.9)", _dark: "rgb(255 255 255 / 0.9)" },
-	_before: {
-		content: '""',
-		width: { md: "0.25rem" },
-		height: "1.25rem",
-		borderRadius: "0.375rem",
-		backgroundColor: "var(--primary)",
-		position: "absolute",
-		top: "0.75rem",
-		left: "-1.125rem",
-	},
+  width: "100%",
+  display: "block",
+  fontWeight: "700",
+  marginBottom: "0.75rem",
+  fontSize: { base: "1.875rem", md: "2.25rem" },
+  lineHeight: { base: "2.25rem", md: "2.75rem" },
+  color: { base: "rgb(0 0 0 / 0.9)", _dark: "rgb(255 255 255 / 0.9)" },
+  _before: {
+    content: '""',
+    width: { md: "0.25rem" },
+    height: "1.25rem",
+    borderRadius: "0.375rem",
+    backgroundColor: "var(--primary)",
+    position: "absolute",
+    top: "0.75rem",
+    left: "-1.125rem",
+  },
 });
 const metadataClass = css({ marginBottom: "1.25rem" });
 const metadataDividerClass = css({
-	borderColor: "var(--line-divider)",
-	borderStyle: "dashed",
-	borderBottomWidth: "1px",
-	marginBottom: "1.25rem",
+  borderColor: "var(--line-divider)",
+  borderStyle: "dashed",
+  borderBottomWidth: "1px",
+  marginBottom: "1.25rem",
 });
 const postCoverClass = css({
-	marginBottom: "2rem",
-	borderRadius: "0.75rem",
+  marginBottom: "2rem",
+  borderRadius: "0.75rem",
 });
 const markdownClass = css({ marginBottom: "1.5rem" });
 const licenseClass = css({
-	marginBottom: "1.5rem",
-	borderRadius: "0.75rem",
+  marginBottom: "1.5rem",
+  borderRadius: "0.75rem",
 });
 const postNavigationClass = css({
-	display: "flex",
-	flexDirection: { base: "column", md: "row" },
-	justifyContent: "space-between",
-	marginBottom: "1rem",
-	gap: "1rem",
-	overflow: "hidden",
-	width: "100%",
+  display: "flex",
+  flexDirection: { base: "column", md: "row" },
+  justifyContent: "space-between",
+  marginBottom: "1rem",
+  gap: "1rem",
+  overflow: "hidden",
+  width: "100%",
 });
 const postNavigationLinkClass = css({
-	width: "100%",
-	fontWeight: "700",
-	overflow: "hidden",
-	_active: { transform: "scale(0.95)" },
+  width: "100%",
+  fontWeight: "700",
+  overflow: "hidden",
+  _active: { transform: "scale(0.95)" },
 });
 const disabledNavigationLinkClass = css({ pointerEvents: "none" });
 const navigationCardClass = css({
-	borderRadius: "1rem",
-	width: "100%",
-	height: "3.75rem",
-	maxWidth: "100%",
-	paddingInline: "1rem",
-	display: "flex",
-	alignItems: "center",
-	gap: "1rem",
+  borderRadius: "1rem",
+  width: "100%",
+  height: "3.75rem",
+  maxWidth: "100%",
+  paddingInline: "1rem",
+  display: "flex",
+  alignItems: "center",
+  gap: "1rem",
 });
 const previousCardClass = css({ justifyContent: "flex-start !important" });
 const nextCardClass = css({ justifyContent: "flex-end !important" });
 const navigationIconClass = css({
-	fontSize: "2rem",
-	color: "var(--primary)",
+  fontSize: "2rem",
+  color: "var(--primary)",
 });
 const navigationTitleClass = css({
-	overflow: "hidden",
-	textOverflow: "ellipsis",
-	whiteSpace: "nowrap",
-	maxWidth: "calc(100% - 3rem)",
-	color: { base: "rgb(0 0 0 / 0.75)", _dark: "rgb(255 255 255 / 0.75)" },
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  maxWidth: "calc(100% - 3rem)",
+  color: { base: "rgb(0 0 0 / 0.75)", _dark: "rgb(255 255 255 / 0.75)" },
 });
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>

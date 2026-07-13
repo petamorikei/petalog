@@ -2,76 +2,76 @@
 import { css } from "styled-system/css";
 
 interface Props {
-	badge?: string;
-	url?: string;
-	label?: string;
+  badge?: string;
+  url?: string;
+  label?: string;
 }
 const { badge, url, label } = Astro.props;
 
 const buttonClass = css({
-	height: "2.5rem",
-	width: "100%",
-	borderRadius: "0.5rem",
-	backgroundImage: "none",
-	paddingLeft: "0.5rem",
-	color: "#404040",
-	transitionProperty: "all",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_hover: {
-		backgroundColor: "var(--btn-plain-bg-hover)",
-		paddingLeft: "0.75rem",
-		color: "var(--primary)",
-	},
-	_active: {
-		backgroundColor: "var(--btn-plain-bg-active)",
-	},
-	_dark: {
-		color: "#d4d4d4",
-		_hover: {
-			color: "var(--primary)",
-		},
-	},
+  height: "2.5rem",
+  width: "100%",
+  borderRadius: "0.5rem",
+  backgroundImage: "none",
+  paddingLeft: "0.5rem",
+  color: "#404040",
+  transitionProperty: "all",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _hover: {
+    backgroundColor: "var(--btn-plain-bg-hover)",
+    paddingLeft: "0.75rem",
+    color: "var(--primary)",
+  },
+  _active: {
+    backgroundColor: "var(--btn-plain-bg-active)",
+  },
+  _dark: {
+    color: "#d4d4d4",
+    _hover: {
+      color: "var(--primary)",
+    },
+  },
 });
 
 const contentClass = css({
-	position: "relative",
-	marginRight: "0.5rem",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
+  position: "relative",
+  marginRight: "0.5rem",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
 });
 
 const labelClass = css({
-	overflow: "hidden",
-	textOverflow: "ellipsis",
-	textAlign: "left",
-	whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  textAlign: "left",
+  whiteSpace: "nowrap",
 });
 
 const badgeClass = css({
-	marginLeft: "1rem",
-	display: "flex",
-	height: "1.75rem",
-	minWidth: "2rem",
-	alignItems: "center",
-	justifyContent: "center",
-	borderRadius: "0.5rem",
-	backgroundColor: "var(--btn-regular-bg)",
-	paddingLeft: "0.5rem",
-	paddingRight: "0.5rem",
-	fontSize: "0.875rem",
-	lineHeight: "1.25rem",
-	fontWeight: "700",
-	color: "var(--btn-content)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		backgroundColor: "var(--primary)",
-		color: "var(--deep-text)",
-	},
+  marginLeft: "1rem",
+  display: "flex",
+  height: "1.75rem",
+  minWidth: "2rem",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "0.5rem",
+  backgroundColor: "var(--btn-regular-bg)",
+  paddingLeft: "0.5rem",
+  paddingRight: "0.5rem",
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
+  fontWeight: "700",
+  color: "var(--btn-content)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    backgroundColor: "var(--primary)",
+    color: "var(--deep-text)",
+  },
 });
 ---
 <a href={url} aria-label={label}>

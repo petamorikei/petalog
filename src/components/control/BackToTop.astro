@@ -3,58 +3,58 @@ import { Icon } from "astro-icon/components";
 import { css } from "styled-system/css";
 
 const wrapperClass = css({
-	pointerEvents: "none",
-	position: "absolute",
-	top: "0",
-	right: "0",
-	display: "none",
-	height: "3.75rem",
-	width: "3.75rem",
-	lg: {
-		display: "block",
-	},
+  pointerEvents: "none",
+  position: "absolute",
+  top: "0",
+  right: "0",
+  display: "none",
+  height: "3.75rem",
+  width: "3.75rem",
+  lg: {
+    display: "block",
+  },
 });
 
 const backToTopClass = css({
-	pointerEvents: "auto",
-	position: "fixed",
-	bottom: "10rem",
-	display: "flex",
-	alignItems: "center",
-	overflow: "hidden",
-	cursor: "pointer",
-	border: "none",
-	borderRadius: "1rem",
-	color: "var(--primary)",
-	fontSize: "2.25rem",
-	fontWeight: "700",
-	opacity: "1",
-	transform: "translateX(5rem)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	"& i": {
-		fontSize: "1.75rem",
-	},
-	"&.hide": {
-		pointerEvents: "none",
-		opacity: "0",
-		transform: "translateX(5rem) scale(0.9)",
-	},
-	_active: {
-		transform: "translateX(5rem) scale(0.9)",
-	},
+  pointerEvents: "auto",
+  position: "fixed",
+  bottom: "10rem",
+  display: "flex",
+  alignItems: "center",
+  overflow: "hidden",
+  cursor: "pointer",
+  border: "none",
+  borderRadius: "1rem",
+  color: "var(--primary)",
+  fontSize: "2.25rem",
+  fontWeight: "700",
+  opacity: "1",
+  transform: "translateX(5rem)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  "& i": {
+    fontSize: "1.75rem",
+  },
+  "&.hide": {
+    pointerEvents: "none",
+    opacity: "0",
+    transform: "translateX(5rem) scale(0.9)",
+  },
+  _active: {
+    transform: "translateX(5rem) scale(0.9)",
+  },
 });
 
 const buttonClass = css({
-	height: "3.75rem",
-	width: "3.75rem",
+  height: "3.75rem",
+  width: "3.75rem",
 });
 
 const iconClass = css({
-	marginRight: "auto",
-	marginLeft: "auto",
+  marginRight: "auto",
+  marginLeft: "auto",
 });
 ---
 

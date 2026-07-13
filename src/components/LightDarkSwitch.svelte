@@ -4,9 +4,9 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import {
-	applyThemeToDocument,
-	getStoredTheme,
-	setTheme,
+  applyThemeToDocument,
+  getStoredTheme,
+  setTheme,
 } from "@utils/setting-utils.ts";
 import { css } from "styled-system/css";
 import { onMount } from "svelte";
@@ -16,107 +16,107 @@ const seq: LIGHT_DARK_MODE[] = [LIGHT_MODE, DARK_MODE, AUTO_MODE];
 let mode: LIGHT_DARK_MODE = $state(AUTO_MODE);
 
 const switchWrapperClass = css({
-	position: "relative",
-	zIndex: 50,
+  position: "relative",
+  zIndex: 50,
 });
 const switchButtonClass = css({
-	position: "relative",
-	borderRadius: "0.5rem",
-	height: "2.75rem",
-	width: "2.75rem",
-	_active: {
-		transform: "scale(0.9)",
-	},
+  position: "relative",
+  borderRadius: "0.5rem",
+  height: "2.75rem",
+  width: "2.75rem",
+  _active: {
+    transform: "scale(0.9)",
+  },
 });
 const modeIconWrapperClass = css({
-	position: "absolute",
+  position: "absolute",
 });
 const hiddenModeIconClass = css({
-	opacity: 0,
+  opacity: 0,
 });
 const modeIconClass = css({
-	fontSize: "1.25rem",
+  fontSize: "1.25rem",
 });
 const panelClass = css({
-	display: { base: "none", lg: "block" },
-	position: "absolute",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	top: "2.75rem",
-	right: "-0.5rem",
-	paddingTop: "1.25rem",
+  display: { base: "none", lg: "block" },
+  position: "absolute",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  top: "2.75rem",
+  right: "-0.5rem",
+  paddingTop: "1.25rem",
 });
 const panelContentClass = css({
-	padding: "0.5rem",
+  padding: "0.5rem",
 });
 const optionButtonClass = css({
-	display: "flex",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	whiteSpace: "nowrap",
-	alignItems: "center",
-	justifyContent: "flex-start!",
-	width: "100%",
-	borderRadius: "0.5rem",
-	height: "2.25rem",
-	paddingInline: "0.75rem",
-	fontWeight: 500,
-	_active: {
-		transform: "scale(0.95)",
-	},
+  display: "flex",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  whiteSpace: "nowrap",
+  alignItems: "center",
+  justifyContent: "flex-start!",
+  width: "100%",
+  borderRadius: "0.5rem",
+  height: "2.25rem",
+  paddingInline: "0.75rem",
+  fontWeight: 500,
+  _active: {
+    transform: "scale(0.95)",
+  },
 });
 const optionGapClass = css({
-	marginBottom: "0.125rem",
+  marginBottom: "0.125rem",
 });
 const optionIconClass = css({
-	fontSize: "1.25rem",
-	marginRight: "0.75rem",
+  fontSize: "1.25rem",
+  marginRight: "0.75rem",
 });
 
 onMount(() => {
-	mode = getStoredTheme();
-	const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
-	const changeThemeWhenSchemeChanged: Parameters<
-		typeof darkModePreference.addEventListener<"change">
-	>[1] = (_e) => {
-		applyThemeToDocument(mode);
-	};
-	darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
-	return () => {
-		darkModePreference.removeEventListener(
-			"change",
-			changeThemeWhenSchemeChanged,
-		);
-	};
+  mode = getStoredTheme();
+  const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+  const changeThemeWhenSchemeChanged: Parameters<
+    typeof darkModePreference.addEventListener<"change">
+  >[1] = (_e) => {
+    applyThemeToDocument(mode);
+  };
+  darkModePreference.addEventListener("change", changeThemeWhenSchemeChanged);
+  return () => {
+    darkModePreference.removeEventListener(
+      "change",
+      changeThemeWhenSchemeChanged,
+    );
+  };
 });
 
 function switchScheme(newMode: LIGHT_DARK_MODE) {
-	mode = newMode;
-	setTheme(newMode);
+  mode = newMode;
+  setTheme(newMode);
 }
 
 function toggleScheme() {
-	let i = 0;
-	for (; i < seq.length; i++) {
-		if (seq[i] === mode) {
-			break;
-		}
-	}
-	switchScheme(seq[(i + 1) % seq.length]);
+  let i = 0;
+  for (; i < seq.length; i++) {
+    if (seq[i] === mode) {
+      break;
+    }
+  }
+  switchScheme(seq[(i + 1) % seq.length]);
 }
 
 function showPanel() {
-	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.remove("float-panel-closed");
+  const panel = document.querySelector("#light-dark-panel");
+  panel.classList.remove("float-panel-closed");
 }
 
 function hidePanel() {
-	const panel = document.querySelector("#light-dark-panel");
-	panel.classList.add("float-panel-closed");
+  const panel = document.querySelector("#light-dark-panel");
+  panel.classList.add("float-panel-closed");
 }
 </script>
 

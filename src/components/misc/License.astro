@@ -7,10 +7,10 @@ import { i18n } from "../../i18n/translation";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
 
 interface Props {
-	title: string;
-	slug: string;
-	pubDate: Date;
-	class: string;
+  title: string;
+  slug: string;
+  pubDate: Date;
+  class: string;
 }
 
 const { title, pubDate } = Astro.props;
@@ -20,90 +20,90 @@ const licenseConf = licenseConfig;
 const postUrl = decodeURIComponent(Astro.url.toString());
 
 const licenseClass = css({
-	position: "relative",
-	overflow: "hidden",
-	backgroundColor: "var(--license-block-bg)",
-	paddingTop: "1.25rem",
-	paddingRight: "1.5rem",
-	paddingBottom: "1.25rem",
-	paddingLeft: "1.5rem",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  position: "relative",
+  overflow: "hidden",
+  backgroundColor: "var(--license-block-bg)",
+  paddingTop: "1.25rem",
+  paddingRight: "1.5rem",
+  paddingBottom: "1.25rem",
+  paddingLeft: "1.5rem",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
 });
 
 const titleClass = css({
-	fontWeight: "700",
-	color: "rgb(0 0 0 / 0.75)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.75)",
-	},
+  fontWeight: "700",
+  color: "rgb(0 0 0 / 0.75)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.75)",
+  },
 });
 
 const linkClass = css({
-	color: "var(--primary)",
+  color: "var(--primary)",
 });
 
 const metadataClass = css({
-	marginTop: "0.5rem",
-	display: "flex",
-	gap: "1.5rem",
+  marginTop: "0.5rem",
+  display: "flex",
+  gap: "1.5rem",
 });
 
 const metadataLabelClass = css({
-	fontSize: "0.875rem",
-	lineHeight: "1.25rem",
-	color: "rgb(0 0 0 / 0.3)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.3)",
-	},
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
+  color: "rgb(0 0 0 / 0.3)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.3)",
+  },
 });
 
 const metadataValueClass = css({
-	display: "-webkit-box",
-	overflow: "hidden",
-	WebkitLineClamp: "2",
-	color: "rgb(0 0 0 / 0.75)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.75)",
-	},
+  display: "-webkit-box",
+  overflow: "hidden",
+  WebkitLineClamp: "2",
+  color: "rgb(0 0 0 / 0.75)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.75)",
+  },
 });
 
 const metadataLinkClass = css({
-	display: "-webkit-box",
-	overflow: "hidden",
-	WebkitLineClamp: "2",
-	color: "var(--primary)",
+  display: "-webkit-box",
+  overflow: "hidden",
+  WebkitLineClamp: "2",
+  color: "var(--primary)",
 });
 
 const watermarkClass = css({
-	pointerEvents: "none",
-	position: "absolute",
-	top: "50%",
-	right: "1.5rem",
-	fontSize: "15rem",
-	color: "rgb(0 0 0 / 0.05)",
-	transform: "translateY(-50%)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.05)",
-	},
+  pointerEvents: "none",
+  position: "absolute",
+  top: "50%",
+  right: "1.5rem",
+  fontSize: "15rem",
+  color: "rgb(0 0 0 / 0.05)",
+  transform: "translateY(-50%)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.05)",
+  },
 });
 ---
 <div class:list={[licenseClass, className]}>

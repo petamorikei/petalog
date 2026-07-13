@@ -2,12 +2,12 @@
 import path from "node:path";
 
 interface Props {
-	id?: string;
-	src: string;
-	class?: string;
-	alt?: string;
-	position?: string;
-	basePath?: string;
+  id?: string;
+  src: string;
+  class?: string;
+  alt?: string;
+  position?: string;
+  basePath?: string;
 }
 
 import { Image } from "astro:assets";
@@ -18,10 +18,10 @@ const { id, src, alt, position = "center", basePath = "/" } = Astro.props;
 const className = Astro.props.class;
 
 const isLocal = !(
-	src.startsWith("/") ||
-	src.startsWith("http") ||
-	src.startsWith("https") ||
-	src.startsWith("data:")
+  src.startsWith("/") ||
+  src.startsWith("http") ||
+  src.startsWith("https") ||
+  src.startsWith("data:")
 );
 const isPublic = src.startsWith("/");
 
@@ -30,41 +30,41 @@ const isPublic = src.startsWith("/");
 // biome-ignore lint/suspicious/noImplicitAnyLet: <check later>
 let img;
 if (isLocal) {
-	const files = import.meta.glob<ImageMetadata>("../../**", {
-		import: "default",
-	});
-	let normalizedPath = path
-		.normalize(path.join("../../", basePath, src))
-		.replace(/\\/g, "/");
-	const file = files[normalizedPath];
-	if (!file) {
-		console.error(
-			`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
-		);
-	}
-	img = await file();
+  const files = import.meta.glob<ImageMetadata>("../../**", {
+    import: "default",
+  });
+  let normalizedPath = path
+    .normalize(path.join("../../", basePath, src))
+    .replace(/\\/g, "/");
+  const file = files[normalizedPath];
+  if (!file) {
+    console.error(
+      `\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
+    );
+  }
+  img = await file();
 }
 
 const wrapperClass = css({
-	position: "relative",
-	overflow: "hidden",
+  position: "relative",
+  overflow: "hidden",
 });
 const overlayClass = css({
-	pointerEvents: "none",
-	position: "absolute",
-	inset: "0",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	_dark: {
-		backgroundColor: "rgb(0 0 0 / 0.1)",
-	},
+  pointerEvents: "none",
+  position: "absolute",
+  inset: "0",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  _dark: {
+    backgroundColor: "rgb(0 0 0 / 0.1)",
+  },
 });
 const imageClass = css({
-	height: "100%",
-	width: "100%",
-	objectFit: "cover",
+  height: "100%",
+  width: "100%",
+  objectFit: "cover",
 });
 const imageStyle = `object-position: ${position}`;
 ---

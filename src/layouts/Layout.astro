@@ -12,14 +12,14 @@ import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { css } from "styled-system/css";
 import { profileConfig, siteConfig } from "@/config";
 import {
-	AUTO_MODE,
-	BANNER_HEIGHT,
-	BANNER_HEIGHT_EXTEND,
-	BANNER_HEIGHT_HOME,
-	DARK_MODE,
-	DEFAULT_THEME,
-	LIGHT_MODE,
-	PAGE_WIDTH,
+  AUTO_MODE,
+  BANNER_HEIGHT,
+  BANNER_HEIGHT_EXTEND,
+  BANNER_HEIGHT_HOME,
+  DARK_MODE,
+  DEFAULT_THEME,
+  LIGHT_MODE,
+  PAGE_WIDTH,
 } from "../constants/constants";
 import { defaultFavicons } from "../constants/icon";
 import type { Favicon } from "../types/config";
@@ -27,11 +27,11 @@ import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
 
 interface Props {
-	title?: string;
-	banner?: string;
-	description?: string;
-	lang?: string;
-	setOGTypeArticle?: boolean;
+  title?: string;
+  banner?: string;
+  description?: string;
+  lang?: string;
+  setOGTypeArticle?: boolean;
 }
 
 let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
@@ -45,7 +45,7 @@ const isHomePage = pathsEqual(Astro.url.pathname, url("/"));
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeColor.hue;
 if (!banner || typeof banner !== "string" || banner.trim() === "") {
-	banner = siteConfig.banner.src;
+  banner = siteConfig.banner.src;
 }
 
 // TODO don't use post cover as banner for now
@@ -55,43 +55,43 @@ const enableBanner = siteConfig.banner.enable;
 
 let pageTitle: string;
 if (title) {
-	pageTitle = `${title} - ${siteConfig.title}`;
+  pageTitle = `${title} - ${siteConfig.title}`;
 } else {
-	pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
+  pageTitle = `${siteConfig.title} - ${siteConfig.subtitle}`;
 }
 
 const favicons: Favicon[] =
-	siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
+  siteConfig.favicon.length > 0 ? siteConfig.favicon : defaultFavicons;
 
 // const siteLang = siteConfig.lang.replace('_', '-')
 if (!lang) {
-	lang = `${siteConfig.lang}`;
+  lang = `${siteConfig.lang}`;
 }
 const siteLang = lang.replace("_", "-");
 
 const bannerOffsetByPosition = {
-	top: `${BANNER_HEIGHT_EXTEND}vh`,
-	center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
-	bottom: "0",
+  top: `${BANNER_HEIGHT_EXTEND}vh`,
+  center: `${BANNER_HEIGHT_EXTEND / 2}vh`,
+  bottom: "0",
 };
 const bannerOffset =
-	bannerOffsetByPosition[siteConfig.banner.position || "center"];
+  bannerOffsetByPosition[siteConfig.banner.position || "center"];
 
 const documentClass = css({
-	backgroundColor: "var(--page-bg)",
-	fontSize: "14px",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	md: { fontSize: "16px" },
+  backgroundColor: "var(--page-bg)",
+  fontSize: "14px",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  md: { fontSize: "16px" },
 });
 const bodyClass = css({
-	minHeight: "100vh",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
-	transitionDuration: "150ms",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  minHeight: "100vh",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter",
+  transitionDuration: "150ms",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
 });
 const pageHeightExtendClass = css({ height: "300vh" });
 ---

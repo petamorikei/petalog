@@ -5,9 +5,9 @@ import { css } from "styled-system/css";
 import { url } from "../../utils/url-utils";
 
 interface Props {
-	page: Page;
-	class?: string;
-	style?: string;
+  page: Page;
+  class?: string;
+  style?: string;
 }
 
 const { page, style } = Astro.props;
@@ -24,17 +24,17 @@ let count = 1;
 let l = page.currentPage;
 let r = page.currentPage;
 while (0 < l - 1 && r + 1 <= page.lastPage && count + 2 <= VISIBLE) {
-	count += 2;
-	l--;
-	r++;
+  count += 2;
+  l--;
+  r++;
 }
 while (0 < l - 1 && count < VISIBLE) {
-	count++;
-	l--;
+  count++;
+  l--;
 }
 while (r + 1 <= page.lastPage && count < VISIBLE) {
-	count++;
-	r++;
+  count++;
+  r++;
 }
 
 let pages: number[] = [];
@@ -47,70 +47,70 @@ if (r === page.lastPage - 2) pages.push(page.lastPage - 1);
 if (r < page.lastPage) pages.push(page.lastPage);
 
 const getPageUrl = (p: number) => {
-	if (p === 1) return "/";
-	return `/${p}/`;
+  if (p === 1) return "/";
+  return `/${p}/`;
 };
 
 const paginationClass = css({
-	display: "flex",
-	flexDirection: "row",
-	justifyContent: "center",
-	gap: "0.75rem",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "center",
+  gap: "0.75rem",
 });
 
 const navigationButtonClass = css({
-	height: "2.75rem",
-	width: "2.75rem",
-	overflow: "hidden",
-	borderRadius: "0.5rem",
-	color: "var(--primary)",
+  height: "2.75rem",
+  width: "2.75rem",
+  overflow: "hidden",
+  borderRadius: "0.5rem",
+  color: "var(--primary)",
 });
 
 const navigationIconClass = css({
-	fontSize: "1.75rem",
+  fontSize: "1.75rem",
 });
 
 const pageListClass = css({
-	display: "flex",
-	flexDirection: "row",
-	alignItems: "center",
-	borderRadius: "0.5rem",
-	backgroundColor: "var(--card-bg)",
-	fontWeight: "700",
-	color: "#404040",
-	_dark: {
-		color: "#d4d4d4",
-	},
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  borderRadius: "0.5rem",
+  backgroundColor: "var(--card-bg)",
+  fontWeight: "700",
+  color: "#404040",
+  _dark: {
+    color: "#d4d4d4",
+  },
 });
 
 const ellipsisClass = css({
-	marginLeft: "0.25rem",
-	marginRight: "0.25rem",
+  marginLeft: "0.25rem",
+  marginRight: "0.25rem",
 });
 
 const currentPageClass = css({
-	display: "flex",
-	height: "2.75rem",
-	width: "2.75rem",
-	alignItems: "center",
-	justifyContent: "center",
-	borderRadius: "0.5rem",
-	backgroundColor: "var(--primary)",
-	fontWeight: "700",
-	color: "#ffffff",
-	_dark: {
-		color: "rgb(0 0 0 / 0.7)",
-	},
+  display: "flex",
+  height: "2.75rem",
+  width: "2.75rem",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "0.5rem",
+  backgroundColor: "var(--primary)",
+  fontWeight: "700",
+  color: "#ffffff",
+  _dark: {
+    color: "rgb(0 0 0 / 0.7)",
+  },
 });
 
 const pageLinkClass = css({
-	height: "2.75rem",
-	width: "2.75rem",
-	overflow: "hidden",
-	borderRadius: "0.5rem",
-	_active: {
-		transform: "scale(0.85)",
-	},
+  height: "2.75rem",
+  width: "2.75rem",
+  overflow: "hidden",
+  borderRadius: "0.5rem",
+  _active: {
+    transform: "scale(0.85)",
+  },
 });
 ---
 

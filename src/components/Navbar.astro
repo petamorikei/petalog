@@ -13,106 +13,106 @@ import NavMenuPanel from "./widget/NavMenuPanel.astro";
 const className = Astro.props.class;
 
 let links: NavBarLink[] = navBarConfig.links.map(
-	(item: NavBarLink | LinkPreset): NavBarLink => {
-		if (typeof item === "number") {
-			return LinkPresets[item];
-		}
-		return item;
-	},
+  (item: NavBarLink | LinkPreset): NavBarLink => {
+    if (typeof item === "number") {
+      return LinkPresets[item];
+    }
+    return item;
+  },
 );
 
 const navbarClass = css({
-	zIndex: 50,
+  zIndex: 50,
 });
 const animationCapClass = css({
-	position: "absolute",
-	height: "2rem",
-	left: "0",
-	right: "0",
-	top: "-2rem",
-	backgroundColor: "var(--card-bg)",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
+  position: "absolute",
+  height: "2rem",
+  left: "0",
+  right: "0",
+  top: "-2rem",
+  backgroundColor: "var(--card-bg)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
 });
 const navbarCardClass = css({
-	overflow: "visible!",
-	maxWidth: "var(--page-width)",
-	height: "4.5rem",
-	borderTopLeftRadius: "0!",
-	borderTopRightRadius: "0!",
-	marginInline: "auto",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "space-between",
-	paddingInline: "1rem",
+  overflow: "visible!",
+  maxWidth: "var(--page-width)",
+  height: "4.5rem",
+  borderTopLeftRadius: "0!",
+  borderTopRightRadius: "0!",
+  marginInline: "auto",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  paddingInline: "1rem",
 });
 const homeLinkClass = css({
-	borderRadius: "0.5rem",
-	height: "3.25rem",
-	paddingInline: "1.25rem",
-	fontWeight: 700,
-	_active: {
-		transform: "scale(0.95)",
-	},
+  borderRadius: "0.5rem",
+  height: "3.25rem",
+  paddingInline: "1.25rem",
+  fontWeight: 700,
+  _active: {
+    transform: "scale(0.95)",
+  },
 });
 const homeContentClass = css({
-	display: "flex",
-	flexDirection: "row",
-	color: "var(--primary)",
-	alignItems: "center",
+  display: "flex",
+  flexDirection: "row",
+  color: "var(--primary)",
+  alignItems: "center",
 });
 const homeIconClass = css({
-	fontSize: "1.75rem",
-	marginBottom: "0.25rem",
-	marginRight: "0.5rem",
+  fontSize: "1.75rem",
+  marginBottom: "0.25rem",
+  marginRight: "0.5rem",
 });
 const desktopLinksClass = css({
-	display: { base: "none", md: "flex" },
+  display: { base: "none", md: "flex" },
 });
 const navLinkClass = css({
-	borderRadius: "0.5rem",
-	height: "2.75rem",
-	fontWeight: 700,
-	paddingInline: "1.25rem",
-	_active: {
-		transform: "scale(0.95)",
-	},
+  borderRadius: "0.5rem",
+  height: "2.75rem",
+  fontWeight: 700,
+  paddingInline: "1.25rem",
+  _active: {
+    transform: "scale(0.95)",
+  },
 });
 const navLinkContentClass = css({
-	display: "flex",
-	alignItems: "center",
+  display: "flex",
+  alignItems: "center",
 });
 const externalIconClass = css({
-	fontSize: "0.875rem",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	transform: "translateY(-1px)",
-	marginLeft: "0.25rem",
-	color: "rgb(0 0 0 / 0.2)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.2)",
-	},
+  fontSize: "0.875rem",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  transform: "translateY(-1px)",
+  marginLeft: "0.25rem",
+  color: "rgb(0 0 0 / 0.2)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.2)",
+  },
 });
 const controlsClass = css({
-	display: "flex",
+  display: "flex",
 });
 const controlButtonClass = css({
-	borderRadius: "0.5rem",
-	height: "2.75rem",
-	width: "2.75rem",
-	_active: {
-		transform: "scale(0.9)",
-	},
+  borderRadius: "0.5rem",
+  height: "2.75rem",
+  width: "2.75rem",
+  _active: {
+    transform: "scale(0.9)",
+  },
 });
 const menuButtonClass = css({
-	display: { md: "none!" },
+  display: { md: "none!" },
 });
 const controlIconClass = css({
-	fontSize: "1.25rem",
+  fontSize: "1.25rem",
 });
 ---
 <div id="navbar" class:list={["onload-animation", navbarClass]}>

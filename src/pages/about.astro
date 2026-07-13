@@ -10,25 +10,25 @@ import MainGridLayout from "../layouts/MainGridLayout.astro";
 const aboutPost = await getEntry("spec", "about");
 
 if (!aboutPost) {
-	throw new Error("About page content not found");
+  throw new Error("About page content not found");
 }
 
 const { Content } = await render(aboutPost);
 
 const outerClass = css({
-	display: "flex",
-	width: "100%",
-	borderRadius: "var(--radius-large)",
-	overflow: "hidden",
-	position: "relative",
-	minHeight: "8rem",
+  display: "flex",
+  width: "100%",
+  borderRadius: "var(--radius-large)",
+  overflow: "hidden",
+  position: "relative",
+  minHeight: "8rem",
 });
 const cardClass = css({
-	zIndex: "10",
-	paddingInline: "2.25rem",
-	paddingBlock: "1.5rem",
-	position: "relative",
-	width: "100%",
+  zIndex: "10",
+  paddingInline: "2.25rem",
+  paddingBlock: "1.5rem",
+  position: "relative",
+  width: "100%",
 });
 const markdownClass = css({ marginTop: "0.5rem" });
 ---

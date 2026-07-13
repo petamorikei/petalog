@@ -10,30 +10,30 @@ import ImageWrapper from "./misc/ImageWrapper.astro";
 import PostMetadata from "./PostMeta.astro";
 
 interface Props {
-	class?: string;
-	entry: CollectionEntry<"posts">;
-	title: string;
-	url: string;
-	published: Date;
-	updated?: Date;
-	tags: string[];
-	category: string | null;
-	image: string;
-	description: string;
-	draft: boolean;
-	style: string;
+  class?: string;
+  entry: CollectionEntry<"posts">;
+  title: string;
+  url: string;
+  published: Date;
+  updated?: Date;
+  tags: string[];
+  category: string | null;
+  image: string;
+  description: string;
+  draft: boolean;
+  style: string;
 }
 const {
-	entry,
-	title,
-	url,
-	published,
-	updated,
-	tags,
-	category,
-	image,
-	description,
-	style,
+  entry,
+  title,
+  url,
+  published,
+  updated,
+  tags,
+  category,
+  image,
+  description,
+  style,
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -43,170 +43,170 @@ const coverWidth = "28%";
 
 const { remarkPluginFrontmatter } = await render(entry);
 const imageBasePath = entry.filePath
-	? getDir(entry.filePath).replace(/^src\//, "")
-	: path.join("content/posts/", getDir(entry.id));
+  ? getDir(entry.filePath).replace(/^src\//, "")
+  : path.join("content/posts/", getDir(entry.id));
 
 const transitionClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
 });
 const cardClass = css({
-	display: "flex",
-	flexDirection: { base: "column-reverse", md: "column" },
-	width: "100%",
-	borderRadius: "var(--radius-large)",
-	overflow: "hidden",
-	position: "relative",
+  display: "flex",
+  flexDirection: { base: "column-reverse", md: "column" },
+  width: "100%",
+  borderRadius: "var(--radius-large)",
+  overflow: "hidden",
+  position: "relative",
 });
 const cardContentClass = css({
-	paddingLeft: { base: "1.5rem", md: "2.25rem" },
-	paddingRight: { base: "1.5rem", md: "0.5rem" },
-	paddingTop: { base: "1.5rem", md: "1.75rem" },
-	paddingBottom: "1.5rem",
-	position: "relative",
+  paddingLeft: { base: "1.5rem", md: "2.25rem" },
+  paddingRight: { base: "1.5rem", md: "0.5rem" },
+  paddingTop: { base: "1.5rem", md: "1.75rem" },
+  paddingBottom: "1.5rem",
+  position: "relative",
 });
 const contentWithoutCoverClass = css({
-	width: { base: "100%", md: "calc(100% - 52px - 12px)" },
+  width: { base: "100%", md: "calc(100% - 52px - 12px)" },
 });
 const contentWithCoverClass = css({
-	width: { base: "100%", md: "calc(100% - var(--coverWidth) - 12px)" },
+  width: { base: "100%", md: "calc(100% - var(--coverWidth) - 12px)" },
 });
 const titleLinkClass = css({
-	width: "100%",
-	display: "block",
-	fontWeight: "700",
-	marginBottom: "0.75rem",
-	fontSize: "1.875rem",
-	lineHeight: "2.25rem",
-	_hover: { color: "var(--primary)" },
-	_active: { color: "var(--title-active)" },
-	_dark: {
-		_hover: { color: "var(--primary)" },
-		_active: { color: "var(--title-active)" },
-	},
-	_before: {
-		content: '""',
-		width: "0.25rem",
-		height: "1.25rem",
-		borderRadius: "0.375rem",
-		backgroundColor: "var(--primary)",
-		position: "absolute",
-		top: "35px",
-		left: "18px",
-		display: { base: "none", md: "block" },
-	},
+  width: "100%",
+  display: "block",
+  fontWeight: "700",
+  marginBottom: "0.75rem",
+  fontSize: "1.875rem",
+  lineHeight: "2.25rem",
+  _hover: { color: "var(--primary)" },
+  _active: { color: "var(--title-active)" },
+  _dark: {
+    _hover: { color: "var(--primary)" },
+    _active: { color: "var(--title-active)" },
+  },
+  _before: {
+    content: '""',
+    width: "0.25rem",
+    height: "1.25rem",
+    borderRadius: "0.375rem",
+    backgroundColor: "var(--primary)",
+    position: "absolute",
+    top: "35px",
+    left: "18px",
+    display: { base: "none", md: "block" },
+  },
 });
 const mobileTitleIconClass = css({
-	display: { base: "inline", md: "none" },
-	fontSize: "2rem",
-	color: "var(--primary)",
-	transform: "translateY(0.125rem)",
-	position: "absolute",
+  display: { base: "inline", md: "none" },
+  fontSize: "2rem",
+  color: "var(--primary)",
+  transform: "translateY(0.125rem)",
+  position: "absolute",
 });
 const desktopTitleIconClass = css({
-	color: "var(--primary)",
-	fontSize: "2rem",
-	display: { base: "none", md: "inline" },
-	position: "absolute",
-	transform: "translate(-0.25rem, 0.125rem)",
-	opacity: "0",
-	_groupHover: {
-		opacity: "1",
-		transform: "translate(0, 0.125rem)",
-	},
+  color: "var(--primary)",
+  fontSize: "2rem",
+  display: { base: "none", md: "inline" },
+  position: "absolute",
+  transform: "translate(-0.25rem, 0.125rem)",
+  opacity: "0",
+  _groupHover: {
+    opacity: "1",
+    transform: "translate(0, 0.125rem)",
+  },
 });
 const metadataClass = css({ marginBottom: "1rem" });
 const descriptionClass = css({
-	marginBottom: "0.875rem",
-	paddingRight: "1rem",
+  marginBottom: "0.875rem",
+  paddingRight: "1rem",
 });
 const clampedDescriptionClass = css({
-	overflow: "hidden",
-	display: "-webkit-box",
-	WebkitLineClamp: { base: "2", md: "1" },
+  overflow: "hidden",
+  display: "-webkit-box",
+  WebkitLineClamp: { base: "2", md: "1" },
 });
 const statsClass = css({
-	fontSize: "0.875rem",
-	lineHeight: "1.25rem",
-	color: { base: "rgb(0 0 0 / 0.3)", _dark: "rgb(255 255 255 / 0.3)" },
-	display: "flex",
-	gap: "1rem",
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
+  color: { base: "rgb(0 0 0 / 0.3)", _dark: "rgb(255 255 255 / 0.3)" },
+  display: "flex",
+  gap: "1rem",
 });
 const coverLinkClass = css({
-	maxHeight: { base: "20vh", md: "none" },
-	marginInline: { base: "1rem", md: "0" },
-	marginTop: { base: "1rem", md: "0" },
-	marginBottom: { base: "-0.5rem", md: "0" },
-	width: { md: "var(--coverWidth)" },
-	position: { base: "relative", md: "absolute" },
-	top: { md: "0.75rem" },
-	bottom: { md: "0.75rem" },
-	right: { md: "0.75rem" },
-	borderRadius: "0.75rem",
-	overflow: "hidden",
-	_active: { transform: "scale(0.95)" },
+  maxHeight: { base: "20vh", md: "none" },
+  marginInline: { base: "1rem", md: "0" },
+  marginTop: { base: "1rem", md: "0" },
+  marginBottom: { base: "-0.5rem", md: "0" },
+  width: { md: "var(--coverWidth)" },
+  position: { base: "relative", md: "absolute" },
+  top: { md: "0.75rem" },
+  bottom: { md: "0.75rem" },
+  right: { md: "0.75rem" },
+  borderRadius: "0.75rem",
+  overflow: "hidden",
+  _active: { transform: "scale(0.95)" },
 });
 const coverShadeClass = css({
-	position: "absolute",
-	pointerEvents: "none",
-	zIndex: "10",
-	width: "100%",
-	height: "100%",
-	_groupHover: { backgroundColor: "rgb(0 0 0 / 0.3)" },
-	_groupActive: { backgroundColor: "rgb(0 0 0 / 0.5)" },
+  position: "absolute",
+  pointerEvents: "none",
+  zIndex: "10",
+  width: "100%",
+  height: "100%",
+  _groupHover: { backgroundColor: "rgb(0 0 0 / 0.3)" },
+  _groupActive: { backgroundColor: "rgb(0 0 0 / 0.5)" },
 });
 const coverIconWrapperClass = css({
-	position: "absolute",
-	pointerEvents: "none",
-	zIndex: "20",
-	width: "100%",
-	height: "100%",
-	display: "flex",
-	alignItems: "center",
-	justifyContent: "center",
+  position: "absolute",
+  pointerEvents: "none",
+  zIndex: "20",
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 });
 const coverIconClass = css({
-	opacity: "0",
-	transform: "scale(0.5)",
-	color: "rgb(255 255 255)",
-	fontSize: "3rem",
-	lineHeight: "1",
-	_groupHover: { opacity: "1", transform: "scale(1)" },
+  opacity: "0",
+  transform: "scale(0.5)",
+  color: "rgb(255 255 255)",
+  fontSize: "3rem",
+  lineHeight: "1",
+  _groupHover: { opacity: "1", transform: "scale(1)" },
 });
 const fullSizeClass = css({ width: "100%", height: "100%" });
 const noCoverLinkClass = css({
-	display: { base: "none !important", md: "flex !important" },
-	width: "3.25rem",
-	position: "absolute",
-	right: "0.75rem",
-	top: "0.75rem",
-	bottom: "0.75rem",
-	borderRadius: "0.75rem",
-	backgroundColor: "var(--enter-btn-bg)",
-	_hover: { backgroundColor: "var(--enter-btn-bg-hover)" },
-	_active: {
-		backgroundColor: "var(--enter-btn-bg-active)",
-		transform: "scale(0.95)",
-	},
+  display: { base: "none !important", md: "flex !important" },
+  width: "3.25rem",
+  position: "absolute",
+  right: "0.75rem",
+  top: "0.75rem",
+  bottom: "0.75rem",
+  borderRadius: "0.75rem",
+  backgroundColor: "var(--enter-btn-bg)",
+  _hover: { backgroundColor: "var(--enter-btn-bg-hover)" },
+  _active: {
+    backgroundColor: "var(--enter-btn-bg-active)",
+    transform: "scale(0.95)",
+  },
 });
 const noCoverIconClass = css({
-	color: "var(--primary)",
-	fontSize: "2.25rem",
-	lineHeight: "2.5rem",
-	marginInline: "auto",
+  color: "var(--primary)",
+  fontSize: "2.25rem",
+  lineHeight: "2.5rem",
+  marginInline: "auto",
 });
 const mobileDividerClass = css({
-	borderTopWidth: "1px",
-	borderStyle: "dashed",
-	marginInline: "1.5rem",
-	borderColor: {
-		base: "rgb(0 0 0 / 0.1)",
-		_dark: "rgb(255 255 255 / 0.15)",
-	},
-	display: { md: "none" },
-	_last: { borderTopWidth: "0" },
+  borderTopWidth: "1px",
+  borderStyle: "dashed",
+  marginInline: "1.5rem",
+  borderColor: {
+    base: "rgb(0 0 0 / 0.1)",
+    _dark: "rgb(255 255 255 / 0.15)",
+  },
+  display: { md: "none" },
+  _last: { borderTopWidth: "0" },
 });
 ---
 <div class:list={["card-base", cardClass, className]} style={style}>

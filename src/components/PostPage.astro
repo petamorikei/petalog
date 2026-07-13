@@ -10,19 +10,19 @@ let delay = 0;
 const interval = 50;
 
 const transitionClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
 });
 const postListClass = css({
-	display: "flex",
-	flexDirection: "column",
-	borderRadius: "var(--radius-large)",
-	backgroundColor: { base: "var(--card-bg)", md: "transparent" },
-	paddingBlock: { base: "0.25rem", md: "0" },
-	gap: { md: "1rem" },
-	marginBottom: "1rem",
+  display: "flex",
+  flexDirection: "column",
+  borderRadius: "var(--radius-large)",
+  backgroundColor: { base: "var(--card-bg)", md: "transparent" },
+  paddingBlock: { base: "0.25rem", md: "0" },
+  gap: { md: "1rem" },
+  marginBottom: "1rem",
 });
 ---
 <div class:list={[transitionClass, postListClass]}>

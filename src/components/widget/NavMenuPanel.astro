@@ -5,76 +5,76 @@ import { type NavBarLink } from "../../types/config";
 import { url } from "../../utils/url-utils";
 
 interface Props {
-	links: NavBarLink[];
+  links: NavBarLink[];
 }
 
 const links = Astro.props.links;
 
 const panelClass = css({
-	position: "absolute",
-	transitionProperty: "all",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	right: "1rem",
-	paddingInline: "0.5rem",
-	paddingBlock: "0.5rem",
+  position: "absolute",
+  transitionProperty: "all",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  right: "1rem",
+  paddingInline: "0.5rem",
+  paddingBlock: "0.5rem",
 });
 const linkClass = css({
-	display: "flex",
-	justifyContent: "space-between",
-	alignItems: "center",
-	paddingBlock: "0.5rem",
-	paddingLeft: "0.75rem",
-	paddingRight: "0.25rem",
-	borderRadius: "0.5rem",
-	gap: "2rem",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	_hover: {
-		backgroundColor: "var(--btn-plain-bg-hover)",
-	},
-	_active: {
-		backgroundColor: "var(--btn-plain-bg-active)",
-	},
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  paddingBlock: "0.5rem",
+  paddingLeft: "0.75rem",
+  paddingRight: "0.25rem",
+  borderRadius: "0.5rem",
+  gap: "2rem",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  _hover: {
+    backgroundColor: "var(--btn-plain-bg-hover)",
+  },
+  _active: {
+    backgroundColor: "var(--btn-plain-bg-active)",
+  },
 });
 const linkTextClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	color: "rgb(0 0 0 / 0.75)",
-	fontWeight: 700,
-	_dark: {
-		color: "rgb(255 255 255 / 0.75)",
-	},
-	_groupHover: {
-		color: "var(--primary)",
-	},
-	_groupActive: {
-		color: "var(--primary)",
-	},
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  color: "rgb(0 0 0 / 0.75)",
+  fontWeight: 700,
+  _dark: {
+    color: "rgb(255 255 255 / 0.75)",
+  },
+  _groupHover: {
+    color: "var(--primary)",
+  },
+  _groupActive: {
+    color: "var(--primary)",
+  },
 });
 const internalIconClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	fontSize: "1.25rem",
-	color: "var(--primary)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  fontSize: "1.25rem",
+  color: "var(--primary)",
 });
 const externalIconClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	fontSize: "0.75rem",
-	color: "rgb(0 0 0 / 0.25)",
-	transform: "translateX(-0.25rem)",
-	_dark: {
-		color: "rgb(255 255 255 / 0.25)",
-	},
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  fontSize: "0.75rem",
+  color: "rgb(0 0 0 / 0.25)",
+  transform: "translateX(-0.25rem)",
+  _dark: {
+    color: "rgb(255 255 255 / 0.25)",
+  },
 });
 ---
 <div id="nav-menu-panel" class:list={["float-panel float-panel-closed", panelClass]}>

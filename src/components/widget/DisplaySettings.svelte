@@ -6,111 +6,111 @@ import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
 import { css } from "styled-system/css";
 
 const panelClass = css({
-	position: "absolute",
-	transitionProperty: "all",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	width: "20rem",
-	right: "1rem",
-	paddingInline: "1rem",
-	paddingBlock: "1rem",
+  position: "absolute",
+  transitionProperty: "all",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  width: "20rem",
+  right: "1rem",
+  paddingInline: "1rem",
+  paddingBlock: "1rem",
 });
 const headerClass = css({
-	display: "flex",
-	flexDirection: "row",
-	gap: "0.5rem",
-	marginBottom: "0.75rem",
-	alignItems: "center",
-	justifyContent: "space-between",
+  display: "flex",
+  flexDirection: "row",
+  gap: "0.5rem",
+  marginBottom: "0.75rem",
+  alignItems: "center",
+  justifyContent: "space-between",
 });
 const titleClass = css({
-	display: "flex",
-	gap: "0.5rem",
-	fontWeight: 700,
-	fontSize: "1.125rem",
-	lineHeight: "1.75rem",
-	color: "#171717",
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	position: "relative",
-	marginLeft: "0.75rem",
-	_dark: {
-		color: "#f5f5f5",
-	},
-	"&::before": {
-		content: '""',
-		width: "0.25rem",
-		height: "1rem",
-		borderRadius: "0.375rem",
-		backgroundColor: "var(--primary)",
-		position: "absolute",
-		left: "-0.75rem",
-		top: "0.33rem",
-	},
+  display: "flex",
+  gap: "0.5rem",
+  fontWeight: 700,
+  fontSize: "1.125rem",
+  lineHeight: "1.75rem",
+  color: "#171717",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  position: "relative",
+  marginLeft: "0.75rem",
+  _dark: {
+    color: "#f5f5f5",
+  },
+  "&::before": {
+    content: '""',
+    width: "0.25rem",
+    height: "1rem",
+    borderRadius: "0.375rem",
+    backgroundColor: "var(--primary)",
+    position: "absolute",
+    left: "-0.75rem",
+    top: "0.33rem",
+  },
 });
 const resetButtonClass = css({
-	width: "1.75rem",
-	height: "1.75rem",
-	borderRadius: "0.375rem",
-	willChange: "transform",
-	_active: {
-		transform: "scale(0.9)",
-	},
+  width: "1.75rem",
+  height: "1.75rem",
+  borderRadius: "0.375rem",
+  willChange: "transform",
+  _active: {
+    transform: "scale(0.9)",
+  },
 });
 const hiddenResetButtonClass = css({
-	opacity: 0,
-	pointerEvents: "none",
+  opacity: 0,
+  pointerEvents: "none",
 });
 const resetButtonContentClass = css({
-	color: "var(--btn-content)",
+  color: "var(--btn-content)",
 });
 const resetIconClass = css({
-	fontSize: "0.875rem",
+  fontSize: "0.875rem",
 });
 const valueWrapperClass = css({
-	display: "flex",
-	gap: "0.25rem",
+  display: "flex",
+  gap: "0.25rem",
 });
 const hueValueClass = css({
-	transitionProperty:
-		"color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
-	transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
-	transitionDuration: "150ms",
-	backgroundColor: "var(--btn-regular-bg)",
-	width: "2.5rem",
-	height: "1.75rem",
-	borderRadius: "0.375rem",
-	display: "flex",
-	justifyContent: "center",
-	fontWeight: 700,
-	fontSize: "0.875rem",
-	lineHeight: "1.25rem",
-	alignItems: "center",
-	color: "var(--btn-content)",
+  transitionProperty:
+    "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
+  transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
+  transitionDuration: "150ms",
+  backgroundColor: "var(--btn-regular-bg)",
+  width: "2.5rem",
+  height: "1.75rem",
+  borderRadius: "0.375rem",
+  display: "flex",
+  justifyContent: "center",
+  fontWeight: 700,
+  fontSize: "0.875rem",
+  lineHeight: "1.25rem",
+  alignItems: "center",
+  color: "var(--btn-content)",
 });
 const sliderWrapperClass = css({
-	width: "100%",
-	height: "1.5rem",
-	paddingInline: "0.25rem",
-	backgroundColor: "oklch(0.8 0.1 0)",
-	borderRadius: "0.25rem",
-	userSelect: "none",
-	_dark: {
-		backgroundColor: "oklch(0.7 0.1 0)",
-	},
+  width: "100%",
+  height: "1.5rem",
+  paddingInline: "0.25rem",
+  backgroundColor: "oklch(0.8 0.1 0)",
+  borderRadius: "0.25rem",
+  userSelect: "none",
+  _dark: {
+    backgroundColor: "oklch(0.7 0.1 0)",
+  },
 });
 
 let hue = getHue();
 const defaultHue = getDefaultHue();
 
 function resetHue() {
-	hue = getDefaultHue();
+  hue = getDefaultHue();
 }
 
 $: if (hue || hue === 0) {
-	setHue(hue);
+  setHue(hue);
 }
 </script>
 
