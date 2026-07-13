@@ -248,6 +248,19 @@ test.describe("Markdown extensions", () => {
 		);
 		await expect(page.locator("spoiler")).toContainText("is hidden ayyy");
 	});
+
+	test("math preserves its KaTeX and MathML output", async ({ page }) => {
+		await page.goto("/posts/markdown/");
+
+		await expect(page.locator(".katex")).toHaveCount(3);
+		await expect(page.locator(".katex-display")).toHaveCount(1);
+
+		const annotations = page.locator(
+			'.katex-mathml annotation[encoding="application/x-tex"]',
+		);
+		await expect(annotations).toHaveCount(3);
+		await expect(annotations.first()).toHaveText("\\omega = d\\phi / dt");
+	});
 });
 
 test.describe("content assets", () => {
