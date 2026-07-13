@@ -194,6 +194,35 @@ test.describe("content discovery", () => {
 	});
 });
 
+test.describe("Expressive Code", () => {
+	test("custom copy and collapsible sections remain interactive", async ({
+		context,
+		page,
+	}) => {
+		await context.grantPermissions(["clipboard-read", "clipboard-write"], {
+			origin: "http://127.0.0.1:4321",
+		});
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.goto("/posts/expressive-code/");
+
+		const firstCodeBlock = page.locator(".expressive-code").first();
+		const copyButton = firstCodeBlock.getByRole("button", {
+			name: "Copy code",
+		});
+		await firstCodeBlock.hover();
+		await copyButton.click();
+		await expect(copyButton).toHaveClass(/(?:^|\s)success(?:\s|$)/);
+		await expect
+			.poll(() => page.evaluate(() => navigator.clipboard.readText()))
+			.toBe("console.log('This code is syntax highlighted!')");
+
+		const collapsedSection = page.locator("details.ec-section").first();
+		await expect(collapsedSection).not.toHaveAttribute("open", "");
+		await collapsedSection.locator("summary").click();
+		await expect(collapsedSection).toHaveAttribute("open", "");
+	});
+});
+
 test.describe("navigation and scrolling", () => {
 	test("Swup replaces content and updates the document head without a reload", async ({
 		page,
