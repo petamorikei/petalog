@@ -250,6 +250,26 @@ test.describe("Markdown extensions", () => {
 	});
 });
 
+test.describe("content assets", () => {
+	test("the local post cover remains optimized and loadable", async ({
+		page,
+	}) => {
+		await page.goto("/posts/guide/");
+
+		const cover = page.locator("#post-cover img");
+		await expect(cover).toHaveAttribute("src", /\/_astro\/cover\..+\.webp$/);
+		await expect
+			.poll(() =>
+				cover.evaluate((image: HTMLImageElement) => ({
+					complete: image.complete,
+					naturalHeight: image.naturalHeight,
+					naturalWidth: image.naturalWidth,
+				})),
+			)
+			.toEqual({ complete: true, naturalHeight: 1024, naturalWidth: 2048 });
+	});
+});
+
 test.describe("navigation and scrolling", () => {
 	test("Swup replaces content and updates the document head without a reload", async ({
 		page,
