@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { type CollectionEntry, render } from "astro:content";
 import path from "node:path";
 import { Icon } from "astro-icon/components";
 import { css } from "styled-system/css";
@@ -41,7 +41,10 @@ const hasCover = image !== undefined && image !== null && image !== "";
 
 const coverWidth = "28%";
 
-const { remarkPluginFrontmatter } = await entry.render();
+const { remarkPluginFrontmatter } = await render(entry);
+const imageBasePath = entry.filePath
+	? getDir(entry.filePath).replace(/^src\//, "")
+	: path.join("content/posts/", getDir(entry.id));
 
 const transitionClass = css({
 	transitionProperty:
@@ -243,7 +246,7 @@ const mobileDividerClass = css({
                   class:list={[transitionClass, coverIconClass]}>
             </Icon>
         </div>
-        <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
+        <ImageWrapper src={image} basePath={imageBasePath} alt="Cover Image of the Post"
                   class={fullSizeClass}>
         </ImageWrapper>
     </a>}

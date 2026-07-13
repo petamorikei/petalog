@@ -280,6 +280,67 @@ test.describe("content assets", () => {
 				})),
 			)
 			.toEqual({ complete: true, naturalHeight: 1024, naturalWidth: 2048 });
+
+		await page.goto("/");
+		const homeCover = page.locator(
+			'a[href="/posts/guide/"][aria-label="Simple Guides for Fuwari"] img',
+		);
+		await expect(homeCover).toHaveAttribute(
+			"src",
+			/\/_astro\/cover\..+\.webp$/,
+		);
+		await expect
+			.poll(() =>
+				homeCover.evaluate((image: HTMLImageElement) => ({
+					complete: image.complete,
+					naturalHeight: image.naturalHeight,
+					naturalWidth: image.naturalWidth,
+				})),
+			)
+			.toEqual({ complete: true, naturalHeight: 1024, naturalWidth: 2048 });
+	});
+
+	test("published routes and RSS order remain stable", async ({ request }) => {
+		const response = await request.get("/rss.xml");
+		expect(response.status()).toBe(200);
+
+		const rss = await response.text();
+		const titles = [...rss.matchAll(/<item><title>([^<]+)<\/title>/g)].map(
+			([, title]) => title,
+		);
+		expect(titles).toEqual([
+			"Markdown Extended Features",
+			"Expressive Code Example",
+			"Simple Guides for Fuwari",
+			"Markdown Example",
+			"Include Video in the Posts",
+		]);
+
+		const paths = [
+			...rss.matchAll(/<guid isPermaLink="true">([^<]+)<\/guid>/g),
+		].map(([, link]) => new URL(link).pathname);
+		expect(paths).toEqual([
+			"/posts/markdown-extended/",
+			"/posts/expressive-code/",
+			"/posts/guide/",
+			"/posts/markdown/",
+			"/posts/video/",
+		]);
+
+		for (const path of paths) {
+			const postResponse = await request.get(path, { maxRedirects: 0 });
+			expect(postResponse.status()).toBe(200);
+		}
+
+		for (const path of [
+			"/posts/draft/",
+			"/posts/guide/index.md/",
+			"/posts/markdown.md/",
+			"/2/",
+		]) {
+			const missingResponse = await request.get(path, { maxRedirects: 0 });
+			expect(missingResponse.status(), path).toBe(404);
+		}
 	});
 });
 
