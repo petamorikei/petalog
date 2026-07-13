@@ -223,6 +223,33 @@ test.describe("Expressive Code", () => {
 	});
 });
 
+test.describe("Markdown extensions", () => {
+	test("directives preserve their generated DOM", async ({ page }) => {
+		await page.goto("/posts/markdown-extended/");
+
+		const admonitions = page.locator("blockquote.admonition");
+		await expect(admonitions).toHaveCount(7);
+		await expect(admonitions.locator(".bdm-title")).toHaveText([
+			"NOTE",
+			"TIP",
+			"IMPORTANT",
+			"WARNING",
+			"CAUTION",
+			"MY CUSTOM TITLE",
+			"TIP",
+		]);
+
+		const githubCard = page.locator(
+			'a.card-github[repo="Fabrizz/MMM-OnSpotify"]',
+		);
+		await expect(githubCard).toHaveAttribute(
+			"href",
+			"https://github.com/Fabrizz/MMM-OnSpotify",
+		);
+		await expect(page.locator("spoiler")).toContainText("is hidden ayyy");
+	});
+});
+
 test.describe("navigation and scrolling", () => {
 	test("Swup replaces content and updates the document head without a reload", async ({
 		page,
