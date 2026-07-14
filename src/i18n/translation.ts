@@ -38,11 +38,11 @@ const map: { [key: string]: Translation } = {
   tr_tr: tr,
 };
 
-export function getTranslation(lang: string): Translation {
+export const getTranslation = (lang: string): Translation => {
   return map[lang.toLowerCase()] || defaultTranslation;
-}
+};
 
-export function i18n(key: I18nKey): string {
+export const i18n = (key: I18nKey): string => {
   const lang = siteConfig.lang || "en";
   return getTranslation(lang)[key];
-}
+};

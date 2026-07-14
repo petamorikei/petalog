@@ -158,7 +158,7 @@ const controlIconClass = css({
 </div>
 
 <script>
-function switchTheme() {
+const switchTheme = () => {
     if (localStorage.theme === 'dark') {
         document.documentElement.classList.remove('dark');
         localStorage.theme = 'light';
@@ -166,19 +166,19 @@ function switchTheme() {
         document.documentElement.classList.add('dark');
         localStorage.theme = 'dark';
     }
-}
+};
 
-function loadButtonScript() {
+const loadButtonScript = () => {
     let switchBtn = document.getElementById("scheme-switch");
     if (switchBtn) {
-        switchBtn.onclick = function () {
+        switchBtn.onclick = () => {
             switchTheme()
         };
     }
 
     let settingBtn = document.getElementById("display-settings-switch");
     if (settingBtn) {
-        settingBtn.onclick = function () {
+        settingBtn.onclick = () => {
             let settingPanel = document.getElementById("display-setting");
             if (settingPanel) {
                 settingPanel.classList.toggle("float-panel-closed");
@@ -188,20 +188,21 @@ function loadButtonScript() {
 
     let menuBtn = document.getElementById("nav-menu-switch");
     if (menuBtn) {
-        menuBtn.onclick = function () {
+        menuBtn.onclick = () => {
             let menuPanel = document.getElementById("nav-menu-panel");
             if (menuPanel) {
                 menuPanel.classList.toggle("float-panel-closed");
             }
         };
     }
-}
+};
 
 loadButtonScript();
 </script>
 
 {import.meta.env.PROD && <script is:inline define:vars={{scriptUrl: url('/pagefind/pagefind.js')}}>
-async function loadPagefind() {
+{
+const loadPagefind = async () => {
     try {
         const response = await fetch(scriptUrl, { method: 'HEAD' });
         if (!response.ok) {
@@ -227,11 +228,12 @@ async function loadPagefind() {
         document.dispatchEvent(new CustomEvent('pagefindloaderror'));
         console.log('Pagefind load error, event dispatched.');
     }
-}
+};
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', loadPagefind);
 } else {
     loadPagefind();
+}
 }
 </script>}

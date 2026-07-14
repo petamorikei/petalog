@@ -163,15 +163,15 @@ const tagListClass = css({
 
 let groups: Group[] = [];
 
-function formatDate(date: Date) {
+const formatDate = (date: Date) => {
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
   return `${month}-${day}`;
-}
+};
 
-function formatTag(tagList: string[]) {
+const formatTag = (tagList: string[]) => {
   return tagList.map((t) => `#${t}`).join(" ");
-}
+};
 
 onMount(async () => {
   let filteredPosts: Post[] = sortedPosts;

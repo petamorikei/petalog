@@ -8,15 +8,15 @@ import { siteConfig } from "@/config";
 
 const parser = new MarkdownIt();
 
-function stripInvalidXmlChars(str: string): string {
+const stripInvalidXmlChars = (str: string): string => {
   return str.replace(
     // biome-ignore lint/suspicious/noControlCharactersInRegex: https://www.w3.org/TR/xml/#charsets
     /[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F\uFDD0-\uFDEF\uFFFE\uFFFF]/g,
     "",
   );
-}
+};
 
-export async function GET(context: APIContext): Promise<Response> {
+export const GET = async (context: APIContext): Promise<Response> => {
   const blog = await getSortedPosts();
 
   return rss({
@@ -39,4 +39,4 @@ export async function GET(context: APIContext): Promise<Response> {
     }),
     customData: `<language>${siteConfig.lang}</language>`,
   });
-}
+};

@@ -292,7 +292,7 @@ function disableAnimation() {
 
 const bannerEnabled = !!document.getElementById('banner-wrapper')
 
-function setClickOutsideToClose(panel: string, ignores: string[]) {
+const setClickOutsideToClose = (panel: string, ignores: string[]) => {
 	document.addEventListener("click", event => {
 		let panelDom = document.getElementById(panel);
 		let tDom = event.target;
@@ -305,22 +305,22 @@ function setClickOutsideToClose(panel: string, ignores: string[]) {
 		}
 		panelDom!.classList.add("float-panel-closed");
 	});
-}
+};
 setClickOutsideToClose("display-setting", ["display-setting", "display-settings-switch"])
 setClickOutsideToClose("nav-menu-panel", ["nav-menu-panel", "nav-menu-switch"])
 setClickOutsideToClose("search-panel", ["search-panel", "search-bar", "search-switch"])
 
 
-function loadTheme() {
+const loadTheme = () => {
 	const theme = getStoredTheme()
 	setTheme(theme)
-}
+};
 
-function loadHue() {
+const loadHue = () => {
 	setHue(getHue())
-}
+};
 
-function initCustomScrollbar() {
+const initCustomScrollbar = () => {
 	const bodyElement = document.querySelector('body');
 	if (!bodyElement) return;
 	OverlayScrollbars(
@@ -383,9 +383,9 @@ function initCustomScrollbar() {
 	katexElements.forEach(element => {
 		katexObserver.observe(element);
 	});
-}
+};
 
-function showBanner() {
+const showBanner = () => {
 	if (!siteConfig.banner.enable) return;
 
 	const banner = document.getElementById('banner');
@@ -395,15 +395,15 @@ function showBanner() {
 	}
 
 	banner.classList.remove('opacity-0', 'scale-105');
-}
+};
 
-function init() {
+const init = () => {
 	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
 	showBanner();
-}
+};
 
 /* Load settings when entering the site */
 init();
@@ -491,7 +491,7 @@ if (window?.swup?.hooks) {
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
-function scrollFunction() {
+const scrollFunction = () => {
 	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
 
 	if (backToTopBtn) {
@@ -526,7 +526,7 @@ function scrollFunction() {
 			navbar.classList.remove('navbar-hidden')
 		}
 	}
-}
+};
 window.onscroll = scrollFunction
 
 window.onresize = () => {
@@ -545,7 +545,7 @@ import "photoswipe/style.css"
 let lightbox: PhotoSwipeLightbox
 let pswp = import("photoswipe")
 
-function createPhotoSwipe() {
+const createPhotoSwipe = () => {
 	lightbox = new PhotoSwipeLightbox({
 		gallery: ".custom-md img, #post-cover img",
 		pswpModule: () => pswp,
@@ -574,7 +574,7 @@ function createPhotoSwipe() {
 	})
 
 	lightbox.init()
-}
+};
 
 const setup = () => {
 	if (!lightbox) {

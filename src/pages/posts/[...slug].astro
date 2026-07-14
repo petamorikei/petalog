@@ -16,13 +16,13 @@ import PostMetadata from "../../components/PostMeta.astro";
 import { profileConfig, siteConfig } from "../../config";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   const blogEntries = await getSortedPosts();
   return blogEntries.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },
   }));
-}
+};
 
 const { entry } = Astro.props;
 const { Content, headings, remarkPluginFrontmatter } = await render(entry);

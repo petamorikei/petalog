@@ -68,7 +68,7 @@ const iconClass = css({
 </div>
 
 <script is:raw is:inline>
-function backToTop() {
+window.backToTop = () => {
     window.scroll({ top: 0, behavior: 'smooth' });
-}
+};
 </script>

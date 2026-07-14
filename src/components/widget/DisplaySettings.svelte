@@ -105,9 +105,9 @@ const sliderWrapperClass = css({
 let hue = getHue();
 const defaultHue = getDefaultHue();
 
-function resetHue() {
+const resetHue = () => {
   hue = getDefaultHue();
-}
+};
 
 $: if (hue || hue === 0) {
   setHue(hue);

@@ -1,24 +1,12 @@
 import { definePlugin, type ExpressiveCodePlugin } from "@expressive-code/core";
 import type { Element } from "hast";
 
-export function pluginCustomCopyButton(): ExpressiveCodePlugin {
+export const pluginCustomCopyButton = (): ExpressiveCodePlugin => {
   return definePlugin({
     name: "Custom Copy Button",
     hooks: {
       postprocessRenderedBlock: (context) => {
-        function traverse(node: Element) {
-          if (node.type === "element" && node.tagName === "pre") {
-            processCodeBlock(node);
-            return;
-          }
-          if (node.children) {
-            for (const child of node.children) {
-              if (child.type === "element") traverse(child);
-            }
-          }
-        }
-
-        function processCodeBlock(node: Element) {
+        const processCodeBlock = (node: Element) => {
           const copyButton = {
             type: "element" as const,
             tagName: "button",
@@ -81,10 +69,22 @@ export function pluginCustomCopyButton(): ExpressiveCodePlugin {
             node.children = [];
           }
           node.children.push(copyButton);
-        }
+        };
+
+        const traverse = (node: Element) => {
+          if (node.type === "element" && node.tagName === "pre") {
+            processCodeBlock(node);
+            return;
+          }
+          if (node.children) {
+            for (const child of node.children) {
+              if (child.type === "element") traverse(child);
+            }
+          }
+        };
 
         traverse(context.renderData.blockAst);
       },
     },
   });
-}
+};

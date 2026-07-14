@@ -94,12 +94,12 @@ onMount(() => {
   };
 });
 
-function switchScheme(newMode: LIGHT_DARK_MODE) {
+const switchScheme = (newMode: LIGHT_DARK_MODE) => {
   mode = newMode;
   setTheme(newMode);
-}
+};
 
-function toggleScheme() {
+const toggleScheme = () => {
   let i = 0;
   for (; i < seq.length; i++) {
     if (seq[i] === mode) {
@@ -107,17 +107,17 @@ function toggleScheme() {
     }
   }
   switchScheme(seq[(i + 1) % seq.length]);
-}
+};
 
-function showPanel() {
+const showPanel = () => {
   const panel = document.querySelector("#light-dark-panel");
   panel.classList.remove("float-panel-closed");
-}
+};
 
-function hidePanel() {
+const hidePanel = () => {
   const panel = document.querySelector("#light-dark-panel");
   panel.classList.add("float-panel-closed");
-}
+};
 </script>
 
 <!-- Keep this panel above the other floating panels. -->

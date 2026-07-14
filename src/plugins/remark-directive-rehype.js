@@ -1,7 +1,7 @@
 import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
-export function parseDirectiveNode() {
+export const parseDirectiveNode = () => {
   return (tree, { _data }) => {
     visit(tree, (node) => {
       if (
@@ -27,4 +27,4 @@ export function parseDirectiveNode() {
       }
     });
   };
-}
+};

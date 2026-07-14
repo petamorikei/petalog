@@ -4,7 +4,7 @@ import { i18n } from "@i18n/translation";
 import { getCategoryUrl } from "@utils/url-utils.ts";
 
 // // Retrieve posts and sort them by publication date
-async function getRawSortedPosts() {
+const getRawSortedPosts = async () => {
   const allBlogPosts = await getCollection("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
@@ -15,9 +15,9 @@ async function getRawSortedPosts() {
     return dateA > dateB ? -1 : 1;
   });
   return sorted;
-}
+};
 
-export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
+export const getSortedPosts = async (): Promise<CollectionEntry<"posts">[]> => {
   const sorted = await getRawSortedPosts();
 
   for (let i = 1; i < sorted.length; i++) {
@@ -30,12 +30,12 @@ export async function getSortedPosts(): Promise<CollectionEntry<"posts">[]> {
   }
 
   return sorted;
-}
+};
 export type PostForList = {
   slug: string;
   data: CollectionEntry<"posts">["data"];
 };
-export async function getSortedPostsList(): Promise<PostForList[]> {
+export const getSortedPostsList = async (): Promise<PostForList[]> => {
   const sortedFullPosts = await getRawSortedPosts();
 
   // delete post.body
@@ -45,13 +45,13 @@ export async function getSortedPostsList(): Promise<PostForList[]> {
   }));
 
   return sortedPostsList;
-}
+};
 export type Tag = {
   name: string;
   count: number;
 };
 
-export async function getTagList(): Promise<Tag[]> {
+export const getTagList = async (): Promise<Tag[]> => {
   const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
@@ -70,7 +70,7 @@ export async function getTagList(): Promise<Tag[]> {
   });
 
   return keys.map((key) => ({ name: key, count: countMap[key] }));
-}
+};
 
 export type Category = {
   name: string;
@@ -78,7 +78,7 @@ export type Category = {
   url: string;
 };
 
-export async function getCategoryList(): Promise<Category[]> {
+export const getCategoryList = async (): Promise<Category[]> => {
   const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
     return import.meta.env.PROD ? data.draft !== true : true;
   });
@@ -111,4 +111,4 @@ export async function getCategoryList(): Promise<Category[]> {
     });
   }
   return ret;
-}
+};

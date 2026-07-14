@@ -8,7 +8,7 @@ type StoredSettings = {
 	hue?: string;
 };
 
-async function seedStoredSettings(page: Page, settings: StoredSettings) {
+const seedStoredSettings = async (page: Page, settings: StoredSettings) => {
 	await page.addInitScript((initialSettings) => {
 		if (
 			initialSettings.theme !== undefined &&
@@ -23,25 +23,25 @@ async function seedStoredSettings(page: Page, settings: StoredSettings) {
 			localStorage.setItem("hue", initialSettings.hue);
 		}
 	}, settings);
-}
+};
 
-async function waitForHydratedIsland(page: Page, componentName: string) {
+const waitForHydratedIsland = async (page: Page, componentName: string) => {
 	await page.waitForFunction((name) => {
 		const island = [...document.querySelectorAll("astro-island")].find(
 			(element) => element.getAttribute("component-url")?.includes(name),
 		);
 		return island !== undefined && !island.hasAttribute("ssr");
 	}, componentName);
-}
+};
 
-async function expectDarkMode(page: Page, enabled: boolean) {
+const expectDarkMode = async (page: Page, enabled: boolean) => {
 	const root = page.locator("html");
 	if (enabled) {
 		await expect(root).toHaveClass(/\bdark\b/);
 	} else {
 		await expect(root).not.toHaveClass(/\bdark\b/);
 	}
-}
+};
 
 test.describe("visitor settings", () => {
 	test("theme control persists light, dark, and system modes", async ({

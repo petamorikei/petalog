@@ -2,7 +2,7 @@
 import { toString } from "mdast-util-to-string";
 
 /* Use the post's first paragraph as the excerpt */
-export function remarkExcerpt() {
+export const remarkExcerpt = () => {
   return (tree, { data }) => {
     let excerpt = "";
     for (const node of tree.children) {
@@ -14,4 +14,4 @@ export function remarkExcerpt() {
     }
     data.astro.frontmatter.excerpt = excerpt;
   };
-}
+};

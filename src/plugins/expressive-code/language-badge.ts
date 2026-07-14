@@ -3,7 +3,7 @@
  */
 import { definePlugin, type ExpressiveCodePlugin } from "@expressive-code/core";
 
-export function pluginLanguageBadge(): ExpressiveCodePlugin {
+export const pluginLanguageBadge = (): ExpressiveCodePlugin => {
   return definePlugin({
     name: "Language Badge",
     baseStyles: () => `
@@ -46,4 +46,4 @@ export function pluginLanguageBadge(): ExpressiveCodePlugin {
       }
     `,
   });
-}
+};
