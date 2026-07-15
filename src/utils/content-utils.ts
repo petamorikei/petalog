@@ -33,15 +33,22 @@ export const getSortedPosts = async (): Promise<CollectionEntry<"posts">[]> => {
 };
 export type PostForList = {
   slug: string;
-  data: CollectionEntry<"posts">["data"];
+  data: Pick<
+    CollectionEntry<"posts">["data"],
+    "title" | "published" | "tags" | "category"
+  >;
 };
 export const getSortedPostsList = async (): Promise<PostForList[]> => {
   const sortedFullPosts = await getRawSortedPosts();
 
-  // delete post.body
   const sortedPostsList = sortedFullPosts.map((post) => ({
     slug: post.id,
-    data: post.data,
+    data: {
+      title: post.data.title,
+      published: post.data.published,
+      tags: post.data.tags,
+      category: post.data.category,
+    },
   }));
 
   return sortedPostsList;
