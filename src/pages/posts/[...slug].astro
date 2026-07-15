@@ -109,6 +109,7 @@ const postTitleClass = css({
   width: "100%",
   display: "block",
   fontWeight: "700",
+  marginTop: "0",
   marginBottom: "0.75rem",
   fontSize: { base: "1.875rem", md: "2.25rem" },
   lineHeight: { base: "2.25rem", md: "2.75rem" },
@@ -182,7 +183,7 @@ const navigationTitleClass = css({
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>
     <script is:inline slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
-    <div class={postOuterClass}>
+    <article class={postOuterClass}>
         <div id="post-container" class:list={["card-base", postContainerClass]}>
             <!-- word count and reading time -->
             <div class:list={["onload-animation", transitionClass, statsClass]}>
@@ -204,11 +205,11 @@ const navigationTitleClass = css({
 
             <!-- title -->
             <div class:list={["onload-animation", relativeClass]}>
-                <div
+                <h1
                     data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title"
                     class:list={[transitionClass, postTitleClass]}>
                     {entry.data.title}
-                </div>
+                </h1>
             </div>
 
             <!-- metadata -->
@@ -237,7 +238,7 @@ const navigationTitleClass = css({
 			{licenseConfig.enable && <License title={entry.data.title} slug={entry.id} pubDate={entry.data.published} class={`license-container onload-animation ${licenseClass}`}></License>}
 
         </div>
-    </div>
+    </article>
 
     <div class={postNavigationClass}>
         <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}

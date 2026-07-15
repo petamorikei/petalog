@@ -43,6 +43,7 @@ const yearRowClass = css({
 });
 const yearClass = css({
   width: { base: "15%", md: "10%" },
+  margin: "0",
   transitionProperty:
     "color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter",
   transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
@@ -160,6 +161,11 @@ const tagListClass = css({
   textOverflow: "ellipsis",
   overflow: "hidden",
 });
+const postListClass = css({
+  listStyle: "none",
+  margin: "0",
+  padding: "0",
+});
 
 let groups: Group[] = [];
 
@@ -219,11 +225,11 @@ onMount(async () => {
 
 <div class={`card-base ${archivePanelClass}`}>
     {#each groups as group}
-        <div>
+        <section aria-labelledby={`archive-year-${group.year}`}>
             <div class={yearRowClass}>
-                <div class={`text-75 ${yearClass}`}>
+                <h2 id={`archive-year-${group.year}`} class={`text-75 ${yearClass}`}>
                     {group.year}
-                </div>
+                </h2>
                 <div class={timelineColumnClass}>
                     <div class={yearDotClass}></div>
                 </div>
@@ -232,35 +238,39 @@ onMount(async () => {
                 </div>
             </div>
 
-            {#each group.posts as post}
-                <a
-                        href={getPostUrlBySlug(post.slug)}
-                        aria-label={post.data.title}
-                        class={`group btn-plain ${postLinkClass}`}
-                >
-                    <div class={postRowClass}>
-                        <!-- date -->
-                        <div class={`text-50 ${postDateClass}`}>
-                            {formatDate(post.data.published)}
-                        </div>
+            <ul class={postListClass}>
+                {#each group.posts as post}
+                    <li>
+                        <a
+                                href={getPostUrlBySlug(post.slug)}
+                                aria-label={post.data.title}
+                                class={`group btn-plain ${postLinkClass}`}
+                        >
+                            <div class={postRowClass}>
+                                <!-- date -->
+                                <div class={`text-50 ${postDateClass}`}>
+                                    {formatDate(post.data.published)}
+                                </div>
 
-                        <!-- dot and line -->
-                        <div class={`dash-line ${timelineTrackClass}`}>
-                            <div class={timelineDotClass}></div>
-                        </div>
+                                <!-- dot and line -->
+                                <div class={`dash-line ${timelineTrackClass}`}>
+                                    <div class={timelineDotClass}></div>
+                                </div>
 
-                        <!-- post title -->
-                        <div class={`text-75 ${postTitleClass}`}>
-                            {post.data.title}
-                        </div>
+                                <!-- post title -->
+                                <div class={`text-75 ${postTitleClass}`}>
+                                    {post.data.title}
+                                </div>
 
-                        <!-- tag list -->
-                        <div class={`text-30 ${tagListClass}`}>
-                            {formatTag(post.data.tags)}
-                        </div>
-                    </div>
-                </a>
-            {/each}
-        </div>
+                                <!-- tag list -->
+                                <div class={`text-30 ${tagListClass}`}>
+                                    {formatTag(post.data.tags)}
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                {/each}
+            </ul>
+        </section>
     {/each}
 </div>

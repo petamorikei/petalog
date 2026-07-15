@@ -4,6 +4,8 @@ import { css } from "styled-system/css";
 import Pagination from "../components/control/Pagination.astro";
 import PostPage from "../components/PostPage.astro";
 import { PAGE_SIZE } from "../constants/constants";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
 import MainGridLayout from "../layouts/MainGridLayout.astro";
 import { getSortedPosts } from "../utils/content-utils";
 
@@ -20,6 +22,7 @@ const paginationClass = css({ marginInline: "auto" });
 ---
 
 <MainGridLayout>
+    <h1 class="visually-hidden">{i18n(I18nKey.recentPosts)}</h1>
     <PostPage page={page}></PostPage>
     <Pagination class:list={["onload-animation", paginationClass]} page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>

@@ -98,6 +98,12 @@ const titleLinkClass = css({
     display: { base: "none", md: "block" },
   },
 });
+const titleHeadingClass = css({
+  margin: "0",
+  padding: "0",
+  fontSize: "inherit",
+  lineHeight: "inherit",
+});
 const mobileTitleIconClass = css({
   display: { base: "inline", md: "none" },
   fontSize: "2rem",
@@ -209,14 +215,16 @@ const mobileDividerClass = css({
   _last: { borderTopWidth: "0" },
 });
 ---
-<div class:list={["card-base", cardClass, className]} style={style}>
+<article class:list={["card-base", cardClass, className]} style={style}>
     <div class:list={[cardContentClass, !hasCover ? contentWithoutCoverClass : contentWithCoverClass]}>
-        <a href={url}
-           class:list={["group", "text-90", transitionClass, titleLinkClass]}>
-            {title}
-            <Icon class={mobileTitleIconClass} name="material-symbols:chevron-right-rounded" ></Icon>
-            <Icon class:list={[transitionClass, desktopTitleIconClass]} name="material-symbols:chevron-right-rounded"></Icon>
-        </a>
+        <h2 class={titleHeadingClass}>
+            <a href={url}
+               class:list={["group", "text-90", transitionClass, titleLinkClass]}>
+                {title}
+                <Icon class={mobileTitleIconClass} name="material-symbols:chevron-right-rounded" ></Icon>
+                <Icon class:list={[transitionClass, desktopTitleIconClass]} name="material-symbols:chevron-right-rounded"></Icon>
+            </a>
+        </h2>
 
         <!-- metadata -->
         <PostMetadata published={published} updated={updated} tags={tags} category={category} hideTagsForMobile={true} hideUpdateDate={true} class={metadataClass}></PostMetadata>
@@ -258,7 +266,7 @@ const mobileDividerClass = css({
             </Icon>
         </a>
     }
-</div>
+</article>
 <div class:list={[transitionClass, mobileDividerClass]}></div>
 
 <style define:vars={{coverWidth}}>
