@@ -30,6 +30,9 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	compressHTML: true,
+	image: {
+		layout: "constrained",
+	},
 	integrations: [
 		swup({
 			theme: false,

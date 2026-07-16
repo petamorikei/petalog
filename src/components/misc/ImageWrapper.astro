@@ -1,49 +1,50 @@
 ---
-import path from "node:path";
+import { Image } from "astro:assets";
+import { css } from "styled-system/css";
+import type { ImageSource } from "../../types/config";
+import { url } from "../../utils/url-utils";
+
+type ImageLayout = "constrained" | "fixed" | "full-width" | "none";
 
 interface Props {
   id?: string;
-  src: string;
+  src: ImageSource;
   class?: string;
   alt?: string;
   position?: string;
-  basePath?: string;
+  layout?: ImageLayout;
+  widths?: number[];
+  sizes?: string;
+  width?: number;
+  height?: number;
 }
 
-import { Image } from "astro:assets";
-import { css } from "styled-system/css";
-import { url } from "../../utils/url-utils";
-
-const { id, src, alt, position = "center", basePath = "/" } = Astro.props;
+const {
+  id,
+  src,
+  alt = "",
+  position = "center",
+  layout,
+  widths,
+  sizes,
+  width,
+  height,
+} = Astro.props;
 const className = Astro.props.class;
 
-const isLocal = !(
-  src.startsWith("/") ||
-  src.startsWith("http") ||
-  src.startsWith("https") ||
-  src.startsWith("data:")
-);
-const isPublic = src.startsWith("/");
+const isPassthrough = typeof src === "string";
+const isPublic = isPassthrough && src.startsWith("/") && !src.startsWith("//");
+const isRemote = isPassthrough && /^https:\/\//i.test(src);
 
-// TODO temporary workaround for images dynamic import
-// https://github.com/withastro/astro/issues/3373
-// biome-ignore lint/suspicious/noImplicitAnyLet: <check later>
-let img;
-if (isLocal) {
-  const files = import.meta.glob<ImageMetadata>("../../**", {
-    import: "default",
-  });
-  let normalizedPath = path
-    .normalize(path.join("../../", basePath, src))
-    .replace(/\\/g, "/");
-  const file = files[normalizedPath];
-  if (!file) {
-    console.error(
-      `\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
-    );
-  }
-  img = await file();
+if (isPassthrough && !isPublic && !isRemote) {
+  throw new Error(
+    `Unsupported image source: ${src}. Import local images or use HTTPS/public URLs.`,
+  );
 }
+
+const passthroughSrc = isPublic ? url(src) : isPassthrough ? src : undefined;
+const passthroughWidth = width ?? 1200;
+const passthroughHeight = height ?? 600;
 
 const wrapperClass = css({
   position: "relative",
@@ -70,6 +71,24 @@ const imageStyle = `object-position: ${position}`;
 ---
 <div id={id} class:list={[className, wrapperClass]}>
     <div class={overlayClass}></div>
-    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle}/>}
-    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle}/>}
+    {!isPassthrough && <Image
+      src={src}
+      alt={alt}
+      layout={layout}
+      widths={widths}
+      sizes={sizes}
+      width={width}
+      height={height}
+      class={imageClass}
+      style={imageStyle}
+    />}
+    {passthroughSrc && <Image
+      src={passthroughSrc}
+      alt={alt}
+      layout="none"
+      width={passthroughWidth}
+      height={passthroughHeight}
+      class={imageClass}
+      style={imageStyle}
+    />}
 </div>

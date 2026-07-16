@@ -264,22 +264,38 @@ test.describe("Markdown extensions", () => {
 });
 
 test.describe("content assets", () => {
-	test("the local post cover remains optimized and loadable", async ({
+	test("the local post cover remains responsive, optimized, and loadable", async ({
 		page,
 	}) => {
 		await page.goto("/posts/guide/");
 
 		const cover = page.locator("#post-cover img");
 		await expect(cover).toHaveAttribute("src", /\/_astro\/cover\..+\.webp$/);
+		await expect(cover).toHaveAttribute(
+			"srcset",
+			/ 640w, .* 828w, .* 1080w, .* 1280w, .* 1668w$/,
+		);
+		await expect(cover).toHaveAttribute(
+			"sizes",
+			"(min-width: 1200px) 800px, (min-width: 1024px) calc(100vw - 400px), (min-width: 768px) calc(100vw - 104px), calc(100vw - 48px)",
+		);
+		await expect(cover).toHaveAttribute("width", "2048");
+		await expect(cover).toHaveAttribute("height", "1024");
 		await expect
 			.poll(() =>
 				cover.evaluate((image: HTMLImageElement) => ({
 					complete: image.complete,
-					naturalHeight: image.naturalHeight,
-					naturalWidth: image.naturalWidth,
+					hasNaturalSize:
+						image.naturalHeight > 0 && image.naturalWidth > 0,
+					naturalAspectRatio:
+						image.naturalWidth / image.naturalHeight,
 				})),
 			)
-			.toEqual({ complete: true, naturalHeight: 1024, naturalWidth: 2048 });
+			.toEqual({
+				complete: true,
+				hasNaturalSize: true,
+				naturalAspectRatio: 2,
+			});
 
 		await page.goto("/");
 		const homeCover = page.locator(
@@ -289,15 +305,31 @@ test.describe("content assets", () => {
 			"src",
 			/\/_astro\/cover\..+\.webp$/,
 		);
+		await expect(homeCover).toHaveAttribute(
+			"srcset",
+			/ 320w, .* 480w, .* 640w, .* 828w, .* 1280w$/,
+		);
+		await expect(homeCover).toHaveAttribute(
+			"sizes",
+			"(min-width: 768px) 250px, calc(100vw - 2rem)",
+		);
+		await expect(homeCover).toHaveAttribute("width", "2048");
+		await expect(homeCover).toHaveAttribute("height", "1024");
 		await expect
 			.poll(() =>
 				homeCover.evaluate((image: HTMLImageElement) => ({
 					complete: image.complete,
-					naturalHeight: image.naturalHeight,
-					naturalWidth: image.naturalWidth,
+					hasNaturalSize:
+						image.naturalHeight > 0 && image.naturalWidth > 0,
+					naturalAspectRatio:
+						image.naturalWidth / image.naturalHeight,
 				})),
 			)
-			.toEqual({ complete: true, naturalHeight: 1024, naturalWidth: 2048 });
+			.toEqual({
+				complete: true,
+				hasNaturalSize: true,
+				naturalAspectRatio: 2,
+			});
 	});
 
 	test("published routes and RSS order remain stable", async ({ request }) => {

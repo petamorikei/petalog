@@ -1,3 +1,4 @@
+import avatarImage from "./assets/images/768-2048.webp";
 import type {
   ExpressiveCodeConfig,
   LicenseConfig,
@@ -17,7 +18,7 @@ export const siteConfig: SiteConfig = {
   },
   banner: {
     enable: false,
-    src: "assets/images/demo-banner.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+    // Import a local image and assign it to `src` when the banner is enabled.
     position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
     credit: {
       enable: false, // Display the credit text of the banner image
@@ -53,7 +54,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-  avatar: "assets/images/demo-avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+  avatar: avatarImage,
   name: "Lorem Ipsum",
   bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   links: [

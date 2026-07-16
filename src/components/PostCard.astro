@@ -1,11 +1,9 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import path from "node:path";
 import { Icon } from "astro-icon/components";
 import { css } from "styled-system/css";
 import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
-import { getDir } from "../utils/url-utils";
 import ImageWrapper from "./misc/ImageWrapper.astro";
 import PostMetadata from "./PostMeta.astro";
 
@@ -18,7 +16,7 @@ interface Props {
   updated?: Date;
   tags: string[];
   category: string | null;
-  image: string;
+  image?: CollectionEntry<"posts">["data"]["image"];
   description: string;
   draft: boolean;
   style: string;
@@ -37,14 +35,13 @@ const {
 } = Astro.props;
 const className = Astro.props.class;
 
-const hasCover = image !== undefined && image !== null && image !== "";
+const hasCover = image !== undefined;
 
 const coverWidth = "28%";
+const coverWidths = [320, 480, 640, 828, 1280];
+const coverSizes = "(min-width: 768px) 250px, calc(100vw - 2rem)";
 
 const { remarkPluginFrontmatter } = await render(entry);
-const imageBasePath = entry.filePath
-  ? getDir(entry.filePath).replace(/^src\//, "")
-  : path.join("content/posts/", getDir(entry.id));
 
 const transitionClass = css({
   transitionProperty:
@@ -254,7 +251,7 @@ const mobileDividerClass = css({
                   class:list={[transitionClass, coverIconClass]}>
             </Icon>
         </div>
-        <ImageWrapper src={image} basePath={imageBasePath} alt="Cover Image of the Post"
+        <ImageWrapper src={image} alt="" layout="constrained" widths={coverWidths} sizes={coverSizes}
                   class={fullSizeClass}>
         </ImageWrapper>
     </a>}

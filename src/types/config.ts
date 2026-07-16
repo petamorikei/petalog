@@ -1,4 +1,25 @@
 import type { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants";
+import type { ImageMetadata } from "astro";
+
+export type ImageSource = ImageMetadata | string;
+
+type BannerConfig = {
+  position?: "top" | "center" | "bottom";
+  credit: {
+    enable: boolean;
+    text: string;
+    url?: string;
+  };
+} & (
+  | {
+      enable: true;
+      src: ImageSource;
+    }
+  | {
+      enable: false;
+      src?: ImageSource;
+    }
+);
 
 export type SiteConfig = {
   title: string;
@@ -20,16 +41,7 @@ export type SiteConfig = {
     hue: number;
     fixed: boolean;
   };
-  banner: {
-    enable: boolean;
-    src: string;
-    position?: "top" | "center" | "bottom";
-    credit: {
-      enable: boolean;
-      text: string;
-      url?: string;
-    };
-  };
+  banner: BannerConfig;
   toc: {
     enable: boolean;
     depth: 1 | 2 | 3;
@@ -61,7 +73,7 @@ export type NavBarConfig = {
 };
 
 export type ProfileConfig = {
-  avatar?: string;
+  avatar?: ImageSource;
   name: string;
   bio?: string;
   links: {
@@ -89,7 +101,7 @@ export type BlogPostData = {
   description: string;
   tags: string[];
   draft?: boolean;
-  image?: string;
+  image?: ImageSource;
   category?: string;
   prevTitle?: string;
   prevSlug?: string;

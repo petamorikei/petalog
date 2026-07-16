@@ -18,7 +18,6 @@ import Layout from "./Layout.astro";
 
 interface Props {
   title?: string;
-  banner?: string;
   description?: string;
   lang?: string;
   setOGTypeArticle?: boolean;
@@ -27,7 +26,6 @@ interface Props {
 
 const {
   title,
-  banner,
   description,
   lang,
   setOGTypeArticle,
@@ -214,7 +212,7 @@ const tocClass = css({ width: "100%", height: "100%" });
 const tocSpacerClass = css({ height: "2rem", width: "100%" });
 ---
 
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
+<Layout title={title} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle}>
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
@@ -225,9 +223,9 @@ const tocSpacerClass = css({ height: "2rem", width: "100%" });
 </div>
 
 <!-- Banner -->
-{siteConfig.banner.enable && <div id="banner-wrapper" class={bannerWrapperClass} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
+{siteConfig.banner.enable && siteConfig.banner.src && <div id="banner-wrapper" class={bannerWrapperClass} style={`top: -${BANNER_HEIGHT_EXTEND}vh`}>
     <ImageWrapper id="banner" alt="Banner image of the blog" class:list={[bannerClass, "opacity-0 scale-105"]}
-                  src={siteConfig.banner.src} position={siteConfig.banner.position}
+                  src={siteConfig.banner.src} position={siteConfig.banner.position} layout="full-width" sizes="100vw"
     >
     </ImageWrapper>
 </div>}

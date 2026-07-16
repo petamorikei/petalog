@@ -164,7 +164,7 @@ const singleSocialLinkClass = css({
                   class={avatarOverlayIconClass}>
             </Icon>
         </div>
-        <ImageWrapper src={config.avatar || ""} alt="Profile Image of the Author" class={avatarClass}></ImageWrapper>
+        {config.avatar && <ImageWrapper src={config.avatar} alt="Profile Image of the Author" layout="fixed" width={256} height={256} class={avatarClass}></ImageWrapper>}
     </a>
     <div class={profileContentClass}>
         <div class={profileNameClass}>{config.name}</div>
