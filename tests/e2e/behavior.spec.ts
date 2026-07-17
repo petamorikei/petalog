@@ -140,6 +140,21 @@ test.describe("floating navigation", () => {
 });
 
 test.describe("content discovery", () => {
+	test("navigation exposes only actionable links", async ({ page }) => {
+		await page.setViewportSize(DESKTOP_VIEWPORT);
+		await page.goto("/");
+
+		const categoryLink = page.locator("#categories").getByRole("link", {
+			name: "View all posts in the Examples category",
+		});
+		await expect(categoryLink).toBeVisible();
+		await expect(categoryLink.locator("button")).toHaveCount(0);
+		await expect(page.locator('#swup-container a[href=""]')).toHaveCount(0);
+
+		await page.goto("/posts/markdown-extended/");
+		await expect(page.locator('#swup-container a[href="#"]')).toHaveCount(0);
+	});
+
 	test("Pagefind returns a real production result and closes on outside click", async ({
 		page,
 	}) => {

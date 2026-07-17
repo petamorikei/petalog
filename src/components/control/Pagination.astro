@@ -115,19 +115,20 @@ const pageLinkClass = css({
 ---
 
 <div class:list={[className, paginationClass]} style={style}>
-    <a href={page.url.prev || ""} aria-label={page.url.prev ? "Previous Page" : null}
-       class:list={["btn-card", navigationButtonClass,
-           {"disabled": page.url.prev == undefined}
-       ]}
-    >
-        <Icon name="material-symbols:chevron-left-rounded" class={navigationIconClass}></Icon>
-    </a>
+    {page.url.prev
+        ? <a href={page.url.prev} aria-label="Previous Page" class:list={["btn-card", navigationButtonClass]}>
+            <Icon name="material-symbols:chevron-left-rounded" class={navigationIconClass}></Icon>
+        </a>
+        : <span aria-hidden="true" class:list={["btn-card", navigationButtonClass, "disabled"]}>
+            <Icon name="material-symbols:chevron-left-rounded" class={navigationIconClass}></Icon>
+        </span>
+    }
     <div class={pageListClass}>
         {pages.map((p) => {
             if (p == HIDDEN)
                 return <Icon name="material-symbols:more-horiz" class={ellipsisClass}/>;
             if (p == page.currentPage)
-                return <div class={currentPageClass}>
+                return <div aria-current="page" class={currentPageClass}>
                     {p}
                 </div>
             return <a href={url(getPageUrl(p))} aria-label={`Page ${p}`}
@@ -135,11 +136,12 @@ const pageLinkClass = css({
             >{p}</a>
         })}
     </div>
-    <a href={page.url.next || ""} aria-label={page.url.next ? "Next Page" : null}
-       class:list={["btn-card", navigationButtonClass,
-           {"disabled": page.url.next == undefined}
-       ]}
-    >
-        <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass}></Icon>
-    </a>
+    {page.url.next
+        ? <a href={page.url.next} aria-label="Next Page" class:list={["btn-card", navigationButtonClass]}>
+            <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass}></Icon>
+        </a>
+        : <span aria-hidden="true" class:list={["btn-card", navigationButtonClass, "disabled"]}>
+            <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass}></Icon>
+        </span>
+    }
 </div>

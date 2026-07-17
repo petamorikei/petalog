@@ -9,6 +9,7 @@ interface Props {
 const { badge, url, label } = Astro.props;
 
 const buttonClass = css({
+  display: "block",
   height: "2.5rem",
   width: "100%",
   borderRadius: "0.5rem",
@@ -74,17 +75,15 @@ const badgeClass = css({
   },
 });
 ---
-<a href={url} aria-label={label}>
-    <button class={buttonClass}>
-        <div class={contentClass}>
-            <div class={labelClass}>
-                <slot></slot>
-            </div>
-            { badge !== undefined && badge !== null && badge !== '' &&
-                <div class={badgeClass}>
-                    { badge }
-                </div>
-            }
+<a href={url} aria-label={label} class={buttonClass}>
+    <div class={contentClass}>
+        <div class={labelClass}>
+            <slot></slot>
         </div>
-    </button>
+        { badge !== undefined && badge !== null && badge !== '' &&
+            <div class={badgeClass}>
+                { badge }
+            </div>
+        }
+    </div>
 </a>

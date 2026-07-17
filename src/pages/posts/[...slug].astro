@@ -155,7 +155,6 @@ const postNavigationLinkClass = css({
   overflow: "hidden",
   _active: { transform: "scale(0.95)" },
 });
-const disabledNavigationLinkClass = css({ pointerEvents: "none" });
 const navigationCardClass = css({
   borderRadius: "1rem",
   width: "100%",
@@ -240,25 +239,29 @@ const navigationTitleClass = css({
     </article>
 
     <div class={postNavigationClass}>
-        <a href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
-           class:list={[postNavigationLinkClass, !entry.data.nextSlug && disabledNavigationLinkClass]}>
-            {entry.data.nextSlug && <div class:list={["btn-card", navigationCardClass, previousCardClass]} >
+        {entry.data.nextSlug
+            ? <a href={getPostUrlBySlug(entry.data.nextSlug)} class={postNavigationLinkClass}>
+                <div class:list={["btn-card", navigationCardClass, previousCardClass]} >
                 <Icon name="material-symbols:chevron-left-rounded" class={navigationIconClass} />
                 <div class:list={[transitionClass, navigationTitleClass]}>
                     {entry.data.nextTitle}
                 </div>
-            </div>}
-        </a>
-
-        <a href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
-           class:list={[postNavigationLinkClass, !entry.data.prevSlug && disabledNavigationLinkClass]}>
-            {entry.data.prevSlug && <div class:list={["btn-card", navigationCardClass, nextCardClass]}>
-                <div class:list={[transitionClass, navigationTitleClass]}>
-                    {entry.data.prevTitle}
                 </div>
-                <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass} />
-            </div>}
-        </a>
+            </a>
+            : <span aria-hidden="true" class={postNavigationLinkClass}></span>
+        }
+
+        {entry.data.prevSlug
+            ? <a href={getPostUrlBySlug(entry.data.prevSlug)} class={postNavigationLinkClass}>
+                <div class:list={["btn-card", navigationCardClass, nextCardClass]}>
+                    <div class:list={[transitionClass, navigationTitleClass]}>
+                        {entry.data.prevTitle}
+                    </div>
+                    <Icon name="material-symbols:chevron-right-rounded" class={navigationIconClass} />
+                </div>
+            </a>
+            : <span aria-hidden="true" class={postNavigationLinkClass}></span>
+        }
     </div>
 
 </MainGridLayout>

@@ -488,11 +488,9 @@ const scrollFunction = () => {
 	let bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
 
 	if (backToTopBtn) {
-		if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
-			backToTopBtn.classList.remove('hide')
-		} else {
-			backToTopBtn.classList.add('hide')
-		}
+		const shouldShow = document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight
+		backToTopBtn.classList.toggle('hide', !shouldShow)
+		backToTopBtn.inert = !shouldShow
 	}
 
 	if (bannerEnabled && toc) {

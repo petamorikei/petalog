@@ -60,8 +60,8 @@ const iconClass = css({
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
 <div class:list={["back-to-top-wrapper", wrapperClass]}>
-    <div id="back-to-top-btn" class:list={["back-to-top-btn", "hide", backToTopClass]} onclick="backToTop()">
-        <button aria-label="Back to Top" class:list={["btn-card", buttonClass]}>
+    <div id="back-to-top-btn" inert class:list={["back-to-top-btn", "hide", backToTopClass]}>
+        <button type="button" aria-label="Back to Top" class:list={["btn-card", buttonClass]} onclick="backToTop()">
             <Icon name="material-symbols:keyboard-arrow-up-rounded" class={iconClass}></Icon>
         </button>
     </div>
