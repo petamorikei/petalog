@@ -66,7 +66,7 @@ const footerLinkClass = css({
 <div class={dividerClass}></div>
 <div class={footerContainerClass}>
     <div class:list={["text-50", footerTextClass]}>
-        &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
+        &copy; <span>{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
         <a class:list={["link", footerLinkClass]} target="_blank" href={url('rss.xml')}>RSS</a> /
         <a class:list={["link", footerLinkClass]} target="_blank" href={url('sitemap-index.xml')}>Sitemap</a><br>
         Powered by
