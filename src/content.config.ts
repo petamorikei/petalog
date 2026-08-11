@@ -4,6 +4,18 @@ import type { CollectionConfig } from "astro/content/config";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
+const runtimeProcess = (
+  globalThis as typeof globalThis & {
+    process?: {
+      env?: Record<string, string | undefined>;
+    };
+  }
+).process;
+const postsBase =
+  runtimeProcess?.env?.PETALOG_E2E === "true"
+    ? "./src/content/e2e-posts"
+    : "./src/content/posts";
+
 type PostData = {
   title: string;
   published: Date;
@@ -46,7 +58,7 @@ const passthroughImage = z.string().refine(
 const postsCollection = defineCollection({
   loader: glob({
     pattern: "**/*.{md,mdx}",
-    base: "./src/content/posts",
+    base: postsBase,
   }),
   schema: ({ image }) =>
     z.object({

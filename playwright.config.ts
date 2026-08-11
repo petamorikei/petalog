@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const previewHost = "127.0.0.1";
-const previewPort = 4321;
+const previewPort = 4322;
 const previewUrl = `http://${previewHost}:${previewPort}`;
 const runtimeProcess = (
 	globalThis as typeof globalThis & {
@@ -48,9 +48,13 @@ export default defineConfig({
 		},
 	],
 	webServer: {
-		command: `pnpm build && pnpm exec astro preview --host ${previewHost} --port ${previewPort}`,
+		command: `pnpm exec astro build && pnpm exec pagefind --site .astro/e2e-dist && pnpm exec astro preview --host ${previewHost} --port ${previewPort}`,
+		env: {
+			ASTRO_PREVIEW_BACKGROUND: "0",
+			PETALOG_E2E: "true",
+		},
 		url: previewUrl,
-		reuseExistingServer: !isCI,
+		reuseExistingServer: false,
 		stdout: "pipe",
 		stderr: "pipe",
 		timeout: 180_000,

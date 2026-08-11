@@ -24,10 +24,13 @@ import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 
+const isE2E = process.env.PETALOG_E2E === "true";
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://fuwari.vercel.app/",
 	base: "/",
+	outDir: isE2E ? "./.astro/e2e-dist" : "./dist",
 	trailingSlash: "always",
 	compressHTML: true,
 	image: {
