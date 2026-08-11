@@ -22,8 +22,6 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-.vercel
-
 # Playwright transient output
 test-results/
 playwright-report/
