@@ -48,7 +48,7 @@ published: ${getDate()}
 description: ''
 tags: []
 category: ''
-draft: false 
+draft: false
 lang: ''
 ---
 `
