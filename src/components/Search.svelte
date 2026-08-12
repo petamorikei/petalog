@@ -337,7 +337,7 @@ $: if (initialized && keywordMobile) {
     <!-- search bar inside panel for phone/tablet -->
     <div id="search-bar-inside" class={insideSearchBarClass}>
         <Icon icon="material-symbols:search" class={searchIconClass}></Icon>
-        <input placeholder="Search" bind:value={keywordMobile}
+        <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordMobile}
                class={insideInputClass}
         >
     </div>
